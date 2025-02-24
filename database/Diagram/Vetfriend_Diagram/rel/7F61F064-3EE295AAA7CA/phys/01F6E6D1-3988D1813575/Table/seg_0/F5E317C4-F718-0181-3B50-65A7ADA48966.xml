@@ -1,0 +1,108 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="PAYMENT" directorySegmentName="seg_0" id="F5E317C4-F718-0181-3B50-65A7ADA48966">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>F33F6CF2-A6DD-60A0-6C2E-D816D31A4DC9</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PAYMENTDATE" id="0F6B0605-0B2E-0B40-8BF7-E87054FF6345">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PAYMENTTYPE" id="1DF46FCF-6EE3-0AAA-8B62-C26B7BC0ED83">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STATE" id="3FFA3F0E-1958-176F-C217-819513DECF71">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEDATE" id="86A3E9E7-2492-FFD5-6E24-BC12E14CE5E5">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEDATE" id="87576731-B743-23EC-E9B0-2E9D1A7754C5">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEDATE" id="B3E5C0E5-1A60-BEF3-0C2E-6495B44A0BDF">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SALEID" id="CC5CF285-C093-CE1F-D1DC-DACC21835D7E">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEUSER" id="E14861AB-FC19-3880-3205-55303008AFC5">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEUSER" id="E40FD950-723C-AE9E-D996-3A5769C24BCD">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEUSER" id="E827C8B9-3B88-2BC2-473E-8C463D2C903B">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AMOUNT" id="F5C2D835-DD01-37A6-9248-79439DEA0777">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PAYMENTID" id="FBD3DBE1-339E-86D9-F470-28A0338CDB29">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<autoIncrementDDL>IDENTITY_CLAUSE</autoIncrementDDL>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IDX_PAYMENT_SALEID" id="E09381EB-7E0C-8378-5C25-9227210577A9">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_PAYMENT_SALE" id="A9A7DF2A-3F9F-D515-E12F-643781E4E41F">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PAYMENT_PK" id="2E7AAACF-F483-46EB-BFD1-A1BD4B89FD2F">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<indexSegment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

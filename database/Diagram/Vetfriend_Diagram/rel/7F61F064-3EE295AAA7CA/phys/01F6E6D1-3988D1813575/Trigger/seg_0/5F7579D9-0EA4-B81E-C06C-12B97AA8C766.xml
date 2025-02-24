@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_APP_USER_BIU" directorySegmentName="seg_0" id="5F7579D9-0EA4-B81E-C06C-12B97AA8C766">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_APP_USER_BIU</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[DECLARE
+  dummy NUMBER;
+BEGIN
+  -- (1) Validate the email format; raises an error if invalid.
+  dummy := fn_validate_email(:NEW.email);
+
+  -- (12) Format the username: if missing, return a default value; otherwise, trim and lower-case it.
+  :NEW.username := fn_format_username_total(:NEW.username);
+
+  -- (3) Hash the password if it is not already hashed (assuming hash length of 64 for SHA256).
+  IF LENGTH(:NEW.password) < 64 THEN
+    :NEW.password := fn_hash_password(:NEW.password);
+  END IF;
+
+  -- Set the audit create date if not already provided.
+  IF :NEW.auditCreateDate IS NULL THEN
+    :NEW.auditCreateDate := SYSTIMESTAMP;
+  END IF;
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>AD600D04-D463-87C1-96C3-2256D06756A3</table>
+</TriggerOraclev10g>

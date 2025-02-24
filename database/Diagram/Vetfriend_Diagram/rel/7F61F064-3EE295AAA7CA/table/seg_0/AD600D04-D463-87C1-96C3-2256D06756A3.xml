@@ -1,0 +1,245 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AD600D04-D463-87C1-96C3-2256D06756A3" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="APP_USER">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>APP_USER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USERID" id="17F77558-5A6D-20C4-87CF-885F3C501D43">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>USERID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementDisableCache>false</autoIncrementDisableCache>
+<autoIncrementCache>20</autoIncrementCache>
+<autoIncrementOrder>false</autoIncrementOrder>
+</Column>
+<Column name="FIRSTNAME" id="C1C49A9E-0519-990A-F35E-E48F57CCC276">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>FIRSTNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LASTNAME" id="94F71CA7-4B30-B8E2-B545-50C580F8ADB4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>LASTNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USERNAME" id="377DB5C7-6D8F-BB43-CC1E-778A1E50952D">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>USERNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PASSWORD" id="60EDEFFB-8BC2-509F-F27C-25427A9BFB24">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>PASSWORD</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>256</dataTypeSize>
+<ownDataTypeParameters>256,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMAIL" id="D5347FF6-59A0-B309-2185-D093F583FBA9">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>EMAIL</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USERTYPE" id="83624A41-57B3-91EC-1072-48A6C27893E4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>USERTYPE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STATE" id="F1557BA8-8364-3718-BED1-8E5DBC552BC3">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>STATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITCREATEUSER" id="C82C58EB-C07A-DC20-C94E-C758762319A0">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>AUDITCREATEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITCREATEDATE" id="03723E9E-D46F-ED74-E3B8-BC773288175F">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>AUDITCREATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITUPDATEUSER" id="33C2CD42-AA78-16CE-636C-A2EFE96865A5">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>AUDITUPDATEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITUPDATEDATE" id="4CDDF6D6-6582-E3AD-C145-8A9F01647435">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>AUDITUPDATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITDELETEUSER" id="4F3AEE37-EF0F-99C3-E7C2-BCABFCB69A5F">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>AUDITDELETEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITDELETEDATE" id="1A690886-90EE-6573-2078-377A06D36D53">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APP_USER</sourceObjSchema>
+<sourceObjName>AUDITDELETEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="827BECAC-D54D-0CA2-FD8F-40E0441EAA7D" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="APP_USER_PK">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>SYS_C008901</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="17F77558-5A6D-20C4-87CF-885F3C501D43"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D1FBC66D-622D-CD70-3932-FD02979FDD5E" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="APP_USER_USERNAME_UN">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>SYS_C008902</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="377DB5C7-6D8F-BB43-CC1E-778A1E50952D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

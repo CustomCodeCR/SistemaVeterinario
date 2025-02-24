@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="PRODUCTCATEGORY" directorySegmentName="seg_0" id="51E5A5FC-CFCA-FDF9-1BDF-8EC57B51C9D7">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>F33F6CF2-A6DD-60A0-6C2E-D816D31A4DC9</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="STATE" id="064BA7A4-77EA-7E1C-C458-A51319D60B70">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEUSER" id="126765BB-DCEF-BC91-E499-B5DE08126E1A">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DESCRIPTION" id="19254259-0A9B-DDA7-5438-0E6093CE04E9">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEDATE" id="237B3159-3465-62FC-31AF-EDD6E1949FA7">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEDATE" id="491A9176-2BE3-8AAD-3793-F79B967C2C24">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CATEGORYID" id="8C2F4FD8-B795-791B-6C9B-D479CCB671A9">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<autoIncrementDDL>IDENTITY_CLAUSE</autoIncrementDDL>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEUSER" id="943AC9AD-7653-B442-A771-5F0E22109AD2">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CATEGORYNAME" id="F4C7E4A1-F0A2-0DD8-2DCD-84A46A15EF0F">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEUSER" id="F6F36802-5CE3-93EF-741D-DB10C01CBFEC">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEDATE" id="F73244DD-7EA8-C7E8-7B3D-8DF50BC728D6">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PRODUCTCATEGORY_PK" id="CC530EAD-9973-8713-A8F8-8655E3E7D9F4">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<indexSegment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

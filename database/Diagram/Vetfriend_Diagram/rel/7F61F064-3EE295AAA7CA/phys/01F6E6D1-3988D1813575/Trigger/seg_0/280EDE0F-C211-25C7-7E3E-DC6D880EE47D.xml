@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_SUPPLIER_BIU" directorySegmentName="seg_0" id="280EDE0F-C211-25C7-7E3E-DC6D880EE47D">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_SUPPLIER_BIU</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[DECLARE
+  dummy NUMBER;
+BEGIN
+  -- (8) Validate that supplier contact and phone are not NULL.
+  dummy := fn_validate_supplier_contact(:NEW.contact, :NEW.phone);
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>5CD99C64-5C45-D784-8FC9-F5EB81F240EF</table>
+</TriggerOraclev10g>

@@ -1,0 +1,123 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="PURCHASEORDERDETAIL" directorySegmentName="seg_0" id="BBBC3E9C-7D75-DC07-124A-F0ACA1D9CD84">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>F33F6CF2-A6DD-60A0-6C2E-D816D31A4DC9</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PURCHASEORDERID" id="0F21E63D-C678-292D-F073-25655AC8777A">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PRODUCTID" id="291938A1-D16F-8FA7-556B-967DFF67FC29">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEUSER" id="2FD69753-CD94-CC3E-37DD-08D85B32939E">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STATE" id="3E413472-0F3A-4574-61FE-4F235C048531">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEDATE" id="5933A19C-91CF-8F77-2BF0-DEE3BED7AF76">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEDATE" id="5C1086E0-AC1C-9F18-4087-F05CF4FBBE33">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEUSER" id="82EF1A27-4DD8-88FB-87CD-C2F373C28163">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="UNITPRICE" id="A8D25F5A-52C3-A686-398B-479005254F61">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEUSER" id="C6B15BF8-8037-14EF-23CB-6F2EFC56166D">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="QUANTITY" id="CF728EE5-90C6-66F1-9634-948252C10FC7">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEDATE" id="FCA1DF46-EFC3-FA48-CA4E-9AAC7DB06B73">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IDX_PURCHASEORDERDETAIL_PURCHASEORDERID" id="28EC1178-7873-D819-D984-0F6BCF5B8B52">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PK_PURCHASEORDERDETAIL" id="E0AD1DBA-57F6-0C81-BCD8-73FE261DCFD2">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IDX_PURCHASEORDERDETAIL_PRODUCTID" id="EE54EE0A-E143-C55C-14D9-A4045B796DD2">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_PURCHASEORDERDETAIL_PRODUCT" id="BE9A6625-361B-FC2D-919D-B996820187BA">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_PURCHASEORDERDETAIL_ORDER" id="FBFF4A06-5485-5A0B-0939-7C3BE7848E92">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_PURCHASEORDERDETAIL" id="1E22EECB-00AD-B0E8-8C37-88769219014E">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<existingIndex>E0AD1DBA-57F6-0C81-BCD8-73FE261DCFD2</existingIndex>
+<indexSegment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

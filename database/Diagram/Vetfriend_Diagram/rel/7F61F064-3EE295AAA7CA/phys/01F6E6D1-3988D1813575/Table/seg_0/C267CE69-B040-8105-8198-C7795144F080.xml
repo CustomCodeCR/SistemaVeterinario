@@ -1,0 +1,103 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="CLIENT" directorySegmentName="seg_0" id="C267CE69-B040-8105-8198-C7795144F080">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>F33F6CF2-A6DD-60A0-6C2E-D816D31A4DC9</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ADDRESS" id="0621E019-7C82-7481-4C9F-E4E1FBA6E487">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEDATE" id="21E711C6-A2F9-BF37-D0AD-97DF3733D58B">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STATE" id="244D4C75-F009-ABFF-8373-C67E3913E3FD">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="USERID" id="33C82C76-EB3B-43C8-2EF2-49BCC4249E83">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEDATE" id="3901C78C-0EC2-ED2C-26B3-88A8770C1515">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEDATE" id="3AAC74FA-EBF2-7451-6F9F-7B8183BD8013">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PHONE" id="4AEE8DFC-2CDF-C0BD-DF68-4E8DFD329078">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEUSER" id="93B42A73-68FC-2545-6899-72F12BABDEAE">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEUSER" id="9DB08DEC-EB3C-4377-AFCB-62B036FF1FEA">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEUSER" id="CDC0B49A-C54C-75BF-3FF6-AC214836F168">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CLIENTID" id="FCE66336-7090-18C5-3A3B-8A74DAD0FA1F">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<autoIncrementDDL>IDENTITY_CLAUSE</autoIncrementDDL>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IDX_CLIENT_USERID" id="38C0B23F-9852-E120-6B4D-61B3CD4F701B">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_CLIENT_USER" id="DE322B81-324B-0857-2506-6A9A7DB8B466">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="CLIENT_PK" id="127E5267-4A12-3F75-E2B2-D5996B8E5A42">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<indexSegment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

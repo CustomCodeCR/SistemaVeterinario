@@ -1,0 +1,113 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="PRODUCTCATEGORYRELATION" directorySegmentName="seg_0" id="5C17A407-7434-79E4-A1A7-DC484AE1F6D4">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>F33F6CF2-A6DD-60A0-6C2E-D816D31A4DC9</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="AUDITDELETEDATE" id="04E02FC0-DE59-7D18-A47D-8B81F224D598">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STATE" id="3F2D96E3-8A35-4ABE-CEE1-3625DC9B0460">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITDELETEUSER" id="66C109F2-D282-F389-77C9-F27897F23704">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEUSER" id="82C674DA-4A16-BB9F-49C6-598DE29FE4E4">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITCREATEDATE" id="9C0B3223-0090-B9BD-9BA7-F6C89C4CD2D3">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CATEGORYID" id="BAE4BF60-9C70-0CB8-2293-226EC5911BF4">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEDATE" id="BAE74A5B-8943-155B-CA50-188568CB33E1">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PRODUCTID" id="CA739B3C-97A4-61AF-1E69-E7105C0179BA">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AUDITUPDATEUSER" id="D41AF21A-321D-9984-0DF9-04F5F205675A">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IDX_PRODUCTCATEGORYRELATION_CATEGORYID" id="46B7B62E-004C-F2F6-F66C-385B9BA020F1">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IDX_PRODUCTCATEGORYRELATION_PRODUCTID" id="783304C6-E58C-3BB5-8C12-7C03FB580BC6">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PK_PRODUCTCATEGORYRELATION" id="DA819AD4-6ACF-3317-2260-90837678083F">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_PRODUCTCATEGORYRELATION_PRODUCT" id="0A08A8E4-3720-767E-FAB3-66768D237172">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_PRODUCTCATEGORYRELATION_CATEGORY" id="0C74EF79-0098-E6BE-8A71-01EB98FF3B12">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_PRODUCTCATEGORYRELATION" id="A82A177E-62CB-32A2-90AC-A62B0163A5D7">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<segment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</segment>
+<tableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</tableSpace>
+<existingIndex>DA819AD4-6ACF-3317-2260-90837678083F</existingIndex>
+<indexSegment>2BA7A593-9A87-DB6D-B44E-BD10954A53FF</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

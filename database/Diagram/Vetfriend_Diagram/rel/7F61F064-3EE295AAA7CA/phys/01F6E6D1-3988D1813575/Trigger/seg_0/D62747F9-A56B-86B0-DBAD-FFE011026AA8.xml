@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_INVENTORY_AI" directorySegmentName="seg_0" id="D62747F9-A56B-86B0-DBAD-FFE011026AA8">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_INVENTORY_AI</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[DECLARE
+  v_value  NUMBER;
+  v_status VARCHAR2(20);
+BEGIN
+  -- (6) Compute the inventory value (quantity * price).
+  v_value := fn_get_inventory_value(:NEW.productId);
+
+  -- (13) Check whether the product should be reordered (if quantity is below threshold).
+  v_status := fn_inventory_reorder_status(:NEW.productId);
+
+  -- Optionally, you might update an audit field or log this information.
+END;
+]]></body>
+<triggerTime>AFTER</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>B85962C0-F129-50B1-BA44-326E9F6F3348</table>
+</TriggerOraclev10g>

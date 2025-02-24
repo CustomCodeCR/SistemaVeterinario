@@ -1,0 +1,231 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="081DC31D-FF92-541F-CA0B-287D6B34BD05" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_ACTIVE_APP_USERS">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_ACTIVE_APP_USERS</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_ACTIVE_APP_USERS
+AS 
+SELECT userId, firstName, lastName, username, email, userType,
+       auditCreateUser, auditCreateDate, auditUpdateUser, auditUpdateDate
+FROM app_user
+WHERE state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="USERID" id="63A62232-1D7E-06B5-3873-630670E3BA50">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>USERID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>USERID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>USERID</headerAlias>
+<reference>false</reference>
+<referencedColumn>17F77558-5A6D-20C4-87CF-885F3C501D43</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="FIRSTNAME" id="047279C5-973D-9DD4-8A77-85A6AE222DF0">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>FIRSTNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>FIRSTNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>FIRSTNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>C1C49A9E-0519-990A-F35E-E48F57CCC276</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="LASTNAME" id="76B9FC39-44D6-B07F-D524-B0EA9D6F56B4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>LASTNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>LASTNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>LASTNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>94F71CA7-4B30-B8E2-B545-50C580F8ADB4</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="USERNAME" id="4C5803D7-25C8-B399-4F6F-81E8711D6CB4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>USERNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>USERNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>USERNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>377DB5C7-6D8F-BB43-CC1E-778A1E50952D</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="EMAIL" id="AC18CD7E-72CC-DD04-910A-DCEDD68A72EE">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>EMAIL</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>EMAIL</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>EMAIL</headerAlias>
+<reference>false</reference>
+<referencedColumn>D5347FF6-59A0-B309-2185-D093F583FBA9</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="USERTYPE" id="9FD730F7-4D03-48B3-9B03-4ABCAB9AE253">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>USERTYPE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>USERTYPE</alias>
+<dataType>NVARCHAR2 (20)</dataType>
+<headerAlias>USERTYPE</headerAlias>
+<reference>false</reference>
+<referencedColumn>83624A41-57B3-91EC-1072-48A6C27893E4</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="AUDITCREATEUSER" id="9361DF5D-AE0E-C7BD-8F93-97B87A3EBD82">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>AUDITCREATEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>AUDITCREATEUSER</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>AUDITCREATEUSER</headerAlias>
+<reference>false</reference>
+<referencedColumn>C82C58EB-C07A-DC20-C94E-C758762319A0</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="AUDITCREATEDATE" id="EC45D161-38FB-697E-F9AF-7AF75C1404B5">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>AUDITCREATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>AUDITCREATEDATE</alias>
+<dataType>TIMESTAMP (7)</dataType>
+<headerAlias>AUDITCREATEDATE</headerAlias>
+<reference>false</reference>
+<referencedColumn>03723E9E-D46F-ED74-E3B8-BC773288175F</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="AUDITUPDATEUSER" id="32BE9ACD-E2A7-4105-1E55-56DF9FCB6156">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>AUDITUPDATEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>AUDITUPDATEUSER</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>AUDITUPDATEUSER</headerAlias>
+<reference>false</reference>
+<referencedColumn>33C2CD42-AA78-16CE-636C-A2EFE96865A5</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="AUDITUPDATEDATE" id="AD3A2606-E8CC-2DA7-B46D-F5481D581833">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_ACTIVE_APP_USERS</sourceObjSchema>
+<sourceObjName>AUDITUPDATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>AUDITUPDATEDATE</alias>
+<dataType>TIMESTAMP (7)</dataType>
+<headerAlias>AUDITUPDATEDATE</headerAlias>
+<reference>false</reference>
+<referencedColumn>4CDDF6D6-6582-E3AD-C145-8A9F01647435</referencedColumn>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="AD600D04-D463-87C1-96C3-2256D06756A3">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="17F77558-5A6D-20C4-87CF-885F3C501D43">
+<columnName>USERID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C1C49A9E-0519-990A-F35E-E48F57CCC276">
+<columnName>FIRSTNAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="94F71CA7-4B30-B8E2-B545-50C580F8ADB4">
+<columnName>LASTNAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="377DB5C7-6D8F-BB43-CC1E-778A1E50952D">
+<columnName>USERNAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="D5347FF6-59A0-B309-2185-D093F583FBA9">
+<columnName>EMAIL</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="83624A41-57B3-91EC-1072-48A6C27893E4">
+<columnName>USERTYPE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C82C58EB-C07A-DC20-C94E-C758762319A0">
+<columnName>AUDITCREATEUSER</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="03723E9E-D46F-ED74-E3B8-BC773288175F">
+<columnName>AUDITCREATEDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="33C2CD42-AA78-16CE-636C-A2EFE96865A5">
+<columnName>AUDITUPDATEUSER</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="4CDDF6D6-6582-E3AD-C145-8A9F01647435">
+<columnName>AUDITUPDATEDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F1557BA8-8364-3718-BED1-8E5DBC552BC3">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APP_USER</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

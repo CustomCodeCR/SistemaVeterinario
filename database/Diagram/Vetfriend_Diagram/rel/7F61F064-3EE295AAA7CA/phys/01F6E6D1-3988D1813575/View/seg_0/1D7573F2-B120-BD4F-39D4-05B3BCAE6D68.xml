@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableViewProxyOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TableViewProxyOraclev10g" name="VIEW_PRODUCT_CATEGORY_MAPPING" directorySegmentName="seg_0" id="1D7573F2-B120-BD4F-39D4-05B3BCAE6D68">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+</TableViewProxyOraclev10g>

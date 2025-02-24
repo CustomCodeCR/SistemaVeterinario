@@ -1,0 +1,166 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="B55D4ECE-E82B-BF60-7478-2A4303779003" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_PRODUCT_INVENTORY">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_PRODUCT_INVENTORY</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_PRODUCT_INVENTORY
+AS 
+SELECT pr.productId, pr.name AS productName, pr.description, pr.price,
+       i.quantity, i.updateDate
+FROM product pr
+JOIN inventory i ON pr.productId = i.productId
+WHERE pr.state != 0 AND i.state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PRODUCTID" id="2C35ADED-1C27-219F-2C7B-D052F03DC8A9">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_INVENTORY</sourceObjSchema>
+<sourceObjName>PRODUCTID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PRODUCTID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PRODUCTID</headerAlias>
+<reference>false</reference>
+<referencedColumn>561089D4-6B48-AF2F-C06A-99A5B3A4F67D</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PRODUCTNAME" id="361C150E-7F7A-AA69-046A-8E21E61DBF92">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_INVENTORY</sourceObjSchema>
+<sourceObjName>PRODUCTNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PRODUCTNAME</alias>
+<dataType>NVARCHAR2 (100)</dataType>
+<headerAlias>PRODUCTNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>C78E7A09-E06B-5E01-DFA7-2507E276D543</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="DESCRIPTION" id="7925915C-7CA1-0B8C-8136-845C46FCF8F6">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_INVENTORY</sourceObjSchema>
+<sourceObjName>DESCRIPTION</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>DESCRIPTION</alias>
+<dataType>NUMBER (10,2)</dataType>
+<headerAlias>DESCRIPTION</headerAlias>
+<reference>false</reference>
+<referencedColumn>F20B8E60-1640-167B-2B31-A8D0F6435BCD</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PRICE" id="18AC8C7E-D58F-9665-FEF0-D8F1CB9843E9">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_INVENTORY</sourceObjSchema>
+<sourceObjName>PRICE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PRICE</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PRICE</headerAlias>
+<reference>false</reference>
+<referencedColumn>DB48ED5A-4B66-EC51-D244-CB005BB1F28D</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="QUANTITY" id="26C8F1D6-4A0C-110A-38B2-782035A79DC4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_INVENTORY</sourceObjSchema>
+<sourceObjName>QUANTITY</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>QUANTITY</alias>
+<dataType>DATE</dataType>
+<headerAlias>QUANTITY</headerAlias>
+<reference>false</reference>
+<referencedColumn>FBC72140-C8A6-B51F-3632-26DD34A82559</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="UPDATEDATE" id="D3CF1DAF-A894-BE5C-6DDD-16B8F2FB278A">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_INVENTORY</sourceObjSchema>
+<sourceObjName>UPDATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>UPDATEDATE</alias>
+<dataType>DATE</dataType>
+<headerAlias>UPDATEDATE</headerAlias>
+<reference>false</reference>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="96B42035-C25A-57C6-7168-CDDD86089BF6">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="B85962C0-F129-50B1-BA44-326E9F6F3348">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>INVENTORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="561089D4-6B48-AF2F-C06A-99A5B3A4F67D">
+<columnName>PRODUCTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C78E7A09-E06B-5E01-DFA7-2507E276D543">
+<columnName>DESCRIPTION</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F20B8E60-1640-167B-2B31-A8D0F6435BCD">
+<columnName>PRICE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="DB48ED5A-4B66-EC51-D244-CB005BB1F28D">
+<columnName>QUANTITY</columnName>
+<schema>PROF_ADM</schema>
+<tableName>INVENTORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="FBC72140-C8A6-B51F-3632-26DD34A82559">
+<columnName>UPDATEDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>INVENTORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="31905125-BB15-1310-42DF-7D04C4DE99F6">
+<columnName>NAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="47A09DE5-AD0E-16FF-77FF-44A4C815D750">
+<columnName>PRODUCTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>INVENTORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F12DA0C5-22F3-8954-7B69-4F5E9664A413">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>INVENTORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C213B4EE-6AFC-CD64-291C-81789A1648AF">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

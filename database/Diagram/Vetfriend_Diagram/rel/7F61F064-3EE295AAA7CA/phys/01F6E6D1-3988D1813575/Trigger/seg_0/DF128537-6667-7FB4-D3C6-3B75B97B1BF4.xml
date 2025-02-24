@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_APPOINTMENT_BIU" directorySegmentName="seg_0" id="DF128537-6667-7FB4-D3C6-3B75B97B1BF4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_APPOINTMENT_BIU</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+  -- (9) Check the appointment date; raises an error if it is in the past.
+  :NEW.appointmentDate := fn_check_appointment_date(:NEW.appointmentDate);
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>A4DEEC77-1E13-365E-E8A4-79DE12B51FEC</table>
+</TriggerOraclev10g>
