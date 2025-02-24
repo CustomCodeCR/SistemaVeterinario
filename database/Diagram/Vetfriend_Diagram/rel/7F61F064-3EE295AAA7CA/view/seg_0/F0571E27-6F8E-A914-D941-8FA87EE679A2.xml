@@ -1,0 +1,201 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="F0571E27-6F8E-A914-D941-8FA87EE679A2" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_PET_DETAILS">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_PET_DETAILS</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_PET_DETAILS
+AS 
+SELECT p.petId, p.name AS petName, p.type, p.breed, p.age,
+       c.clientId, c.address, c.phone
+FROM pet p
+JOIN client c ON p.clientId = c.clientId
+WHERE p.state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PETID" id="DC70ED8D-096A-D897-3FB9-9B93F6B1335B">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>PETID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PETID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PETID</headerAlias>
+<reference>false</reference>
+<referencedColumn>516595AA-604E-EEBB-9C8D-BAFCD062A448</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PETNAME" id="6B5635DA-DAAC-ACBD-6A98-2D3758BF7179">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>PETNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PETNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>PETNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>D734A0D7-5482-F6DC-8007-DA2F7F264A45</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="TYPE" id="231F857D-30CD-1913-29AA-96EF696983F8">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>TYPE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>TYPE</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>TYPE</headerAlias>
+<reference>false</reference>
+<referencedColumn>97BCB2D1-5FD9-DAA2-F208-F7DDEE08EFBD</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="BREED" id="1A201E8B-E733-5DFD-396A-6BF4DDBE10BE">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>BREED</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>BREED</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>BREED</headerAlias>
+<reference>false</reference>
+<referencedColumn>8AE5343E-B556-186A-5174-3ED2298BB93F</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="AGE" id="091D04E4-780D-5492-C2EE-7A4EDE9EC9B9">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>AGE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>AGE</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>AGE</headerAlias>
+<reference>false</reference>
+<referencedColumn>FCE66336-7090-18C5-3A3B-8A74DAD0FA1F</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="CLIENTID" id="278D27D7-F3C8-2C29-A28D-FC14BAEC855A">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>CLIENTID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>CLIENTID</alias>
+<dataType>NVARCHAR2 (100)</dataType>
+<headerAlias>CLIENTID</headerAlias>
+<reference>false</reference>
+<referencedColumn>0621E019-7C82-7481-4C9F-E4E1FBA6E487</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="ADDRESS" id="7E8BF9E3-ABB0-7506-AB3A-D0F2625A1A63">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>ADDRESS</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>ADDRESS</alias>
+<dataType>NVARCHAR2 (20)</dataType>
+<headerAlias>ADDRESS</headerAlias>
+<reference>false</reference>
+<referencedColumn>4AEE8DFC-2CDF-C0BD-DF68-4E8DFD329078</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PHONE" id="619EA7DB-0315-59D6-1647-7363436847A4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PET_DETAILS</sourceObjSchema>
+<sourceObjName>PHONE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PHONE</alias>
+<dataType>NVARCHAR2 (20)</dataType>
+<headerAlias>PHONE</headerAlias>
+<reference>false</reference>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="BFC41E30-CF64-6A92-3303-0758298F9837">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C267CE69-B040-8105-8198-C7795144F080">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="516595AA-604E-EEBB-9C8D-BAFCD062A448">
+<columnName>PETID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="D734A0D7-5482-F6DC-8007-DA2F7F264A45">
+<columnName>TYPE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="97BCB2D1-5FD9-DAA2-F208-F7DDEE08EFBD">
+<columnName>BREED</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="8AE5343E-B556-186A-5174-3ED2298BB93F">
+<columnName>AGE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="FCE66336-7090-18C5-3A3B-8A74DAD0FA1F">
+<columnName>CLIENTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="0621E019-7C82-7481-4C9F-E4E1FBA6E487">
+<columnName>ADDRESS</columnName>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="4AEE8DFC-2CDF-C0BD-DF68-4E8DFD329078">
+<columnName>PHONE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="DAFA70F9-D092-C0E1-D961-74D5205BFF03">
+<columnName>CLIENTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="FBA93A6B-4BA5-8B5F-B988-361F41593719">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="7EACC8F6-9336-8D9F-AA08-7D10F26661C7">
+<columnName>NAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

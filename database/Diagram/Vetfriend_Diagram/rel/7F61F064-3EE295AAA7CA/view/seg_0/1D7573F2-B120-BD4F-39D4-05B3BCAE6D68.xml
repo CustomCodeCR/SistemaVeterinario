@@ -1,0 +1,132 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="1D7573F2-B120-BD4F-39D4-05B3BCAE6D68" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_PRODUCT_CATEGORY_MAPPING">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_PRODUCT_CATEGORY_MAPPING</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_PRODUCT_CATEGORY_MAPPING
+AS 
+SELECT pcr.productId, pr.name AS productName,
+       pcr.categoryId, pc.categoryName
+FROM productCategoryRelation pcr
+JOIN product pr ON pcr.productId = pr.productId
+JOIN productCategory pc ON pcr.categoryId = pc.categoryId
+WHERE pcr.state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PRODUCTID" id="2BCB139D-C472-3A8E-46A7-300068E96815">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_CATEGORY_MAPPING</sourceObjSchema>
+<sourceObjName>PRODUCTID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PRODUCTID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PRODUCTID</headerAlias>
+<reference>false</reference>
+<referencedColumn>CA739B3C-97A4-61AF-1E69-E7105C0179BA</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PRODUCTNAME" id="52B663E1-D2A1-6530-77E6-AF7ECB390994">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_CATEGORY_MAPPING</sourceObjSchema>
+<sourceObjName>PRODUCTNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PRODUCTNAME</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PRODUCTNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>BAE4BF60-9C70-0CB8-2293-226EC5911BF4</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="CATEGORYID" id="17E73C57-BBF1-719E-F4E2-CA8E083F9C38">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_CATEGORY_MAPPING</sourceObjSchema>
+<sourceObjName>CATEGORYID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>CATEGORYID</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>CATEGORYID</headerAlias>
+<reference>false</reference>
+<referencedColumn>F4C7E4A1-F0A2-0DD8-2DCD-84A46A15EF0F</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="CATEGORYNAME" id="8B688D99-F727-4322-EC9C-0A8249460057">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PRODUCT_CATEGORY_MAPPING</sourceObjSchema>
+<sourceObjName>CATEGORYNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>CATEGORYNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>CATEGORYNAME</headerAlias>
+<reference>false</reference>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="5C17A407-7434-79E4-A1A7-DC484AE1F6D4">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORYRELATION</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="96B42035-C25A-57C6-7168-CDDD86089BF6">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="51E5A5FC-CFCA-FDF9-1BDF-8EC57B51C9D7">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="CA739B3C-97A4-61AF-1E69-E7105C0179BA">
+<columnName>PRODUCTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORYRELATION</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="BAE4BF60-9C70-0CB8-2293-226EC5911BF4">
+<columnName>CATEGORYID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORYRELATION</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F4C7E4A1-F0A2-0DD8-2DCD-84A46A15EF0F">
+<columnName>CATEGORYNAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="31905125-BB15-1310-42DF-7D04C4DE99F6">
+<columnName>NAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="561089D4-6B48-AF2F-C06A-99A5B3A4F67D">
+<columnName>PRODUCTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="8C2F4FD8-B795-791B-6C9B-D479CCB671A9">
+<columnName>CATEGORYID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORY</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="3F2D96E3-8A35-4ABE-CEE1-3625DC9B0460">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PRODUCTCATEGORYRELATION</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

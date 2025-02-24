@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<UserOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UserOraclev10g" name="PROF_ADM" directorySegmentName="seg_0" id="97685FB9-13DA-6EAB-3E56-4D471B1D898F">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjName>PROF_ADM</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<schemaObject>E96B5F41-403B-9BCE-825E-2272AD173FEB</schemaObject>
+<defTableSpace>056EC95B-F61D-1C71-4985-3564268C8D4A</defTableSpace>
+<privileges>UNLIMITED TABLESPACE</privileges>
+<profile>DEFAULT</profile>
+</UserOraclev10g>

@@ -1,0 +1,238 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2A3D5591-6228-393F-0D20-6EE5D54EA2B6" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="APPLIEDVACCINE">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>APPLIEDVACCINE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="APPLIEDVACCINEID" id="0C3BDD8E-EE2F-B5A1-058A-FD49AC5921A4">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>APPLIEDVACCINEID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementDisableCache>false</autoIncrementDisableCache>
+<autoIncrementCache>20</autoIncrementCache>
+<autoIncrementOrder>false</autoIncrementOrder>
+</Column>
+<Column name="APPLICATIONDATE" id="A7C9446C-9FA3-0670-FEA1-5DA493B34B3A">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>APPLICATIONDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PETID" id="13D7464F-7C9B-97F8-7404-3EB3BF9BCD61">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>PETID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FBE5662F-BAF8-EBD7-33D4-E53C82CAECB8" referredColumn="516595AA-604E-EEBB-9C8D-BAFCD062A448"/>
+</associations>
+</Column>
+<Column name="VACCINEID" id="78EFA5B3-F1D6-FD02-48C3-1D233AFD11BE">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>VACCINEID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="85105BF4-34DC-A8DC-0654-9A225ED9CACE" referredColumn="655D7904-F12E-173E-ECA4-F0234DB03BC8"/>
+</associations>
+</Column>
+<Column name="STATE" id="5EF1ACC3-5E89-CF03-E0FB-7FBFE6171F3D">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>STATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITCREATEUSER" id="F5BF3823-8509-91E4-8040-E3E9ABC1ABA5">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>AUDITCREATEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITCREATEDATE" id="E09D8ABA-1892-1CC4-F138-978C17262482">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>AUDITCREATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITUPDATEUSER" id="E8AEEA02-4892-25A5-F2B2-9B6E649CF539">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>AUDITUPDATEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITUPDATEDATE" id="4DE00984-149D-05BE-09F6-0C1C8B771414">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>AUDITUPDATEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITDELETEUSER" id="6CB794E9-2994-BCFD-54C4-8F8DF808DC03">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>AUDITDELETEUSER</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUDITDELETEDATE" id="FECD95B9-8CE7-8395-92FB-162CCD1A4837">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>APPLIEDVACCINE</sourceObjSchema>
+<sourceObjName>AUDITDELETEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="876FDF51-98EB-D2AA-79B5-275C872060B1" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="APPLIEDVACCINE_PK">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>SYS_C008961</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0C3BDD8E-EE2F-B5A1-058A-FD49AC5921A4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1E889338-73D7-2D12-F430-5F2AA8337C09" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="IDX_APPLIEDVACCINE_PETID">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>IDX_APPLIEDVACCINE_PETID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="13D7464F-7C9B-97F8-7404-3EB3BF9BCD61"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="56111E94-1110-D7D6-16AE-466A4535C9B4" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="IDX_APPLIEDVACCINE_VACCINEID">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>IDX_APPLIEDVACCINE_VACCINEID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:42 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="78EFA5B3-F1D6-FD02-48C3-1D233AFD11BE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D21D8562-4A95-0822-F227-5E9BB18FA546" name="FK_APPLIEDVACCINE_PET">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="13D7464F-7C9B-97F8-7404-3EB3BF9BCD61"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A5997747-B68C-90D7-38B0-DEAC90C0719C" name="FK_APPLIEDVACCINE_VACCINE">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="78EFA5B3-F1D6-FD02-48C3-1D233AFD11BE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

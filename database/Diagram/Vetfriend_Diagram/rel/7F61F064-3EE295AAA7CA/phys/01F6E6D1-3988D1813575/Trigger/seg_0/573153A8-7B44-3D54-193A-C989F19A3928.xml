@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_PURCHASEORDERDETAIL_AI" directorySegmentName="seg_0" id="573153A8-7B44-3D54-193A-C989F19A3928">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_PURCHASEORDERDETAIL_AI</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[DECLARE
+  v_total NUMBER;
+BEGIN
+  -- (11) Compute the purchase order total; raises an error if not positive.
+  v_total := fn_compute_purchase_order_total(:NEW.purchaseOrderId);
+END;
+]]></body>
+<triggerTime>AFTER</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>BBBC3E9C-7D75-DC07-124A-F0ACA1D9CD84</table>
+</TriggerOraclev10g>

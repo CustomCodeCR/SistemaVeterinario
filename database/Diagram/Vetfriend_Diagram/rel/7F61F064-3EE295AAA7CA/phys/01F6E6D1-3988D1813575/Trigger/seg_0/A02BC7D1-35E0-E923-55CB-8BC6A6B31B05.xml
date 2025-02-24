@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_SALEDETAIL_AI" directorySegmentName="seg_0" id="A02BC7D1-35E0-E923-55CB-8BC6A6B31B05">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_SALEDETAIL_AI</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[DECLARE
+  v_total NUMBER;
+BEGIN
+  -- (5) Calculate the sale total; the function raises an error if the total is not positive.
+  v_total := fn_calculate_sale_total(:NEW.saleId);
+END;
+]]></body>
+<triggerTime>AFTER</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>C9DC93D5-7055-2F1D-9F0C-983667B9CC2D</table>
+</TriggerOraclev10g>

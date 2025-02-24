@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Vetfriend_Diagram" id="E84472C3-6A59-88C2-1A5A-8E64255232C9" version="3.5">
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:35:51 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>E84472C3-6A59-88C2-1A5A-8E64255232C9</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="787C3B93-372B-721F-C75C-CE1F96C67838">
+<designStoragePath>C:\</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="18635398-DAAA-99D3-C839-F6E4894BECCF">
+<designStoragePath>C:\Users\loren\Desktop\ScriptsAndDictionary\Dictionary</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

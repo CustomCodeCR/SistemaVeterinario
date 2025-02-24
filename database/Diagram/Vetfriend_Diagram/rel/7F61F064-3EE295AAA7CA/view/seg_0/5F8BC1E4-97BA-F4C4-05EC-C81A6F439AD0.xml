@@ -1,0 +1,141 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="5F8BC1E4-97BA-F4C4-05EC-C81A6F439AD0" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_PURCHASE_ORDER_SUMMARY">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_PURCHASE_ORDER_SUMMARY</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_PURCHASE_ORDER_SUMMARY
+AS 
+SELECT po.purchaseOrderId, po.orderDate, po.status,
+       s.supplierId, s.name AS supplierName
+FROM purchaseOrder po
+JOIN supplier s ON po.supplierId = s.supplierId
+WHERE po.state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PURCHASEORDERID" id="03920746-6741-FA19-6FCD-5996F9B65327">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PURCHASE_ORDER_SUMMARY</sourceObjSchema>
+<sourceObjName>PURCHASEORDERID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PURCHASEORDERID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PURCHASEORDERID</headerAlias>
+<reference>false</reference>
+<referencedColumn>7C686025-CA0C-D0DD-3305-9A554F675C5E</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="ORDERDATE" id="DD026A86-6C91-BC8F-3442-C59446D919F2">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PURCHASE_ORDER_SUMMARY</sourceObjSchema>
+<sourceObjName>ORDERDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>ORDERDATE</alias>
+<dataType>DATE</dataType>
+<headerAlias>ORDERDATE</headerAlias>
+<reference>false</reference>
+<referencedColumn>C8D72E07-933B-12F7-74C0-1179E30706B9</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="STATUS" id="DC3CA599-3E4B-9C20-054A-49D3CD4210FA">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PURCHASE_ORDER_SUMMARY</sourceObjSchema>
+<sourceObjName>STATUS</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>STATUS</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>STATUS</headerAlias>
+<reference>false</reference>
+<referencedColumn>0683E462-427C-1A84-9BFC-ACF8C232DB1E</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="SUPPLIERID" id="67BF0263-DA09-C530-725B-9B81204C1F30">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PURCHASE_ORDER_SUMMARY</sourceObjSchema>
+<sourceObjName>SUPPLIERID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>SUPPLIERID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>SUPPLIERID</headerAlias>
+<reference>false</reference>
+<referencedColumn>B192E267-DBA1-C601-BB4A-9575E15B71C6</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="SUPPLIERNAME" id="D904913F-58A4-A6F0-8292-D4F4D8E36621">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PURCHASE_ORDER_SUMMARY</sourceObjSchema>
+<sourceObjName>SUPPLIERNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>SUPPLIERNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>SUPPLIERNAME</headerAlias>
+<reference>false</reference>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="604B6CA3-285E-932C-3F76-66BBA2453B20">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PURCHASEORDER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="5CD99C64-5C45-D784-8FC9-F5EB81F240EF">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>SUPPLIER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="7C686025-CA0C-D0DD-3305-9A554F675C5E">
+<columnName>PURCHASEORDERID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PURCHASEORDER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C8D72E07-933B-12F7-74C0-1179E30706B9">
+<columnName>ORDERDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PURCHASEORDER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="0683E462-427C-1A84-9BFC-ACF8C232DB1E">
+<columnName>STATUS</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PURCHASEORDER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="B192E267-DBA1-C601-BB4A-9575E15B71C6">
+<columnName>SUPPLIERID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SUPPLIER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="3A760969-120F-4B40-E954-085C813CC2C3">
+<columnName>SUPPLIERID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PURCHASEORDER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="216417EC-3F4F-C805-29AE-E02BF5C9A160">
+<columnName>NAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SUPPLIER</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="8A4ACC61-19EC-D59F-6687-51C25FD118BA">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PURCHASEORDER</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

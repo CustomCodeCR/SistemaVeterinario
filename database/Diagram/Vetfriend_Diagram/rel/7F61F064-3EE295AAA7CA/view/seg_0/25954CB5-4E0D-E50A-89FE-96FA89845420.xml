@@ -1,0 +1,130 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="25954CB5-4E0D-E50A-89FE-96FA89845420" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_PAYMENT_SUMMARY">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_PAYMENT_SUMMARY</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_PAYMENT_SUMMARY
+AS 
+SELECT paymentId, saleId, amount, paymentDate, paymentType
+FROM payment
+WHERE state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PAYMENTID" id="8E4C8A5D-CF75-AFFC-675E-F2E4854DB43A">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PAYMENT_SUMMARY</sourceObjSchema>
+<sourceObjName>PAYMENTID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PAYMENTID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>PAYMENTID</headerAlias>
+<reference>false</reference>
+<referencedColumn>FBD3DBE1-339E-86D9-F470-28A0338CDB29</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="SALEID" id="70B770DA-0363-5216-7C02-D2657E8328D3">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PAYMENT_SUMMARY</sourceObjSchema>
+<sourceObjName>SALEID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>SALEID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>SALEID</headerAlias>
+<reference>false</reference>
+<referencedColumn>CC5CF285-C093-CE1F-D1DC-DACC21835D7E</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="AMOUNT" id="3F0FDD1F-B0D0-9ECB-DF41-298CC2EF3D99">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PAYMENT_SUMMARY</sourceObjSchema>
+<sourceObjName>AMOUNT</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>AMOUNT</alias>
+<dataType>NUMBER (10,2)</dataType>
+<headerAlias>AMOUNT</headerAlias>
+<reference>false</reference>
+<referencedColumn>F5C2D835-DD01-37A6-9248-79439DEA0777</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PAYMENTDATE" id="1EF8AC02-4BC3-332F-EB19-A09A70337AF7">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PAYMENT_SUMMARY</sourceObjSchema>
+<sourceObjName>PAYMENTDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PAYMENTDATE</alias>
+<dataType>DATE</dataType>
+<headerAlias>PAYMENTDATE</headerAlias>
+<reference>false</reference>
+<referencedColumn>0F6B0605-0B2E-0B40-8BF7-E87054FF6345</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PAYMENTTYPE" id="73F226C0-DCED-5C20-5138-8B8C0F855B6E">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_PAYMENT_SUMMARY</sourceObjSchema>
+<sourceObjName>PAYMENTTYPE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PAYMENTTYPE</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>PAYMENTTYPE</headerAlias>
+<reference>false</reference>
+<referencedColumn>1DF46FCF-6EE3-0AAA-8B62-C26B7BC0ED83</referencedColumn>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F5E317C4-F718-0181-3B50-65A7ADA48966">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="FBD3DBE1-339E-86D9-F470-28A0338CDB29">
+<columnName>PAYMENTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="CC5CF285-C093-CE1F-D1DC-DACC21835D7E">
+<columnName>SALEID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F5C2D835-DD01-37A6-9248-79439DEA0777">
+<columnName>AMOUNT</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="0F6B0605-0B2E-0B40-8BF7-E87054FF6345">
+<columnName>PAYMENTDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="1DF46FCF-6EE3-0AAA-8B62-C26B7BC0ED83">
+<columnName>PAYMENTTYPE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="3FFA3F0E-1958-176F-C217-819513DECF71">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PAYMENT</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

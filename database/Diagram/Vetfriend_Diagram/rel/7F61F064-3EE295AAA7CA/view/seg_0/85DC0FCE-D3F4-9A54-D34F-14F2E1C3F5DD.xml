@@ -1,0 +1,158 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="85DC0FCE-D3F4-9A54-D34F-14F2E1C3F5DD" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_SALE_SUMMARY">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_SALE_SUMMARY</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_SALE_SUMMARY
+AS 
+SELECT s.saleId, s.saleDate, c.clientId, c.address,
+       SUM(sd.quantity * sd.price) AS totalSale
+FROM sale s
+JOIN client c ON s.clientId = c.clientId
+JOIN saleDetail sd ON s.saleId = sd.saleId
+WHERE s.state != 0
+GROUP BY s.saleId, s.saleDate, c.clientId, c.address]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="SALEID" id="3BE034DF-DFF3-AF35-EDB2-75FF87B2D8AC">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_SALE_SUMMARY</sourceObjSchema>
+<sourceObjName>SALEID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>SALEID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>SALEID</headerAlias>
+<reference>false</reference>
+<referencedColumn>6C1F9F35-D1FE-6320-BF4B-779F3D82F0AB</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="SALEDATE" id="B73D8DEE-04EF-D347-6414-19D47B1EC7E5">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_SALE_SUMMARY</sourceObjSchema>
+<sourceObjName>SALEDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>SALEDATE</alias>
+<dataType>DATE</dataType>
+<headerAlias>SALEDATE</headerAlias>
+<reference>false</reference>
+<referencedColumn>7701A227-02E4-4D2A-8B6D-2B7D779E8BC4</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="CLIENTID" id="553DDA66-59D2-9FCC-A04A-A6BB03672481">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_SALE_SUMMARY</sourceObjSchema>
+<sourceObjName>CLIENTID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>CLIENTID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>CLIENTID</headerAlias>
+<reference>false</reference>
+<referencedColumn>FCE66336-7090-18C5-3A3B-8A74DAD0FA1F</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="ADDRESS" id="E83A8603-70C0-EC53-B41C-04DE427F0C15">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_SALE_SUMMARY</sourceObjSchema>
+<sourceObjName>ADDRESS</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>ADDRESS</alias>
+<dataType>NVARCHAR2 (100)</dataType>
+<headerAlias>ADDRESS</headerAlias>
+<reference>false</reference>
+<referencedColumn>0621E019-7C82-7481-4C9F-E4E1FBA6E487</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="TOTALSALE" id="8C09B882-6C7F-D236-447E-2F210CB29A52">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_SALE_SUMMARY</sourceObjSchema>
+<sourceObjName>TOTALSALE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>TOTALSALE</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>TOTALSALE</headerAlias>
+<reference>false</reference>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="3DBB02B1-9759-F696-9679-A2DC3DA37740">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>SALE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C267CE69-B040-8105-8198-C7795144F080">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="C9DC93D5-7055-2F1D-9F0C-983667B9CC2D">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>SALEDETAIL</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="6C1F9F35-D1FE-6320-BF4B-779F3D82F0AB">
+<columnName>SALEID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="7701A227-02E4-4D2A-8B6D-2B7D779E8BC4">
+<columnName>SALEDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="FCE66336-7090-18C5-3A3B-8A74DAD0FA1F">
+<columnName>CLIENTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="0621E019-7C82-7481-4C9F-E4E1FBA6E487">
+<columnName>ADDRESS</columnName>
+<schema>PROF_ADM</schema>
+<tableName>CLIENT</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="F22864AC-A092-DB5E-0259-31AE4E124995">
+<columnName>CLIENTID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="12D770BE-60AA-8104-6C42-96E916FAC7E5">
+<columnName>QUANTITY</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALEDETAIL</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="86CD31E6-F350-3F20-3B6E-AA54779386D9">
+<columnName>PRICE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALEDETAIL</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="52A25A81-F662-22FD-9023-74655F3EFDCD">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="37183820-AC66-A0D0-3E11-4C219F1361FA">
+<columnName>SALEID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>SALEDETAIL</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="A0F8AC5F-4E2C-6C63-99B6-A9D1093F3D97" containerWithKeyObject="F5E317C4-F718-0181-3B50-65A7ADA48966" localFKIndex="A9A7DF2A-3F9F-D515-E12F-643781E4E41F" name="FK_PAYMENT_SALE">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>FK_PAYMENT_SALE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<referredTableLongName>PROF_ADM.SALE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3DBB02B1-9759-F696-9679-A2DC3DA37740</referredTableID>
+<keyObject>E9BE8CD6-9172-E0D1-0AD9-755D7F4737DD</keyObject>
+<referredKeyID>E9BE8CD6-9172-E0D1-0AD9-755D7F4737DD</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>SALEID</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="E364AC83-406F-4800-2022-5C1EF6F16E16" schemaObject="E96B5F41-403B-9BCE-825E-2272AD173FEB" name="VIEW_VACCINE_INFO">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>VIEW_VACCINE_INFO</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<userDefined>true</userDefined>
+<userDefinedSQL><![CDATA[CREATE OR REPLACE VIEW VIEW_VACCINE_INFO
+AS 
+SELECT av.appliedVaccineId, av.applicationDate,
+       p.name AS petName,
+       v.vaccineName, v.description
+FROM appliedVaccine av
+JOIN pet p ON av.petId = p.petId
+JOIN vaccine v ON av.vaccineId = v.vaccineId
+WHERE av.state != 0]]></userDefinedSQL>
+<parsed>true</parsed>
+<viewElements>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="APPLIEDVACCINEID" id="0A51A79B-5D62-AA22-3B6D-61D113C6ABA3">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_VACCINE_INFO</sourceObjSchema>
+<sourceObjName>APPLIEDVACCINEID</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>APPLIEDVACCINEID</alias>
+<dataType>NUMBER</dataType>
+<headerAlias>APPLIEDVACCINEID</headerAlias>
+<reference>false</reference>
+<referencedColumn>0C3BDD8E-EE2F-B5A1-058A-FD49AC5921A4</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="APPLICATIONDATE" id="4F6F8D1B-1C9A-6730-942D-F512BF0A6523">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_VACCINE_INFO</sourceObjSchema>
+<sourceObjName>APPLICATIONDATE</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>APPLICATIONDATE</alias>
+<dataType>DATE</dataType>
+<headerAlias>APPLICATIONDATE</headerAlias>
+<reference>false</reference>
+<referencedColumn>A7C9446C-9FA3-0670-FEA1-5DA493B34B3A</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="PETNAME" id="A8D3103C-90F9-8265-924D-9EFE1B32A1D3">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_VACCINE_INFO</sourceObjSchema>
+<sourceObjName>PETNAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>PETNAME</alias>
+<dataType>NVARCHAR2 (50)</dataType>
+<headerAlias>PETNAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>3A68F6A5-D38F-A893-5698-FDBF5A8B37B7</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="VACCINENAME" id="A69C42F4-FE8B-9D1E-E2EA-7AEE54207FD6">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_VACCINE_INFO</sourceObjSchema>
+<sourceObjName>VACCINENAME</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>VACCINENAME</alias>
+<dataType>NVARCHAR2 (100)</dataType>
+<headerAlias>VACCINENAME</headerAlias>
+<reference>false</reference>
+<referencedColumn>87B8F0D3-B23B-CE77-8892-109C1377F93E</referencedColumn>
+</viewElement>
+<viewElement class="oracle.dbtools.crest.model.design.relational.ColumnView" name="DESCRIPTION" id="4223E585-05F3-D79A-B46B-718C04A9C99F">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>VIEW_VACCINE_INFO</sourceObjSchema>
+<sourceObjName>DESCRIPTION</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:41 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<alias>DESCRIPTION</alias>
+<dataType>NVARCHAR2 (100)</dataType>
+<headerAlias>DESCRIPTION</headerAlias>
+<reference>false</reference>
+</viewElement>
+</viewElements>
+<usedObjects>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="2A3D5591-6228-393F-0D20-6EE5D54EA2B6">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>APPLIEDVACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="BFC41E30-CF64-6A92-3303-0758298F9837">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="47401D9A-0E39-86D7-714B-B341FC1F75B0">
+<container>true</container>
+<schema>PROF_ADM</schema>
+<tableName>VACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="0C3BDD8E-EE2F-B5A1-058A-FD49AC5921A4">
+<columnName>APPLIEDVACCINEID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APPLIEDVACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="A7C9446C-9FA3-0670-FEA1-5DA493B34B3A">
+<columnName>APPLICATIONDATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APPLIEDVACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="3A68F6A5-D38F-A893-5698-FDBF5A8B37B7">
+<columnName>VACCINENAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>VACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="87B8F0D3-B23B-CE77-8892-109C1377F93E">
+<columnName>DESCRIPTION</columnName>
+<schema>PROF_ADM</schema>
+<tableName>VACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="78EFA5B3-F1D6-FD02-48C3-1D233AFD11BE">
+<columnName>VACCINEID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APPLIEDVACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="13D7464F-7C9B-97F8-7404-3EB3BF9BCD61">
+<columnName>PETID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APPLIEDVACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="655D7904-F12E-173E-ECA4-F0234DB03BC8">
+<columnName>VACCINEID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>VACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="516595AA-604E-EEBB-9C8D-BAFCD062A448">
+<columnName>PETID</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="5EF1ACC3-5E89-CF03-E0FB-7FBFE6171F3D">
+<columnName>STATE</columnName>
+<schema>PROF_ADM</schema>
+<tableName>APPLIEDVACCINE</tableName>
+</UsedObject>
+<UsedObject class="oracle.dbtools.crest.swingui.editor.viewbuilder.SQLNameHelper" id="7EACC8F6-9336-8D9F-AA08-7D10F26661C7">
+<columnName>NAME</columnName>
+<schema>PROF_ADM</schema>
+<tableName>PET</tableName>
+</UsedObject>
+</usedObjects>
+</TableView>

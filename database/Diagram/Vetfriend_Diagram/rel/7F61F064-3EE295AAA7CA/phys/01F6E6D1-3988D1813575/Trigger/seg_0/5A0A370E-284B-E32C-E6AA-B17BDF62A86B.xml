@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_PET_BIU" directorySegmentName="seg_0" id="5A0A370E-284B-E32C-E6AA-B17BDF62A86B">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>TRG_PET_BIU</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[DECLARE
+  v_category VARCHAR2(20);
+BEGIN
+  -- (4) Validate pet age; if out-of-range, an error is raised.
+  :NEW.age := fn_check_pet_age(:NEW.age);
+
+  -- (5) Calculate the pet's age category (e.g. 'Young', 'Adult', 'Senior').
+  v_category := fn_calculate_pet_age_category(:NEW.age);
+
+  -- Optionally: If you have an extra column (e.g. age_category), you could set it:
+  -- :NEW.age_category := v_category;
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>97685FB9-13DA-6EAB-3E56-4D471B1D898F</owner>
+<table>BFC41E30-CF64-6A92-3303-0758298F9837</table>
+</TriggerOraclev10g>

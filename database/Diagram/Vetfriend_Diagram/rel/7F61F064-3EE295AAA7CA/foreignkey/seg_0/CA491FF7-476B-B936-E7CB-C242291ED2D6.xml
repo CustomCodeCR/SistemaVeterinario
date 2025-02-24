@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="CA491FF7-476B-B936-E7CB-C242291ED2D6" containerWithKeyObject="C8DF6E66-CD12-2B84-DD41-6A342166AAC3" localFKIndex="32FF4259-0BEE-B7FF-E9ED-F389FC075914" name="FK_APPOINTMENTDETAIL_APPOINTMENT">
+<sourceConnName>Clean_User</sourceConnName>
+<sourceObjSchema>PROF_ADM</sourceObjSchema>
+<sourceObjName>FK_APPOINTMENTDETAIL_APPOINTMENT</sourceObjName>
+<createdBy>loren</createdBy>
+<createdTime>2025-02-24 00:38:43 UTC</createdTime>
+<ownerDesignName>Vetfriend_Diagram</ownerDesignName>
+<referredTableLongName>PROF_ADM.APPOINTMENT</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A4DEEC77-1E13-365E-E8A4-79DE12B51FEC</referredTableID>
+<keyObject>D50A0ED9-1E74-FCBF-D83A-B3343ADC16F6</keyObject>
+<referredKeyID>D50A0ED9-1E74-FCBF-D83A-B3343ADC16F6</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>APPOINTMENTID</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
