@@ -1,11 +1,12 @@
-﻿namespace backend.Domain.Entities;
+﻿namespace backend.Application.Dtos.User.Response;
 
-public class User : BaseEntity
+public class UserByIdResponseDto
 {
+    public int UsertId { get; set; }
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string Username { get; set; } = null!;
-    public string Password { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string UserType { get; set; } = null!;
+    public int State { get; set; }
 }

@@ -1,10 +1,12 @@
-﻿namespace backend.Application.Interfaces.Persistence;
+﻿using backend.Domain.Entities;
 
-public interface IGenericRepository<T> where T : class
+namespace backend.Application.Interfaces.Persistence;
+
+public interface IGenericRepository<T> where T : BaseEntity
 {
-    Task<IEnumerable<T>> GetAllAsync(string storedProcedure);
-    Task<IEnumerable<T>> GetAllWithPaginationAsync(string storedProcedure, object parameter);
-    Task<T> GetByIdAsync(string storedProcedure, object parameter);
+    IQueryable<T> GetAllQueryable();
+    Task<IEnumerable<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetSelectAsync();
+    Task<T> GetByIdAsync(int id);
     Task<bool> ExecAsync(string storedProcedure, object parameters);
-    Task<int> CountAsync(string tableName);
 }

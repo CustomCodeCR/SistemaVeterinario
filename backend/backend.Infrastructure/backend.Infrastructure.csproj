@@ -12,7 +12,9 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.3.1" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.7.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess.EntityFramework" Version="23.7.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0.2" />
   </ItemGroup>
 
   <ItemGroup>

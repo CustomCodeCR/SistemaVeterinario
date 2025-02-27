@@ -12,7 +12,7 @@ public class ApplicationDbContext
     public ApplicationDbContext(IConfiguration configuration)
     {
         _configuration = configuration;
-        _connectionString = _configuration.GetConnectionString("")!;
+        _connectionString = _configuration.GetConnectionString("Connection")!;
     }
 
     public IDbConnection CreateConnection => new OracleConnection(_connectionString);

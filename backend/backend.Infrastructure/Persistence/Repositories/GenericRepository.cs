@@ -1,31 +1,21 @@
 ﻿using backend.Application.Interfaces.Persistence;
+using backend.Domain.Entities;
 using backend.Infrastructure.Persistence.Context;
 using Dapper;
 using System.Data;
+using System.Data.Entity;
 
 namespace backend.Infrastructure.Persistence.Repositories;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : class
+public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
     private readonly ApplicationDbContext _context;
+    private readonly DbSet<T> _entity;
 
     public GenericRepository(ApplicationDbContext context)
     {
         _context = context;
-    }
-
-    public async Task<IEnumerable<T>> GetAllAsync(string storedProcedure)
-    {
-        using var connection = _context.CreateConnection;
-        return await connection.QueryAsync<T>(storedProcedure, commandType: CommandType.StoredProcedure);
-    }
-
-    public async Task<T> GetByIdAsync(string storedProcedure, object parameter)
-    {
-        using var connection = _context.CreateConnection;
-        var objParam = new DynamicParameters(parameter);
-        return await connection
-            .QuerySingleOrDefaultAsync<T>(storedProcedure, param: objParam, commandType: CommandType.StoredProcedure);
+        _entity = context.Set<T>();
     }
 
     public async Task<bool> ExecAsync(string storedProcedure, object parameters)
@@ -52,5 +42,25 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
         var count = await connection.ExecuteScalarAsync<int>(query, commandType: CommandType.Text);
         return count;
+    }
+
+    public IQueryable<T> GetAllQueryable()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<T>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<T>> GetSelectAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<T> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
     }
 }
