@@ -1,4 +1,9 @@
-﻿using backend.Application.Commons.Behaviors;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using backend.Application.Commons.Behaviors;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,9 @@
-﻿using backend.Application.Interfaces.Services;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using backend.Application.Interfaces.Services;
 using System.Net.Http.Headers;
 
 namespace backend.Infrastructure.Services;
@@ -7,7 +12,7 @@ public class VaultSecretService : IVaultSecretService
 {
     public async Task<string> GetSecret(string secretPath)
     {
-        var vaultToken = "";
+        var vaultToken = Environment.GetEnvironmentVariable("VAULT_TOKEN");
         if (string.IsNullOrEmpty(vaultToken))
         {
             throw new InvalidOperationException("Vault token is not provided.");

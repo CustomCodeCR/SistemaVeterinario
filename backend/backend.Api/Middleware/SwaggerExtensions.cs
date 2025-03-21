@@ -1,58 +1,47 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
 
-namespace backend.Api.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 public static class SwaggerExtensions
 {
-    private static readonly string[] EmptyStringArray = Array.Empty<string>();
-
-    public static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        var swaggerConfig = configuration.GetSection("Swagger");
-
-        var openApi = new OpenApiInfo
+        services.AddSwaggerGen(options =>
         {
-            Title = swaggerConfig["Title"],
-            Version = swaggerConfig["Version"],
-            Description = swaggerConfig["Description"],
-            TermsOfService = new Uri(swaggerConfig["TermsOfServiceUrl"]!),
-            Contact = new OpenApiContact
-            {
-                Name = swaggerConfig["Contact:Name"],
-                Email = swaggerConfig["Contact:Email"],
-                Url = new Uri(swaggerConfig["Contact:Url"]!)
-            },
-            License = new OpenApiLicense
-            {
-                Name = swaggerConfig["License:Name"],
-                Url = new Uri(swaggerConfig["License:Url"]!)
-            }
-        };
+            var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
 
-        services.AddSwaggerGen(x =>
-        {
-            x.SwaggerDoc("v1", openApi);
-
-            var securityScheme = new OpenApiSecurityScheme
+            foreach (var description in provider.ApiVersionDescriptions)
             {
-                Name = "JWT Authentication",
-                Description = "JWT Bearer Token",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
-                Scheme = "Bearer",
-                BearerFormat = "JWT",
-                Reference = new OpenApiReference
+                options.SwaggerDoc(description.GroupName, new OpenApiInfo
                 {
-                    Id = JwtBearerDefaults.AuthenticationScheme,
-                    Type = ReferenceType.SecurityScheme
-                }
-            };
+                    Title = $"CustomCodeCR System Template {description.ApiVersion}",
+                    Version = description.ApiVersion.ToString(),
+                    Description = $"API version {description.ApiVersion}",
+                    TermsOfService = new Uri("https://customcodecr.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Support",
+                        Email = "support@customcodecr.com",
+                        Url = new Uri("https://customcodecr.com/contact")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "CustomCodeCR License",
+                        Url = new Uri("https://customcodecr.com/license")
+                    }
+                });
+            }
 
-            x.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
-            x.AddSecurityRequirement(new OpenApiSecurityRequirement
+            options.DocInclusionPredicate((version, apiDesc) =>
             {
-                { securityScheme, EmptyStringArray }
+                return apiDesc.GroupName == version;
             });
         });
 

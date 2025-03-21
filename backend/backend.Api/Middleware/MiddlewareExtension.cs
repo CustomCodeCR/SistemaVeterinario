@@ -1,4 +1,9 @@
-﻿namespace backend.Api.Middleware;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+namespace backend.Api.Middleware;
 
 public static class MiddlewareExtension
 {

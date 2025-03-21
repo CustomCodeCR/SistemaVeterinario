@@ -1,4 +1,9 @@
-﻿using backend.Application.Commons.Config;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using backend.Application.Commons.Config;
 using backend.Application.Interfaces.Services;
 using backend.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,7 +20,8 @@ public static class AuthenticationExtension
         var serviceProvider = services.BuildServiceProvider();
         var vaultSecretService = serviceProvider.GetRequiredService<IVaultSecretService>();
 
-        var secretJson = vaultSecretService.GetSecret("CustomCodeAPI/data/Jwt").GetAwaiter().GetResult();
+        //Change for correct secret
+        var secretJson = vaultSecretService.GetSecret("VetFriends/data/Jwt").GetAwaiter().GetResult();
         var secretResponse = JsonConvert.DeserializeObject<SecretResponse<JwtSettings>>(secretJson);
 
         if (secretResponse?.Data?.Data == null)

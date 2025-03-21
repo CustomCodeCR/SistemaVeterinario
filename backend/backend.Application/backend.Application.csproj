@@ -7,26 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\User\Commands\CreateCommand\" />
-    <Folder Include="UseCases\User\Commands\DeleteCommand\" />
-    <Folder Include="UseCases\User\Commands\UpdateCommand\" />
-    <Folder Include="UseCases\User\Queries\GetByIdQuery\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
     <PackageReference Include="WatchDog.NET" Version="1.4.12" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\backend.Domain\backend.Domain.csproj" />
     <ProjectReference Include="..\backend.Utilities\backend.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\Vaccine\Response\" />
+    <Folder Include="UseCases\User\Queries\LoginQuery\" />
   </ItemGroup>
 
 </Project>
