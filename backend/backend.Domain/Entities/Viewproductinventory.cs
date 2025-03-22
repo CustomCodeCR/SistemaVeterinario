@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace backend.Domain.Entities;
 
-public partial class Viewproductinventory
+public partial class Viewproductinventory : BaseEntity
 {
     public int Productid { get; set; }
 

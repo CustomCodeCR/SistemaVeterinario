@@ -28,22 +28,22 @@ public class PurchaseOrderDetailConfiguration : IEntityTypeConfiguration<Purchas
         builder.Property(e => e.Productid)
             .HasColumnType("NUMBER")
             .HasColumnName("PRODUCTID");
-        builder.Property(e => e.Auditcreatedate)
+        builder.Property(e => e.AuditCreateDate)
             .HasPrecision(7)
             .HasColumnName("AUDITCREATEDATE");
-        builder.Property(e => e.Auditcreateuser)
+        builder.Property(e => e.AuditCreateUser)
             .HasColumnType("NUMBER")
             .HasColumnName("AUDITCREATEUSER");
-        builder.Property(e => e.Auditdeletedate)
+        builder.Property(e => e.AuditDeleteDate)
             .HasPrecision(7)
             .HasColumnName("AUDITDELETEDATE");
-        builder.Property(e => e.Auditdeleteuser)
+        builder.Property(e => e.AuditDeleteUser)
             .HasColumnType("NUMBER")
             .HasColumnName("AUDITDELETEUSER");
-        builder.Property(e => e.Auditupdatedate)
+        builder.Property(e => e.AuditUpdateDate)
             .HasPrecision(7)
             .HasColumnName("AUDITUPDATEDATE");
-        builder.Property(e => e.Auditupdateuser)
+        builder.Property(e => e.AuditUpdateUser)
             .HasColumnType("NUMBER")
             .HasColumnName("AUDITUPDATEUSER");
         builder.Property(e => e.Quantity)

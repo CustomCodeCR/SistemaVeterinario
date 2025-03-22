@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace backend.Domain.Entities;
 
-public partial class Viewvaccineinfo
+public partial class Viewvaccineinfo : BaseEntity
 {
     public int Appliedvaccineid { get; set; }
 

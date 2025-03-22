@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace backend.Domain.Entities;
 
-public partial class Viewclientinfo
+public partial class Viewclientinfo : BaseEntity
 {
     public int Clientid { get; set; }
 
@@ -18,6 +18,4 @@ public partial class Viewclientinfo
     public string Address { get; set; } = null!;
 
     public string Phone { get; set; } = null!;
-
-    public DateTime Auditcreatedate { get; set; }
 }

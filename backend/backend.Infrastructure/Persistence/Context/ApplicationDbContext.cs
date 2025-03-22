@@ -1,4 +1,5 @@
 ﻿using backend.Domain.Entities;
+using backend.Infrastructure.Persistence.Context.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -78,6 +79,35 @@ public partial class ApplicationDbContext : DbContext
         modelBuilder
             .HasDefaultSchema("VETFRIENDS")
             .UseCollation("USING_NLS_COMP");
+
+        modelBuilder.ApplyConfiguration(new AppliedVaccinesConfiguration());
+        modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
+        modelBuilder.ApplyConfiguration(new AppointmentDetailConfiguration());
+        modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+        modelBuilder.ApplyConfiguration(new ClientConfiguration());
+        modelBuilder.ApplyConfiguration(new InventoryConfiguration());
+        modelBuilder.ApplyConfiguration(new MedicConfiguration());
+        modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+        modelBuilder.ApplyConfiguration(new PetConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductCategoryRelationConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
+        modelBuilder.ApplyConfiguration(new PurchaseOrderConfiguration());
+        modelBuilder.ApplyConfiguration(new PurchaseOrderDetailConfiguration());
+        modelBuilder.ApplyConfiguration(new SaleConfiguration());
+        modelBuilder.ApplyConfiguration(new SaleDetailConfiguration());
+        modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+        modelBuilder.ApplyConfiguration(new VaccineConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewActiveAppUserConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewAppointmentInfoConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewClientInfo());
+        modelBuilder.ApplyConfiguration(new ViewPaymentSummaryConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewPetDetailConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewProductCategoryMappingConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewProductInventoryConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewPurchaseOrderSummaryConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewSaleSummaryConfiguration());
+        modelBuilder.ApplyConfiguration(new ViewVaccineInfoConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
     }

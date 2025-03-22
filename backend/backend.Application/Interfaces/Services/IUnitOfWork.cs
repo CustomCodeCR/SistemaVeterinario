@@ -16,6 +16,7 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<Medic> Medic { get; }
     IGenericRepository<Pet> Pet { get; }
     IGenericRepository<Vaccine> Vaccine { get; }
+    IGenericRepository<Appliedvaccine> AppliedVaccine { get; }
     Task SaveChangesAsync();
     IDbTransaction BeginTransaction();
 }

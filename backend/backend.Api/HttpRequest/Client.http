@@ -1,0 +1,6 @@
+@backend.Api_HostAddress = https://localhost:7166
+
+GET {{backend.Api_HostAddress}}/api/v1/client
+Accept: application/json
+
+POST {{backend.Api_HostAddress}}/api/v1/

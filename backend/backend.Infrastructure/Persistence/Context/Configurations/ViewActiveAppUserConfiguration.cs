@@ -17,16 +17,16 @@ public class ViewActiveAppUserConfiguration : IEntityTypeConfiguration<Viewactiv
                 .HasNoKey()
                 .ToView("VIEWACTIVEAPPUSERS");
 
-        builder.Property(e => e.Auditcreatedate)
+        builder.Property(e => e.AuditCreateDate)
             .HasPrecision(7)
             .HasColumnName("AUDITCREATEDATE");
-        builder.Property(e => e.Auditcreateuser)
+        builder.Property(e => e.AuditCreateUser)
             .HasColumnType("NUMBER")
             .HasColumnName("AUDITCREATEUSER");
-        builder.Property(e => e.Auditupdatedate)
+        builder.Property(e => e.AuditUpdateDate)
             .HasPrecision(7)
             .HasColumnName("AUDITUPDATEDATE");
-        builder.Property(e => e.Auditupdateuser)
+        builder.Property(e => e.AuditUpdateUser)
             .HasColumnType("NUMBER")
             .HasColumnName("AUDITUPDATEUSER");
         builder.Property(e => e.Email)

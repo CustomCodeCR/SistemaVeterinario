@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace backend.Domain.Entities;
 
-public partial class Viewactiveappuser
+public partial class Viewactiveappuser : BaseEntity
 {
     public int Userid { get; set; }
 
@@ -16,12 +16,4 @@ public partial class Viewactiveappuser
     public string Email { get; set; } = null!;
 
     public string Usertype { get; set; } = null!;
-
-    public int Auditcreateuser { get; set; }
-
-    public DateTime Auditcreatedate { get; set; }
-
-    public int? Auditupdateuser { get; set; }
-
-    public DateTime? Auditupdatedate { get; set; }
 }

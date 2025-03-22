@@ -20,7 +20,7 @@ public class ViewClientInfo : IEntityTypeConfiguration<Viewclientinfo>
         builder.Property(e => e.Address)
             .HasMaxLength(100)
             .HasColumnName("ADDRESS");
-        builder.Property(e => e.Auditcreatedate)
+        builder.Property(e => e.AuditCreateDate)
             .HasPrecision(7)
             .HasColumnName("AUDITCREATEDATE");
         builder.Property(e => e.Clientid)

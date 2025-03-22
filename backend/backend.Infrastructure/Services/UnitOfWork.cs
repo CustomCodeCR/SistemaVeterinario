@@ -23,6 +23,7 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<Medic> _medic = null!;
     private IGenericRepository<Pet> _pet = null!;
     private IGenericRepository<Vaccine> _vaccine = null!;
+    private IGenericRepository<Appliedvaccine> _appliedVaccine = null!;
 
     public UnitOfWork(ApplicationDbContext context)
     {
@@ -34,6 +35,7 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<Medic> Medic => _medic ?? new GenericRepository<Medic>(_context);
     public IGenericRepository<Pet> Pet => _pet ?? new GenericRepository<Pet>(_context);
     public IGenericRepository<Vaccine> Vaccine => _vaccine ?? new GenericRepository<Vaccine>(_context);
+    public IGenericRepository<Appliedvaccine> AppliedVaccine => _appliedVaccine ?? new GenericRepository<Appliedvaccine>(_context);
 
     public void Dispose()
     {

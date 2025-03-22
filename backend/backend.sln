@@ -19,15 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{439946
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{E474CDAF-29CD-455A-B2E6-A451041A541C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Domain", "backend.Domain\backend.Domain.csproj", "{458DBDEA-A055-400C-8B5F-1DDAD88E0932}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Domain", "backend.Domain\backend.Domain.csproj", "{458DBDEA-A055-400C-8B5F-1DDAD88E0932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Application", "backend.Application\backend.Application.csproj", "{0C322433-D5A9-42AA-8D49-082B8FF88704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Application", "backend.Application\backend.Application.csproj", "{0C322433-D5A9-42AA-8D49-082B8FF88704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Utilities", "backend.Utilities\backend.Utilities.csproj", "{08DF6567-9975-4A79-9852-B56E53A6D4A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Utilities", "backend.Utilities\backend.Utilities.csproj", "{08DF6567-9975-4A79-9852-B56E53A6D4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Infrastructure", "backend.Infrastructure\backend.Infrastructure.csproj", "{B2F59803-9265-4EDC-9D22-87CA11338174}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Infrastructure", "backend.Infrastructure\backend.Infrastructure.csproj", "{B2F59803-9265-4EDC-9D22-87CA11338174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Api", "backend.Api\backend.Api.csproj", "{2638A174-BDC9-495D-B8FE-FF38256A06C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Api", "backend.Api\backend.Api.csproj", "{2638A174-BDC9-495D-B8FE-FF38256A06C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
