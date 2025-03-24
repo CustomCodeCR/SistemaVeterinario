@@ -22,33 +22,37 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
-        var serviceProvider = services.BuildServiceProvider();
-        var secretService = serviceProvider.GetRequiredService<IVaultSecretService>();
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        // Retrieve the connection string from the secret service
-        var secretJson = secretService.GetSecret("VetFriends/data/ConnectionStrings").GetAwaiter().GetResult();
-        var SecretResponse = JsonConvert.DeserializeObject<SecretResponse<ConnectionStringsConfig>>(secretJson);
-        var Config = SecretResponse?.Data?.Data;
+        string connectionString;
 
-        // Register the connection string as a singleton service
-        services.AddSingleton(Config!.Connection);
+        if (environment != "Production")
+        {
+            connectionString = configuration.GetConnectionString("Connection")!;
+        }
+        else
+        {
+            var serviceProvider = services.BuildServiceProvider();
+            var secretService = serviceProvider.GetRequiredService<IVaultSecretService>();
 
-        // Register the ApplicationDbContext with both options and the connection string
+            var secretJson = secretService.GetSecret("VetFriends/data/ConnectionStrings").GetAwaiter().GetResult();
+            var secretResponse = JsonConvert.DeserializeObject<SecretResponse<ConnectionStringsConfig>>(secretJson);
+            var config = secretResponse?.Data?.Data;
+            connectionString = config!.Connection;
+        }
+
+        services.AddSingleton(connectionString);
+
         services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
         {
-            // Resolve the connection string from DI
-            var connectionString = serviceProvider.GetRequiredService<string>();  // Get the connection string
-            options.UseOracle(connectionString);
+            var resolvedConnection = serviceProvider.GetRequiredService<string>();
+            options.UseOracle(resolvedConnection);
         });
 
-        // Repositorios
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
-        // Servicios adicionales
         services.AddTransient<IOrderingQuery, OrderingQuery>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-        // Configuración de JWT
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 

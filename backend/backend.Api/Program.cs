@@ -17,8 +17,26 @@ using WatchDog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddSingleton<IVaultSecretService, VaultSecretService>();
+var env = builder.Environment;
+
+Console.WriteLine(env.EnvironmentName);
+
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.Development.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.Testing.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
+if (!env.IsDevelopment())
+{
+    builder.Services.AddSingleton<IVaultSecretService, VaultSecretService>();
+}
+else
+{
+    Console.WriteLine("Running in Development environment. Vault configuration skipped.");
+}
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddHealthCheck(builder.Configuration);
@@ -26,14 +44,12 @@ builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddWatchDog();
 builder.Services.AddHttpContextAccessor();
 
-// Enable CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Cors", builder =>
         builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-    );
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 });
 
 builder.Services.AddApiVersioning(options =>
@@ -56,8 +72,7 @@ builder.Services.AddSwagger();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+if (env.IsDevelopment() || env.IsProduction())
 {
     var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
@@ -80,16 +95,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("Cors");
 
-
-app.MapControllers(); 
+app.MapControllers();
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     Predicate = _ => true,
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
-
-// Configure WatchDog for logging
 app.UseWatchDog(configuration =>
 {
     configuration.WatchPageUsername = "admin";

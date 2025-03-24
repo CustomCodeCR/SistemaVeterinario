@@ -17,19 +17,29 @@ public static class AuthenticationExtension
 {
     public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var serviceProvider = services.BuildServiceProvider();
-        var vaultSecretService = serviceProvider.GetRequiredService<IVaultSecretService>();
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        //Change for correct secret
-        var secretJson = vaultSecretService.GetSecret("VetFriends/data/Jwt").GetAwaiter().GetResult();
-        var secretResponse = JsonConvert.DeserializeObject<SecretResponse<JwtSettings>>(secretJson);
+        JwtSettings jwtSettings;
 
-        if (secretResponse?.Data?.Data == null)
+        if (environment != "Production")
         {
-            throw new Exception("Failed to retrieve secrets from Vault.");
+            jwtSettings = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
         }
+        else
+        {
+            var serviceProvider = services.BuildServiceProvider();
+            var vaultSecretService = serviceProvider.GetRequiredService<IVaultSecretService>();
 
-        var jwtSettings = secretResponse.Data.Data;
+            var secretJson = vaultSecretService.GetSecret("VetFriends/data/Jwt").GetAwaiter().GetResult();
+            var secretResponse = JsonConvert.DeserializeObject<SecretResponse<JwtSettings>>(secretJson);
+
+            if (secretResponse?.Data?.Data == null)
+            {
+                throw new Exception("Failed to retrieve secrets from Vault.");
+            }
+
+            jwtSettings = secretResponse.Data.Data;
+        }
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

@@ -8,9 +8,9 @@ namespace backend.Utilities.Static;
 public class SP
 {
     #region User
-    public const string SpCreateAppUser = "PkgAppUser.SpCreateAppUser";
-    public const string SpDeleteAppUser = "PkgAppUser.SpDeleteAppUser";
-    public const string SpUpdateAppUser = "PkgAppUser.SpUpdateAppUser";
+    public const string SpCreateAppUser = "VETFRIENDS.PkgAppUser.SpCreateAppUser";
+    public const string SpDeleteAppUser = "VETFRIENDS.PkgAppUser.SpDeleteAppUser";
+    public const string SpUpdateAppUser = "VETFRIENDS.PkgAppUser.SpUpdateAppUser";
     #endregion
     #region Client
     public const string SpCreateClient = "PkgClient.SpCreateClient";

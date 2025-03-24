@@ -7,6 +7,8 @@ using backend.Application.Commons.Config;
 using backend.Application.Interfaces.Authentication;
 using backend.Application.Interfaces.Services;
 using backend.Domain.Entities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,25 +21,33 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _jwtSettings;
 
-    public JwtTokenGenerator(IVaultSecretService vaultSecretService)
+    public JwtTokenGenerator(IConfiguration configuration, IServiceProvider serviceProvider)
     {
-        //Change for correct secret
-        var secretJson = vaultSecretService.GetSecret("VetFriends/data/Jwt").GetAwaiter().GetResult();
-        var secretResponse = JsonConvert.DeserializeObject<SecretResponse<JwtSettings>>(secretJson);
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        if (secretResponse?.Data?.Data == null)
+        if (environment != "Production")
         {
-            throw new Exception("Failed to retrieve secrets from Vault.");
+            _jwtSettings = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
         }
+        else
+        {
+            var vaultSecretService = serviceProvider.GetRequiredService<IVaultSecretService>();
+            var secretJson = vaultSecretService.GetSecret("VetFriends/data/Jwt").GetAwaiter().GetResult();
+            var secretResponse = JsonConvert.DeserializeObject<SecretResponse<JwtSettings>>(secretJson);
 
-        _jwtSettings = secretResponse.Data.Data;
+            if (secretResponse?.Data?.Data == null)
+            {
+                throw new Exception("Failed to retrieve JWT secrets from Vault.");
+            }
+
+            _jwtSettings = secretResponse.Data.Data;
+        }
     }
 
     public string GenerateToken(Appuser user)
     {
         var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256);
 
         var claims = new[]

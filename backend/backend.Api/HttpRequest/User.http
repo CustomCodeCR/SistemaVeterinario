@@ -1,0 +1,49 @@
+﻿@backend_Host = https://localhost:7166
+@userId = 2
+
+### GET ALL USERS
+GET {{backend_Host}}/api/v1/user
+Accept: application/json
+
+
+### GET USER BY ID
+GET {{backend_Host}}/api/v1/user/{{userId}}
+Accept: application/json
+
+
+### CREATE USER
+POST {{backend_Host}}/api/v1/user/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Juan",
+  "lastName": "Pérez",
+  "username": "juanperez",
+  "password": "password123",
+  "email": "juan@example.com",
+  "userType": "Admin",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE USER
+PUT {{backend_Host}}/api/v1/user/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "userId": 1,
+  "firstName": "Carlos",
+  "lastName": "Ramírez",
+  "username": "carlosr",
+  "password": "updatedpass123",
+  "email": "carlos@example.com",
+  "userType": "Admin",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE USER
+DELETE {{backend_Host}}/api/v1/user/delete/{{userId}}
+Accept: application/json

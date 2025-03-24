@@ -15,19 +15,29 @@ public static class HealthCheckExtension
 
     public static IServiceCollection AddHealthCheck(this IServiceCollection services, IConfiguration configuration)
     {
-        var serviceProvider = services.BuildServiceProvider();
-        var vaultSecretService = serviceProvider.GetRequiredService<IVaultSecretService>();
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        // Change for correct secret
-        var secretJson = vaultSecretService.GetSecret("VetFriends/data/ConnectionStrings").GetAwaiter().GetResult();
-        var secretResponse = JsonConvert.DeserializeObject<SecretResponse<ConnectionStringsConfig>>(secretJson);
+        string connectionString;
 
-        if (secretResponse?.Data?.Data == null || string.IsNullOrEmpty(secretResponse.Data.Data.Connection))
+        if (environment != "Production")
         {
-            throw new Exception("The connection string could not be obtained from Vault.");
+            connectionString = configuration.GetConnectionString("Connection")!;
         }
+        else
+        {
+            var serviceProvider = services.BuildServiceProvider();
+            var vaultSecretService = serviceProvider.GetRequiredService<IVaultSecretService>();
 
-        var connectionString = secretResponse.Data.Data.Connection;
+            var secretJson = vaultSecretService.GetSecret("VetFriends/data/ConnectionStrings").GetAwaiter().GetResult();
+            var secretResponse = JsonConvert.DeserializeObject<SecretResponse<ConnectionStringsConfig>>(secretJson);
+
+            if (secretResponse?.Data?.Data == null || string.IsNullOrEmpty(secretResponse.Data.Data.Connection))
+            {
+                throw new Exception("The connection string could not be obtained from Vault.");
+            }
+
+            connectionString = secretResponse.Data.Data.Connection;
+        }
 
         services.AddHealthChecks()
             .AddOracle(
