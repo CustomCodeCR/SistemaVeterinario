@@ -35,7 +35,7 @@ public class CreatePetHandler : IRequestHandler<CreatePetCommand, BaseResponse<b
             var pet = _mapper.Map<Entity.Pet>(request);
 
             var parameters = new DynamicParameters();
-            parameters.Add("PClientId", pet.Client, DbType.String);
+            parameters.Add("PClientId", pet.Clientid, DbType.String);
             parameters.Add("PName", pet.Name, DbType.String);
             parameters.Add("PType", pet.Type, DbType.String);
             parameters.Add("PBreed", pet.Breed, DbType.String);

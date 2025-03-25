@@ -17,6 +17,14 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<Pet> Pet { get; }
     IGenericRepository<Vaccine> Vaccine { get; }
     IGenericRepository<Appliedvaccine> AppliedVaccine { get; }
+    IGenericRepository<Inventory> Inventory { get; }
+    IGenericRepository<Payment> Payment { get; }
+    IGenericRepository<Product> Product { get; }
+    IGenericRepository<Productcategory> ProductCategory { get; }
+    IGenericRepository<Productcategoryrelation> ProductCategoryRelation { get; }
+    IGenericRepository<Supplier> Supplier { get; }
+    IGenericRepository<Appointment> Appointment { get; }
+    IAppointmentDetailRepository AppointmentDetail { get; }
     Task SaveChangesAsync();
     IDbTransaction BeginTransaction();
 }

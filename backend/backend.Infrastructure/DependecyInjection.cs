@@ -50,6 +50,8 @@ public static class DependencyInjection
         });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<IAppointmentDetailRepository, AppointmentDetailRepository>();
+
         services.AddTransient<IOrderingQuery, OrderingQuery>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 

@@ -35,7 +35,7 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
         builder.Property(e => e.AuditDeleteDate)
             .HasPrecision(7)
             .HasColumnName("AUDITDELETEDATE");
-        builder.Property(e => e.AuditCreateUser)
+        builder.Property(e => e.AuditDeleteUser)
             .HasColumnType("NUMBER")
             .HasColumnName("AUDITDELETEUSER");
         builder.Property(e => e.AuditUpdateDate)

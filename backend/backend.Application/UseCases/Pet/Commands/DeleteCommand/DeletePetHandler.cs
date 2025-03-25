@@ -37,7 +37,7 @@ public class DeletePetHandler : IRequestHandler<DeletePetCommand, BaseResponse<b
             }
 
             var parameters = new DynamicParameters();
-            parameters.Add("PAuditDeletePet", request.AuditDeleteUser);
+            parameters.Add("PAuditDeleteUser", request.AuditDeleteUser);
             parameters.Add("PPetId", request.PetId);
 
             var result = await _unitOfWork.Pet.ExecAsync(SP.SpDeletePet, parameters);

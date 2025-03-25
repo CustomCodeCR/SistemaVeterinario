@@ -50,7 +50,7 @@ public class UpdateMedicHandler : IRequestHandler<UpdateMedicCommand, BaseRespon
             parameters.Add("PSpecialty", client.Specialty, DbType.String);
             parameters.Add("PPhone", client.Phone, DbType.String);
             parameters.Add("PState", client.State, DbType.Int32);
-            parameters.Add("PAuditUpdateMedic", request.AuditUpdateUser, DbType.Int32);
+            parameters.Add("PAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
 
             var result = await _unitOfWork.Medic.ExecAsync(SP.SpUpdateMedic, parameters);
 

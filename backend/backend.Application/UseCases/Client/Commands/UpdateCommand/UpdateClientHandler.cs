@@ -50,7 +50,7 @@ public class UpdateClientHandler : IRequestHandler<UpdateClientCommand, BaseResp
             parameters.Add("PAddress", client.Address, DbType.String);
             parameters.Add("PPhone", client.Phone, DbType.String);
             parameters.Add("PState", client.State, DbType.Int32);
-            parameters.Add("PAuditUpdateClient", request.AuditUpdateUser, DbType.Int32);
+            parameters.Add("PAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
 
             var result = await _unitOfWork.Client.ExecAsync(SP.SpUpdateClient, parameters);
 

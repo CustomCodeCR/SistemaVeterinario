@@ -3,15 +3,15 @@
 // Developed by: Maurice Lang Bonilla
 // -----------------------------------------------------------------------------
 
-using backend.Application.UseCases.User.Commands.DeleteCommand;
+using backend.Application.UseCases.Pet.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace backend.Tests.User.Commands;
+namespace backend.Tests.Pet.Queries;
 
 [TestClass]
-public class DeleteUserCommandTest
+public class GetPetByIdQueryTest
 {
     private static WebApplicationFactory<Program> _factory = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
@@ -24,19 +24,37 @@ public class DeleteUserCommandTest
     }
 
     [TestMethod]
-    public async Task ShouldDeleteUserSuccessfully()
+    public async Task ShouldReturnPetByIdWhenExists()
     {
         using var scope = _scopeFactory.CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
 
-        var command = new DeleteUserCommand
+        var query = new GetPetByIdQuery
         {
-            UserId = 2,
-            AuditDeleteUser = 1003
+            PetId = 3
         };
 
-        var response = await mediator.Send(command);
+        var response = await mediator.Send(query);
 
         Assert.IsTrue(response.IsSuccess);
+        Assert.IsNotNull(response.Data);
+        Assert.AreEqual(query.PetId, response.Data.PetId);
+    }
+
+    [TestMethod]
+    public async Task ShouldReturnNullWhenPetDoesNotExist()
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
+
+        var query = new GetPetByIdQuery
+        {
+            PetId = 9999
+        };
+
+        var response = await mediator.Send(query);
+
+        Assert.IsFalse(response.IsSuccess);
+        Assert.IsNull(response.Data);
     }
 }

@@ -37,7 +37,7 @@ public class DeleteMedicHandler : IRequestHandler<DeleteMedicCommand, BaseRespon
             }
 
             var parameters = new DynamicParameters();
-            parameters.Add("PAuditDeleteMedic", request.AuditDeleteUser);
+            parameters.Add("PAuditDeleteUser", request.AuditDeleteUser);
             parameters.Add("PMedicId", request.MedicId);
 
             var result = await _unitOfWork.Medic.ExecAsync(SP.SpDeleteMedic, parameters);

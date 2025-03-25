@@ -3,12 +3,11 @@
 // Developed by: Maurice Lang Bonilla
 // -----------------------------------------------------------------------------
 
-using backend.Application.UseCases.User.Commands.CreateCommand;
 using FluentValidation;
 
 namespace backend.Application.UseCases.Medic.Commands.CreateCommand;
 
-internal class CreateMedicValidator : AbstractValidator<CreateMedicCommand>
+public class CreateMedicValidator : AbstractValidator<CreateMedicCommand>
 {
     public CreateMedicValidator()
     {

@@ -1,6 +1,43 @@
-@backend.Api_HostAddress = https://localhost:7166
+@backend_Host = https://localhost:7166
+@clientId = 2
 
-GET {{backend.Api_HostAddress}}/api/v1/client
+### GET ALL CLIENTS
+GET {{backend_Host}}/api/v1/client
 Accept: application/json
 
-POST {{backend.Api_HostAddress}}/api/v1/
+
+### GET CLIENT BY ID
+GET {{backend_Host}}/api/v1/client/{{clientId}}
+Accept: application/json
+
+
+### CREATE CLIENT
+POST {{backend_Host}}/api/v1/client/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "userId": "1",
+  "address": "Cartago, Cartago, Cartago, 30101",
+  "phone": "1111-1111",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE CLIENT
+PUT {{backend_Host}}/api/v1/client/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "clientId": 2,
+  "userId": "1",
+  "address": "Cartago, Cartago, Cartago, 30101",
+  "phone": "1111-1111",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE CLIENT
+DELETE {{backend_Host}}/api/v1/client/delete/{{clientId}}
+Accept: application/json

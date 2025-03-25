@@ -24,6 +24,10 @@
 
   <ItemGroup>
     <Folder Include="Dtos\Vaccine\Response\" />
+    <Folder Include="UseCases\Appointment\Commands\DeleteCommand\" />
+    <Folder Include="UseCases\Appointment\Commands\UpdateCommand\" />
+    <Folder Include="UseCases\Appointment\Queries\GetAllQuery\" />
+    <Folder Include="UseCases\Appointment\Queries\GetByIdQuery\" />
     <Folder Include="UseCases\User\Queries\LoginQuery\" />
   </ItemGroup>
 

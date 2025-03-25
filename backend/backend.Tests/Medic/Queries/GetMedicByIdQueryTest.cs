@@ -3,15 +3,15 @@
 // Developed by: Maurice Lang Bonilla
 // -----------------------------------------------------------------------------
 
-using backend.Application.UseCases.User.Commands.DeleteCommand;
+using backend.Application.UseCases.Medic.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace backend.Tests.User.Commands;
+namespace backend.Tests.Medic.Queries;
 
 [TestClass]
-public class DeleteUserCommandTest
+public class GetMedicByIdQueryTest
 {
     private static WebApplicationFactory<Program> _factory = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
@@ -24,19 +24,37 @@ public class DeleteUserCommandTest
     }
 
     [TestMethod]
-    public async Task ShouldDeleteUserSuccessfully()
+    public async Task ShouldReturnMedicByIdWhenExists()
     {
         using var scope = _scopeFactory.CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
 
-        var command = new DeleteUserCommand
+        var query = new GetMedicByIdQuery
         {
-            UserId = 2,
-            AuditDeleteUser = 1003
+            MedicId = 9
         };
 
-        var response = await mediator.Send(command);
+        var response = await mediator.Send(query);
 
         Assert.IsTrue(response.IsSuccess);
+        Assert.IsNotNull(response.Data);
+        Assert.AreEqual(query.MedicId, response.Data.MedicId);
+    }
+
+    [TestMethod]
+    public async Task ShouldReturnNullWhenMedicDoesNotExist()
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
+
+        var query = new GetMedicByIdQuery
+        {
+            MedicId = 9999
+        };
+
+        var response = await mediator.Send(query);
+
+        Assert.IsFalse(response.IsSuccess);
+        Assert.IsNull(response.Data);
     }
 }

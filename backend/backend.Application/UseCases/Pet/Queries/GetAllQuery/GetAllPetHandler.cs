@@ -40,7 +40,10 @@ public async Task<BaseResponse<IEnumerable<PetResponseDto>>> Handle(GetAllPetQue
                 case 2:
                     pets = pets.Where(x => x.Type!.Contains(request.TextFilter));
                     break;
-            }
+                case 3:
+                    pets = pets.Where(x => x.Breed!.Contains(request.TextFilter));
+                    break;
+                }
         }
 
         if (request.StateFilter is not null)

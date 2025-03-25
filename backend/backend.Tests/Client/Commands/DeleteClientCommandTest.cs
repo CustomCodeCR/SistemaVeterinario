@@ -3,15 +3,15 @@
 // Developed by: Maurice Lang Bonilla
 // -----------------------------------------------------------------------------
 
-using backend.Application.UseCases.User.Commands.DeleteCommand;
+using backend.Application.UseCases.Client.Commands.DeleteCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace backend.Tests.User.Commands;
+namespace backend.Tests.Client.Commands;
 
 [TestClass]
-public class DeleteUserCommandTest
+public class DeleteClientCommandTest
 {
     private static WebApplicationFactory<Program> _factory = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
@@ -24,14 +24,14 @@ public class DeleteUserCommandTest
     }
 
     [TestMethod]
-    public async Task ShouldDeleteUserSuccessfully()
+    public async Task ShouldDeleteClientSuccessfully()
     {
         using var scope = _scopeFactory.CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
 
-        var command = new DeleteUserCommand
+        var command = new DeleteClientCommand
         {
-            UserId = 2,
+            ClientId = 2,
             AuditDeleteUser = 1003
         };
 

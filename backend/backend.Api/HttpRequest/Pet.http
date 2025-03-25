@@ -1,0 +1,47 @@
+@backend_Host = https://localhost:7166
+@petId = 5
+
+### GET ALL PETS
+GET {{backend_Host}}/api/v1/pet
+Accept: application/json
+
+
+### GET PET BY ID
+GET {{backend_Host}}/api/v1/pet/{{petId}}
+Accept: application/json
+
+
+### CREATE PET
+POST {{backend_Host}}/api/v1/pet/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "clientId": "1",
+  "name": "Michi",
+  "type": "Gato",
+  "age": 1,
+  "breed": "Naranja",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE PET
+PUT {{backend_Host}}/api/v1/pet/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "petId": 2,
+  "clientId": "1",
+  "name": "Gema",
+  "type": "Gato",
+  "age": 1,
+  "breed": "Persa",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE PET
+DELETE {{backend_Host}}/api/v1/pet/delete/{{petId}}
+Accept: application/json

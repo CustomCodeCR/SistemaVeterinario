@@ -46,13 +46,13 @@ public class UpdatePetHandler : IRequestHandler<UpdatePetCommand, BaseResponse<b
 
             var parameters = new DynamicParameters();
             parameters.Add("PPetId", request.PetId, DbType.Int32);
-            parameters.Add("PClientId", pet.Client, DbType.String);
+            parameters.Add("PClientId", pet.Clientid, DbType.String);
             parameters.Add("PName", pet.Name, DbType.String);
             parameters.Add("PType", pet.Type, DbType.String);
             parameters.Add("PBreed", pet.Breed, DbType.String);
             parameters.Add("PAge", pet.State, DbType.Int32);
             parameters.Add("PState", pet.State, DbType.Int32);
-            parameters.Add("PAuditUpdatePet", request.AuditUpdateUser, DbType.Int32);
+            parameters.Add("PAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
 
             var result = await _unitOfWork.Pet.ExecAsync(SP.SpUpdatePet, parameters);
 

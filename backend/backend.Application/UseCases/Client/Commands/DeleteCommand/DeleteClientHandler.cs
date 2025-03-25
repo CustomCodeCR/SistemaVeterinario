@@ -37,7 +37,7 @@ public class DeleteClientHandler : IRequestHandler<DeleteClientCommand, BaseResp
             }
 
             var parameters = new DynamicParameters();
-            parameters.Add("PAuditDeleteClient", request.AuditDeleteUser);
+            parameters.Add("PAuditDeleteUser", request.AuditDeleteUser);
             parameters.Add("PClientId", request.ClientId);
 
             var result = await _unitOfWork.Client.ExecAsync(SP.SpDeleteClient, parameters);

@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Infrastructure", "b
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Api", "backend.Api\backend.Api.csproj", "{2638A174-BDC9-495D-B8FE-FF38256A06C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Tests", "backend.Tests\backend.Tests.csproj", "{8373833E-11ED-462F-87CF-D7C61B6417EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.Tests", "backend.Tests\backend.Tests.csproj", "{8373833E-11ED-462F-87CF-D7C61B6417EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
