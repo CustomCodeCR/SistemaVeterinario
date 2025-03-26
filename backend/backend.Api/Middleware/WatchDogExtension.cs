@@ -1,4 +1,9 @@
-﻿using WatchDog;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using WatchDog;
 using WatchDog.src.Enums;
 
 namespace backend.Api.Middleware;

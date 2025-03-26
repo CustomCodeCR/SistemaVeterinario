@@ -1,0 +1,43 @@
+@backend_Host = https://localhost:7166
+@medicId = 9
+
+### GET ALL MEDICS
+GET {{backend_Host}}/api/v1/medic
+Accept: application/json
+
+
+### GET MEDIC BY ID
+GET {{backend_Host}}/api/v1/medic/{{medicId}}
+Accept: application/json
+
+
+### CREATE MEDIC
+POST {{backend_Host}}/api/v1/medic/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "userId": "1",
+  "specialty": "Cardiologo",
+  "phone": "1111-1111",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE MEDIC
+PUT {{backend_Host}}/api/v1/medic/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "medicId": 2,
+  "userId": "1",
+  "specialty": "Dermatologo",
+  "phone": "1111-1111",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE MEDIC
+DELETE {{backend_Host}}/api/v1/medic/delete/{{medicId}}
+Accept: application/json

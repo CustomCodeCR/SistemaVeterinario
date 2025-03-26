@@ -1,4 +1,9 @@
-﻿using backend.Application.Commons.Bases;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using backend.Application.Commons.Bases;
 using FluentValidation;
 using MediatR;
 using ValidationException = backend.Application.Commons.Exceptions.ValidationException;

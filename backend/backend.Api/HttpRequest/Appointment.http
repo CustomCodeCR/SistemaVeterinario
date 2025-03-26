@@ -1,0 +1,57 @@
+@backend_Host = https://localhost:7166
+@appointmentId = 1
+
+### GET ALL APPOINTMENTS
+GET {{backend_Host}}/api/v1/appointment
+Accept: application/json
+
+### GET APPOINTMENT BY ID
+GET {{backend_Host}}/api/v1/appointment/{{appointmentId}}
+Accept: application/json
+
+### CREATE APPOINTMENT
+POST {{backend_Host}}/api/v1/appointment/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "appointmentDate": "2025-03-25T14:00:00",
+  "reason": "Chequeo general",
+  "petId": 3,
+  "medicId": 1,
+  "state": 1,
+  "auditCreateUser": 1001,
+  "appointmentDetail": [
+    {
+      "diagnosis": "Ninguno",
+      "treatment": "Vitamina",
+      "observations": "Paciente en buen estado"
+    }
+  ]
+}
+
+### UPDATE APPOINTMENT
+PUT {{backend_Host}}/api/v1/appointment/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "appointmentId": 1,
+  "appointmentDate": "2025-03-26T10:30:00",
+  "reason": "Seguimiento",
+  "petId": 3,
+  "medicId": 1,
+  "state": 1,
+  "auditUpdateUser": 1002,
+  "appointmentDetail": [
+    {
+      "diagnosis": "Leve inflamación",
+      "treatment": "Antibióticos",
+      "observations": "Revisar en una semana"
+    }
+  ]
+}
+
+### DELETE APPOINTMENT
+DELETE {{backend_Host}}/api/v1/appointment/delete/{{appointmentId}}
+Accept: application/json

@@ -1,4 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using Newtonsoft.Json;
 
 namespace backend.Application.Commons.Config;
 

@@ -1,4 +1,9 @@
-﻿using MediatR;
+﻿// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Maurice Lang Bonilla
+// -----------------------------------------------------------------------------
+
+using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Text.Json;
@@ -28,9 +33,9 @@ public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
         if (elapsedMilliseconds > 1500)
         {
             var requestName = typeof(TRequest).Name;
-            _logger.LogWarning("CustomCodeServer Long Running Request: {RequestName} ({ElapsedMilliseconds} milliseconds) {@Request}",
+            _logger.LogWarning("System Template Long Running Request: {RequestName} ({ElapsedMilliseconds} milliseconds) {@Request}",
                 requestName, elapsedMilliseconds, JsonSerializer.Serialize(request));
-            WatchLogger.LogWarning($"InvenTrackCore Long Running Request: {requestName} ({elapsedMilliseconds} milliseconds) {JsonSerializer.Serialize(request)}");
+            WatchLogger.LogWarning($"System Template Long Running Request: {requestName} ({elapsedMilliseconds} milliseconds) {JsonSerializer.Serialize(request)}");
         }
 
         return response;

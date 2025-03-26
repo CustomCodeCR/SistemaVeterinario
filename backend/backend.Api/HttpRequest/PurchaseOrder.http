@@ -1,0 +1,60 @@
+﻿@backend_Host = https://localhost:7166
+@purchaseOrderId = 4
+
+### GET ALL PURCHASE ORDERS
+GET {{backend_Host}}/api/v1/purchaseOrder
+Accept: application/json
+
+### GET PURCHASE ORDER BY ID
+GET {{backend_Host}}/api/v1/purchaseOrder/{{purchaseOrderId}}
+Accept: application/json
+
+### CREATE PURCHASE ORDER
+POST {{backend_Host}}/api/v1/purchaseOrder/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "supplierId": 1,
+  "orderDate": "2025-03-25T14:00:00",
+  "status": "P",
+  "state": 1,
+  "auditCreateUser": 1001,
+  "purchaseOrderDetail": [
+    {
+      "productId": 1,
+      "quantity": 10,
+      "unitPrice": 250
+    },
+    {
+      "productId": 2,
+      "quantity": 3,
+      "unitPrice": 750
+    }
+  ]
+}
+
+### UPDATE PURCHASE ORDER
+PUT {{backend_Host}}/api/v1/purchaseOrder/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "purchaseOrderId": {{purchaseOrderId}},
+  "supplierId": 1,
+  "orderDate": "2025-03-26T10:30:00",
+  "status": "C",
+  "state": 1,
+  "auditUpdateUser": 1002,
+  "purchaseOrderDetail": [
+    {
+      "productId": 2,
+      "quantity": 12,
+      "unitPrice": 240
+    }
+  ]
+}
+
+### DELETE PURCHASE ORDER
+DELETE {{backend_Host}}/api/v1/purchaseOrder/delete/{{purchaseOrderId}}
+Accept: application/json
