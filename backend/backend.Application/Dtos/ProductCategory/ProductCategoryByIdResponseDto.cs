@@ -1,3 +1,10 @@
+<<<<<<< Updated upstream
+=======
+// -----------------------------------------------------------------------------
+// Copyright (c) 2024 CustomCodeCR. All rights reserved.
+// Developed by: Eduardo Castro
+// -----------------------------------------------------------------------------
+>>>>>>> Stashed changes
 namespace backend.Application.Dtos.ProductCategory.Response;
 
 public class ProductCategoryByIdResponseDto
