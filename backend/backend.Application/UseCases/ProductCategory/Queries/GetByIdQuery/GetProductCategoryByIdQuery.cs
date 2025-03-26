@@ -2,6 +2,7 @@
 // Copyright (c) 2024 CustomCodeCR. All rights reserved.
 // Developed by: Eduardo Castro
 // -----------------------------------------------------------------------------
+
 using backend.Application.Commons.Bases;
 using backend.Application.Dtos.ProductCategory.Response;
 using MediatR;

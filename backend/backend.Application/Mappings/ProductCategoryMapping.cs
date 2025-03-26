@@ -10,9 +10,9 @@ using backend.Utilities.Static;
 
 namespace backend.Application.Mappings;
 
-public class ProductCategoryMappingProfile : Profile
+public class ProductCategoryMapping : Profile
 {
-    public ProductCategoryMappingProfile()
+    public ProductCategoryMapping()
     {
         CreateMap<Productcategory, ProductCategoryResponseDto>()
             .ForMember(x => x.CategoryId, x => x.MapFrom(y => y.Id))
