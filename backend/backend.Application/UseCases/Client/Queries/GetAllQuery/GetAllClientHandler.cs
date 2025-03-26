@@ -28,9 +28,11 @@ public async Task<BaseResponse<IEnumerable<ClientResponseDto>>> Handle(GetAllCli
 
     try
     {
-        var clients = _unitOfWork.Client.GetAllQueryable();
+        var clients = _unitOfWork.Client.GetAllQueryable()
+                .Include(x => x.User)
+                .AsQueryable();
 
-        if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
+            if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
         {
             switch (request.NumFilter)
             {

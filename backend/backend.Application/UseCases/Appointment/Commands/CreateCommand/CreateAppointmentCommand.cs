@@ -16,10 +16,10 @@ public class CreateAppointmentCommand : IRequest<BaseResponse<bool>>
     public int MedicId { get; set; }
     public int State { get; set; }
     public int AuditCreateUser { get; set; }
-    public IEnumerable<CrateAppointmentDetailCommand> AppointmentDetail { get; set; } = null!;
+    public IEnumerable<CreateAppointmentDetailCommand> AppointmentDetail { get; set; } = null!;
 }
 
-public class CrateAppointmentDetailCommand
+public class CreateAppointmentDetailCommand
 {
     public string Diagnosis { get; set; } = null!;
     public string Treatment { get; set; } = null!;

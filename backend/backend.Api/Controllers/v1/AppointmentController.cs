@@ -4,10 +4,10 @@
 // -----------------------------------------------------------------------------
 
 using backend.Application.UseCases.Appointment.Commands.CreateCommand;
-/*using backend.Application.UseCases.Appointment.Commands.DeleteCommand;
+using backend.Application.UseCases.Appointment.Commands.DeleteCommand;
 using backend.Application.UseCases.Appointment.Commands.UpdateCommand;
 using backend.Application.UseCases.Appointment.Queries.GetAllQuery;
-using backend.Application.UseCases.Appointment.Queries.GetByIdQuery;*/
+using backend.Application.UseCases.Appointment.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +26,7 @@ namespace backend.Api.Controllers.v1
             _mediator = mediator;
         }
 
-        /*[HttpGet]
+        [HttpGet]
         public async Task<IActionResult> AppointmentList([FromQuery] GetAllAppointmentQuery query)
         {
             var response = await _mediator.Send(query);
@@ -38,7 +38,7 @@ namespace backend.Api.Controllers.v1
         {
             var response = await _mediator.Send(new GetAppointmentByIdQuery() { AppointmentId = userId });
             return Ok(response);
-        }*/
+        }
 
         [HttpPost("Create")]
         public async Task<IActionResult> AppointmentCreate([FromBody] CreateAppointmentCommand command)
@@ -47,7 +47,7 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        /*[HttpPut("Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> AppointmentUpdate([FromBody] UpdateAppointmentCommand command)
         {
             var response = await _mediator.Send(command);
@@ -59,6 +59,6 @@ namespace backend.Api.Controllers.v1
         {
             var response = await _mediator.Send(new DeleteAppointmentCommand() { AppointmentId = userId });
             return Ok(response);
-        }*/
+        }
     }
 }

@@ -4,12 +4,10 @@
 // -----------------------------------------------------------------------------
 
 using AutoMapper;
+using backend.Application.Commons.Select.Response;
 using backend.Application.Dtos.Client.Response;
-using backend.Application.Dtos.User.Response;
 using backend.Application.UseCases.Client.Commands.CreateCommand;
 using backend.Application.UseCases.Client.Commands.UpdateCommand;
-using backend.Application.UseCases.User.Commands.CreateCommand;
-using backend.Application.UseCases.User.Commands.UpdateCommand;
 using backend.Domain.Entities;
 using backend.Utilities.Static;
 
@@ -29,6 +27,11 @@ public class ClientMapping : Profile
         CreateMap<Client, ClientByIdResponseDto>()
             .ForMember(x => x.ClientId, x => x.MapFrom(y => y.Id))
             .ForMember(x => x.UserId, x => x.MapFrom(y => y.Userid))
+            .ReverseMap();
+
+        CreateMap<Client, SelectResponse>()
+            .ForMember(x => x.Id, x => x.MapFrom(y => y.Id))
+            .ForMember(x => x.Description, x => x.MapFrom(y => y.User.Username))
             .ReverseMap();
 
         CreateMap<CreateClientCommand, Client>();

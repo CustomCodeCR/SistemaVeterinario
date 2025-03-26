@@ -28,7 +28,9 @@ public async Task<BaseResponse<IEnumerable<MedicResponseDto>>> Handle(GetAllMedi
 
     try
     {
-        var clients = _unitOfWork.Medic.GetAllQueryable();
+        var clients = _unitOfWork.Medic.GetAllQueryable()
+                .Include(x => x.User)
+                .AsQueryable(); ;
 
         if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
         {

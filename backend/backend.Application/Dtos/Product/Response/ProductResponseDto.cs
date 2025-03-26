@@ -3,16 +3,15 @@
 // Developed by: Maurice Lang Bonilla
 // -----------------------------------------------------------------------------
 
-namespace backend.Application.Dtos.Vaccine.Response;
+namespace backend.Application.Dtos.Product.Response;
 
-public class VaccineResponseDto
+public class ProductResponseDto
 {
-    public int VaccineId { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
-    public string? Address { get; set; }
-    public string? Phone { get; set; }
+    public int ProductId { get; set; }
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+    public int Price { get; set; }
     public DateTime AuditCreateDate { get; set; }
     public int State { get; set; }
-    public string? StateVaccine { get; set; }
+    public string? StateProduct { get; set; }
 }

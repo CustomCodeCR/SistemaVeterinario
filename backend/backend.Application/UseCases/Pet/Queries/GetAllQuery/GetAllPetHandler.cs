@@ -28,7 +28,10 @@ public async Task<BaseResponse<IEnumerable<PetResponseDto>>> Handle(GetAllPetQue
 
     try
     {
-        var pets = _unitOfWork.Pet.GetAllQueryable();
+        var pets = _unitOfWork.Pet.GetAllQueryable()
+                .Include(x => x.Client)
+                .Include(x => x.Client.User)
+                .AsQueryable(); ;
 
         if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
         {

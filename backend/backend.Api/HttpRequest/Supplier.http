@@ -1,0 +1,47 @@
+@backend_Host = https://localhost:7166
+@supplierId = 1
+
+### GET ALL SUPPLIERS
+GET {{backend_Host}}/api/v1/supplier
+Accept: application/json
+
+### GET SELECT SUPPLIERS
+GET {{backend_Host}}/api/v1/supplier/select
+Accept: application/json
+
+### GET SUPPLIER BY ID
+GET {{backend_Host}}/api/v1/supplier/{{supplierId}}
+Accept: application/json
+
+### CREATE SUPPLIER
+POST {{backend_Host}}/api/v1/supplier/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Productos S.A.",
+  "contact": "Juan Ramirez",
+  "address": "Cartago, Cartago, Cartago, 30101",
+  "phone": "1111-1111",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE SUPPLIER
+PUT {{backend_Host}}/api/v1/supplier/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "supplierId": 2,
+  "name": "Proveedores S.A.",
+  "contact": "Juan Perez",
+  "address": "Cartago, Cartago, Cartago, 30101",
+  "phone": "1111-1111",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE SUPPLIER
+DELETE {{backend_Host}}/api/v1/supplier/delete/{{supplierId}}
+Accept: application/json

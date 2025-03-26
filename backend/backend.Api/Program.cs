@@ -28,13 +28,13 @@ builder.Configuration
     .AddJsonFile($"appsettings.Testing.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-if (!env.IsDevelopment())
+if (!env.IsProduction())
 {
-    builder.Services.AddSingleton<IVaultSecretService, VaultSecretService>();
+    Console.WriteLine("Running in Development environment. Vault configuration skipped.");
 }
 else
 {
-    Console.WriteLine("Running in Development environment. Vault configuration skipped.");
+    builder.Services.AddSingleton<IVaultSecretService, VaultSecretService>();
 }
 
 builder.Services.AddApplication();

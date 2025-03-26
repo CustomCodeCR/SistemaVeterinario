@@ -85,16 +85,16 @@ public class SP
     public const string SpUpdateProductCategoryRelation = "PkgProductCategoryRelation.SpUpdateProductCategoryRelation";
     #endregion
 
-    #region PurchaseOrden
-    public const string SpCreatePurchaseOrden = "PkgPurchaseOrden.SpCreatePurchaseOrden";
-    public const string SpDeletePurchaseOrden = "PkgPurchaseOrden.SpDeletePurchaseOrden";
-    public const string SpUpdatePurchaseOrden = "PkgPurchaseOrden.SpUpdatePurchaseOrden";
+    #region PurchaseOrder
+    public const string SpCreatePurchaseOrder = "PkgPurchaseOrder.SpCreatePurchaseOrder";
+    public const string SpDeletePurchaseOrder = "PkgPurchaseOrder.SpDeletePurchaseOrder";
+    public const string SpUpdatePurchaseOrder = "PkgPurchaseOrder.SpUpdatePurchaseOrder";
     #endregion
 
-    #region PurchaseOrdenDetail
-    public const string SpCreatePurchaseOrdenDetail = "PkgPurchaseOrdenDetail.SpCreatePurchaseOrdenDetail";
-    public const string SpDeletePurchaseOrdenDetail = "PkgPurchaseOrdenDetail.SpDeletePurchaseOrdenDetail";
-    public const string SpUpdatePurchaseOrdenDetail = "PkgPurchaseOrdenDetail.SpUpdatePurchaseOrdenDetail";
+    #region PurchaseOrderDetail
+    public const string SpCreatePurchaseOrderDetail = "PkgPurchaseOrderDetail.SpCreatePurchaseOrderDetail";
+    public const string SpDeletePurchaseOrderDetail = "PkgPurchaseOrderDetail.SpDeletePurchaseOrderDetail";
+    public const string SpUpdatePurchaseOrderDetail = "PkgPurchaseOrderDetail.SpUpdatePurchaseOrderDetail";
     #endregion
 
     #region Sale

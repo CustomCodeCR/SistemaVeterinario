@@ -32,6 +32,8 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<Supplier> _supplier = null!;
     private IGenericRepository<Appointment> _appointment = null!;
     private IAppointmentDetailRepository _appointmentDetail = null!;
+    private IGenericRepository<Purchaseorder> _purchaseOrder = null!;
+    private IPurchaseOrderDetailRepository _purchaseOrderDetail = null!;
 
     public UnitOfWork(ApplicationDbContext context)
     {
@@ -52,6 +54,8 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<Supplier> Supplier => _supplier ?? new GenericRepository<Supplier>(_context);
     public IGenericRepository<Appointment> Appointment => _appointment ?? new GenericRepository<Appointment>(_context);
     public IAppointmentDetailRepository AppointmentDetail => _appointmentDetail ?? new AppointmentDetailRepository(_context);
+    public IGenericRepository<Purchaseorder> PurchaseOrder => _purchaseOrder ?? new GenericRepository<Purchaseorder>(_context);
+    public IPurchaseOrderDetailRepository PurchaseOrderDetail => _purchaseOrderDetail ?? new PurchaseOrderDetailRepository(_context);
 
     public void Dispose()
     {

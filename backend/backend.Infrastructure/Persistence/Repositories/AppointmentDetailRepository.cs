@@ -6,6 +6,7 @@
 using backend.Application.Interfaces.Persistence;
 using backend.Domain.Entities;
 using backend.Infrastructure.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Infrastructure.Persistence.Repositories;
 
@@ -18,8 +19,14 @@ public class AppointmentDetailRepository : GenericRepository<Appointmentdetail>,
         _context = context;
     }
 
-    public Task<IEnumerable<Appointmentdetail>> GetAppointmentDetailByAppointmentId(int id)
+    public async Task<IEnumerable<Appointmentdetail>> GetAppointmentDetailByAppointmentId(int appointmentId)
     {
-        throw new NotImplementedException();
+        var response = await _context.Appointmentdetails
+            .AsNoTracking()
+            .Include(ad => ad.Appointment)
+            .Where(ad => ad.Appointmentid == appointmentId)
+            .ToListAsync();
+
+        return response;
     }
 }

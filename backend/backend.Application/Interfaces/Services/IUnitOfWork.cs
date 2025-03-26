@@ -25,6 +25,8 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<Supplier> Supplier { get; }
     IGenericRepository<Appointment> Appointment { get; }
     IAppointmentDetailRepository AppointmentDetail { get; }
+    IGenericRepository<Purchaseorder> PurchaseOrder { get; }
+    IPurchaseOrderDetailRepository PurchaseOrderDetail { get; }
     Task SaveChangesAsync();
     IDbTransaction BeginTransaction();
 }

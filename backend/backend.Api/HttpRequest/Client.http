@@ -1,15 +1,13 @@
 @backend_Host = https://localhost:7166
-@clientId = 2
+@clientId = 1
 
 ### GET ALL CLIENTS
 GET {{backend_Host}}/api/v1/client
 Accept: application/json
 
-
 ### GET CLIENT BY ID
 GET {{backend_Host}}/api/v1/client/{{clientId}}
 Accept: application/json
-
 
 ### CREATE CLIENT
 POST {{backend_Host}}/api/v1/client/create
