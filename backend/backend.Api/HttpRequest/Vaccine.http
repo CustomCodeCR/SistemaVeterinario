@@ -1,0 +1,41 @@
+@backend_Host = https://localhost:7166
+@vaccineId = 2
+
+### GET ALL VACCINES
+GET {{backend_Host}}/api/v1/vaccine
+Accept: application/json
+
+### GET VACCINE BY ID
+GET {{backend_Host}}/api/v1/vaccine/{{vaccineId}}
+Accept: application/json
+
+### CREATE VACCINE
+POST {{backend_Host}}/api/v1/vaccine/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "vaccineName": "Rabia",
+  "description": "Prevenir la rabia",
+  "type": "Core",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE VACCINE
+PUT {{backend_Host}}/api/v1/vaccine/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "vaccineId": 2,
+  "vaccineName": "Coronavirus",
+  "description": "Prevenir el coronavirus",
+  "type": "No Core",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE VACCINE
+DELETE {{backend_Host}}/api/v1/vaccine/delete/{{vaccineId}}
+Accept: application/json

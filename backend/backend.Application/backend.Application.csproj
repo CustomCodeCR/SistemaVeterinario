@@ -23,8 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\Sale\" />
+    <Folder Include="UseCases\ProductCategoryRelation\Commands\CreateCommand\" />
+    <Folder Include="UseCases\ProductCategoryRelation\Commands\DeleteCommand\" />
+    <Folder Include="UseCases\ProductCategoryRelation\Commands\UpdateCommand\" />
+    <Folder Include="UseCases\ProductCategory\Commands\CreateCommand\" />
+    <Folder Include="UseCases\ProductCategory\Commands\DeleteCommand\" />
+    <Folder Include="UseCases\ProductCategory\Commands\UpdateCommand\" />
     <Folder Include="UseCases\User\Queries\LoginQuery\" />
-    <Folder Include="UseCases\Vaccine\Commands\" />
   </ItemGroup>
 
 </Project>
