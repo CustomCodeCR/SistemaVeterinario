@@ -12,6 +12,7 @@ import {
   FaFileInvoiceDollar
 } from 'react-icons/fa'
 import Header from '../components/Header'
+import Footer from 'components/Footer'
 
 const AdminPage = () => {
   // Datos de resumen (puedes reemplazar con datos reales)
@@ -52,7 +53,7 @@ const AdminPage = () => {
     {
       title: 'Gestión de Citas',
       icon: <FaCalendarAlt className="mb-4 text-4xl text-orange-600" />,
-      link: '/admin/appointments',
+      link: '/Appointments',
       description: 'Administra las citas programadas'
     },
     {
@@ -64,7 +65,7 @@ const AdminPage = () => {
     {
       title: 'Servicios Clínicos',
       icon: <FaClinicMedical className="mb-4 text-4xl text-teal-600" />,
-      link: '/admin/services',
+      link: '/ServiciosClinicos',
       description: 'Gestiona servicios veterinarios'
     }
   ]
@@ -149,6 +150,7 @@ const AdminPage = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

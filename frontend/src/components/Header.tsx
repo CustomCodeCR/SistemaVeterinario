@@ -31,6 +31,9 @@ const Header: React.FC = () => {
         <Link to="/about" className="transition-colors hover:text-gray-600">
           Sobre Nosotros
         </Link>
+        <Link to="/cart" className="transition-colors hover:text-gray-600">
+          Carrito
+        </Link>
       </nav>
 
       <div className="flex items-center space-x-4">

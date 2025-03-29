@@ -8,6 +8,8 @@ import Profile from './pages/Profile'
 import Services from './pages/Services'
 import NotFound from './components/NotFound'
 import Admin from './pages/Admin'
+import Appointments from './pages/Appointments'
+import ServiciosClinicos from './pages/ServiciosClinicos'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/services" element={<Services />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/ServiciosClinicos" element={<ServiciosClinicos />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
