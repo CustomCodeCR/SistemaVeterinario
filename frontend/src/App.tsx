@@ -11,6 +11,11 @@ import Admin from './pages/Admin'
 import Appointments from './pages/Appointments'
 import ServiciosClinicos from './pages/ServiciosClinicos'
 import SalesReport from 'pages/SalesReport'
+import Addproduct from './pages/Addproduct'
+import AdminUsers from './pages/AdminUsers'
+import VaccineControl from './pages/VaccineControl'
+import CartPage from './pages/cart';
+
 
 function App() {
   return (
@@ -27,9 +32,13 @@ function App() {
         <Route path="/ServiciosClinicos" element={<ServiciosClinicos />} />
         <Route path="/SalesReport" element={<SalesReport />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/admin/add-product" element={<Addproduct />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/control-vacunas" element={<VaccineControl />} />
+        <Route path="/cart" element={<CartPage />} /> {/* Ruta del carrito */}
       </Routes>
     </BrowserRouter>
   )
-}
+} 
 
 export default App

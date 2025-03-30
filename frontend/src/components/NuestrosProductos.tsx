@@ -1,28 +1,28 @@
-import React from 'react'
-import logo from '../assets/logod.png'
-import AddToCartButton from './AddToCartButton'
-import ViewDetailsButton from './ViewDetailsButton'
-import ProductSearch from 'components/ProductSerch'
-interface Product {
-  id: number
-  name: string
-  description: string
-  price: number
-  image: string
-  category: string
+import React, { useEffect, useState } from 'react';
+import logo from '../assets/logod.png';
+import AddToCartButton from './AddToCartButton';
+import ViewDetailsButton from './ViewDetailsButton';
+import ProductSearch from 'components/ProductSerch';
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
 }
 
 const ProductSection: React.FC = () => {
-  // Datos de ejemplo para productos
-  const products: Product[] = [
+  // Lista original de productos
+  const defaultProducts: Product[] = [
     {
       id: 1,
       name: 'Alimento para perros Premium',
       description: 'Alimento balanceado para perros adultos de todas las razas',
       price: 25.99,
       category: 'Alimentos',
-      image:
-        'https://m.media-amazon.com/images/I/81nGXpRzVVL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/81nGXpRzVVL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 2,
@@ -30,8 +30,7 @@ const ProductSection: React.FC = () => {
       description: 'Cama suave y cómoda para gatos de todos los tamaños',
       price: 35.5,
       category: 'Accesorios',
-      image:
-        'https://m.media-amazon.com/images/I/71+nTJ8m5XL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71+nTJ8m5XL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 3,
@@ -39,8 +38,7 @@ const ProductSection: React.FC = () => {
       description: 'Correa resistente para perros con ajuste de longitud',
       price: 15.75,
       category: 'Accesorios',
-      image:
-        'https://m.media-amazon.com/images/I/71Zb9tUvUQL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71Zb9tUvUQL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 4,
@@ -48,8 +46,7 @@ const ProductSection: React.FC = () => {
       description: 'Juguete para gatos con plumas y sonajero',
       price: 12.99,
       category: 'Juguetes',
-      image:
-        'https://m.media-amazon.com/images/I/71QYq+jqURL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71QYq+jqURL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 5,
@@ -57,8 +54,7 @@ const ProductSection: React.FC = () => {
       description: 'Shampoo hipoalergénico para perros y gatos',
       price: 8.99,
       category: 'Higiene',
-      image:
-        'https://m.media-amazon.com/images/I/61+Q6VdLvYL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/61+Q6VdLvYL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 6,
@@ -66,8 +62,7 @@ const ProductSection: React.FC = () => {
       description: 'Transportadora segura y ventilada para viajes',
       price: 45.0,
       category: 'Accesorios',
-      image:
-        'https://m.media-amazon.com/images/I/71+9y1mJQVL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/71+9y1mJQVL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 7,
@@ -75,8 +70,7 @@ const ProductSection: React.FC = () => {
       description: 'Snacks para perros que ayudan con la higiene dental',
       price: 10.25,
       category: 'Alimentos',
-      image:
-        'https://m.media-amazon.com/images/I/81+QY7jKzYL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/81+QY7jKzYL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       id: 8,
@@ -84,10 +78,20 @@ const ProductSection: React.FC = () => {
       description: 'Rascador de 3 niveles con plataformas y juguetes',
       price: 55.99,
       category: 'Juguetes',
-      image:
-        'https://m.media-amazon.com/images/I/81+QY7jKzYL._AC_UF1000,1000_QL80_.jpg'
+      image: 'https://m.media-amazon.com/images/I/81+QY7jKzYL._AC_UF1000,1000_QL80_.jpg',
     }
-  ]
+  ];
+
+  // Estado para almacenar todos los productos
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // Obtener productos nuevos desde localStorage
+    const storedProducts = JSON.parse(localStorage.getItem('productos') || '[]');
+
+    // Combinar los productos predeterminados con los agregados
+    setProducts([...defaultProducts, ...storedProducts]);
+  }, []);
 
   return (
     <section className="w-full bg-gray-100 p-4 md:p-8">
@@ -121,8 +125,7 @@ const ProductSection: React.FC = () => {
                     alt={product.name}
                     className="size-32 rounded-lg object-contain"
                     onError={(e) => {
-                      ;(e.target as HTMLImageElement).src =
-                        'https://via.placeholder.com/150'
+                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150';
                     }}
                   />
                 </div>
@@ -135,7 +138,8 @@ const ProductSection: React.FC = () => {
               </div>
 
               <div className="mt-auto flex items-center justify-between">
-                <AddToCartButton className="mr-2 grow" />
+                {/* Se le pasa el producto al botón para poder agregarlo al carrito */}
+                <AddToCartButton product={product} className="mr-2 grow" />
                 <ViewDetailsButton className="mr-2 flex grid-rows-1" />
               </div>
             </div>
@@ -143,7 +147,9 @@ const ProductSection: React.FC = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProductSection
+export default ProductSection;
+
+

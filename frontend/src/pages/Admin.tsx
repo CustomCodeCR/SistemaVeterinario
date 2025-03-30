@@ -41,13 +41,13 @@ const AdminPage = () => {
     {
       title: 'Gestionar Usuarios',
       icon: <FaUserShield className="mb-4 text-4xl text-green-600" />,
-      link: '/admin/manage-users',
+      link: '/admin/users',
       description: 'Administra usuarios y permisos'
     },
     {
       title: 'Control de Vacunas',
       icon: <FaSyringe className="mb-4 text-4xl text-purple-600" />,
-      link: '/admin/vaccines',
+      link: '/control-vacunas',
       description: 'Registro y seguimiento de vacunas'
     },
     {
