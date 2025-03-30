@@ -59,7 +59,7 @@ const AdminPage = () => {
     {
       title: 'Reportes de Ventas',
       icon: <FaChartLine className="mb-4 text-4xl text-red-600" />,
-      link: '/admin/sales',
+      link: '/SalesReport',
       description: 'Analiza el desempeño de ventas'
     },
     {

@@ -10,6 +10,7 @@ import NotFound from './components/NotFound'
 import Admin from './pages/Admin'
 import Appointments from './pages/Appointments'
 import ServiciosClinicos from './pages/ServiciosClinicos'
+import SalesReport from 'pages/SalesReport'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/ServiciosClinicos" element={<ServiciosClinicos />} />
+        <Route path="/SalesReport" element={<SalesReport />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
