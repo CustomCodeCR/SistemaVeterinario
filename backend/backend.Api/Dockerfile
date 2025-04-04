@@ -57,4 +57,6 @@ RUN chmod 755 /app
 ARG VAULT_TOKEN
 ENV VAULT_TOKEN=$VAULT_TOKEN
 
+ENV ASPNETCORE_ENVIRONMENT=Production
+
 ENTRYPOINT ["dotnet", "backend.Api.dll"]
