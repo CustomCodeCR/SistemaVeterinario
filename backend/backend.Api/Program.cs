@@ -102,11 +102,19 @@ app.MapHealthChecks("/health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
+app.UseHealthChecksUI(config =>
+{
+    config.UIPath = "/hc-ui"; // o como lo hayas configurado
+    config.ApiPath = "/hc-ui-api"; // opcional
+});
+
 app.UseWatchDog(configuration =>
 {
     configuration.WatchPageUsername = "admin";
     configuration.WatchPagePassword = "S0port3.";
 });
+
+app.UseDeveloperExceptionPage();
 
 await app.RunAsync();
 
