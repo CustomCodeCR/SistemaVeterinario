@@ -9,7 +9,6 @@ ENV TZ=America/Costa_Rica
 USER app
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 # ---------------------------------------------------------------------------
 # BUILD IMAGE

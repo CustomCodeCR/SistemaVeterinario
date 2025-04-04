@@ -67,7 +67,7 @@ pipeline {
                         sh "docker rm ${CONTAINER_NAME_DEV} || true"
                     }
                     dir('/home/administrador') {
-                        sh "docker-compose -f ${COMPOSE_NAME} up -d"
+                        sh "VAULT_TOKEN=${VAULT_TOKEN} docker-compose -f ${COMPOSE_NAME} up -d"
                     }
                 }
             }
