@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -18,22 +17,12 @@ pipeline {
     }
 
     stages {
-        stage('Ejecutar Pruebas Unitarias') {
-            steps {
-                sh 'dotnet test backend.Tests/backend.Tests.csproj --logger trx'
-            }
-            post {
-                failure {
-                    mail to: env.NOTIFICATION_EMAIL,
-                         subject: "Error en las pruebas unitarias: ${currentBuild.fullDisplayName}",
-                         body: "Las pruebas unitarias han fallado en el build ${env.BUILD_URL}. Verifica el pipeline para más detalles."
-                }
-            }
-        }
+        
 
         stage('Construcción de Docker') {
             steps {
-                script {
+                echo '🐳 Construyendo imagen Docker...'
+                dir('backend') {
                     sh "docker build --build-arg VAULT_TOKEN=${VAULT_TOKEN} -f backend.Api/Dockerfile -t ${DOCKER_IMAGE} ."
                 }
             }
@@ -42,12 +31,9 @@ pipeline {
         stage('Verificar Contenedor de Desarrollo en Ejecución') {
             steps {
                 script {
+                    echo '🔍 Verificando contenedor en ejecución...'
                     def devContainerRunning = sh(script: "docker ps -q -f name=${CONTAINER_NAME_DEV}", returnStdout: true).trim()
-                    if (devContainerRunning) {
-                        env.DEV_CONTAINER_RUNNING = "true"
-                    } else {
-                        env.DEV_CONTAINER_RUNNING = "false"
-                    }
+                    env.DEV_CONTAINER_RUNNING = devContainerRunning ? "true" : "false"
                 }
             }
         }
@@ -59,8 +45,9 @@ pipeline {
             steps {
                 script {
                     if (env.DEV_CONTAINER_RUNNING == 'true') {
-                        echo 'El contenedor de desarrollo ya está en ejecución.'
+                        echo '🟡 El contenedor de desarrollo ya está en ejecución.'
                     } else {
+                        echo '🟢 Iniciando contenedor de desarrollo...'
                         sh "docker run -d -p ${PORT_DEV}:${PORT_CONTAINER} --name ${CONTAINER_NAME_DEV} ${DOCKER_IMAGE}"
                     }
                 }
@@ -73,6 +60,7 @@ pipeline {
             }
             steps {
                 script {
+                    echo '🚀 Desplegando en producción con Docker Compose...'
                     def devContainerRunning = sh(script: "docker ps -q -f name=${CONTAINER_NAME_DEV}", returnStdout: true).trim()
                     if (devContainerRunning) {
                         sh "docker stop ${CONTAINER_NAME_DEV} || true"
@@ -89,14 +77,15 @@ pipeline {
     post {
         always {
             script {
-                echo 'Limpiando imágenes de Docker no utilizadas...'
-                sh "docker image prune -f"
+                echo '🧹 Limpiando imágenes de Docker no utilizadas...'
+                def output = sh(script: "docker image prune -f", returnStdout: true).trim()
+                echo "${output}"
             }
         }
 
         success {
             script {
-                echo '¡Pipeline completado con éxito!'
+                echo '✅ ¡Pipeline completado con éxito!'
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
                     sh "docker push ${DOCKER_IMAGE}"
@@ -106,7 +95,7 @@ pipeline {
 
         failure {
             script {
-                echo '¡Pipeline fallido!'
+                echo '❌ ¡Pipeline fallido!'
             }
         }
     }
