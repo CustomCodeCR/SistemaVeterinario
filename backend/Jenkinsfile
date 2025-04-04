@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'maulang18/backend.api:latest'
+        DOCKER_IMAGE = 'maulang18/vetfriends.api:latest'
         CONTAINER_NAME_DEV = 'VetFriendsDev'
         PORT_DEV = '10130'
         PORT_CONTAINER = '8080'
-        COMPOSE_NAME = '/home/administrador/docker-compose-customcodecr.yml'
+        COMPOSE_NAME = '/home/administrador/docker-compose-customcode.yml'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials-id'
         SONARQUBE_TOKEN = credentials('Sonar-Token')
         SONARQUBE_HOST_URL = 'http://20.81.187.2:9000'
