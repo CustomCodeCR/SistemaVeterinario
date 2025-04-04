@@ -11,5 +11,6 @@ namespace backend.Application.UseCases.ProductCategoryRelation.Queries.GetByIdQu
 
 public class GetProductCategoryRelationByIdQuery : IRequest<BaseResponse<ProductCategoryRelationByIdResponseDto>>
 {
-    public int ProductCategoryRelationId { get; set; }
+    public int ProductId { get; set; }
+    public int CategoryId { get; set; }
 }

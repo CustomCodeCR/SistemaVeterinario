@@ -31,7 +31,7 @@ public class DeletePurchaseOrderCommandTest
 
         var command = new DeletePurchaseOrderCommand
         {
-            PurchaseOrderId = 5,
+            PurchaseOrderId = 3,
             AuditDeleteUser = 1003
         };
 

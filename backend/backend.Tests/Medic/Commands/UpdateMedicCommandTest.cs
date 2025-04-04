@@ -32,7 +32,7 @@ public class UpdateMedicCommandTest
 
         var command = new UpdateMedicCommand
         {
-            MedicId = 5,
+            MedicId = 21,
             UserId = 1,
             Specialty = "Dermatologo",
             Phone = "2222-2222",

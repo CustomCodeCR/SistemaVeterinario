@@ -31,7 +31,7 @@ public class DeleteAppointmentCommandTest
 
         var command = new DeleteAppointmentCommand
         {
-            AppointmentId = 22,
+            AppointmentId = 41,
             AuditDeleteUser = 1003
         };
 

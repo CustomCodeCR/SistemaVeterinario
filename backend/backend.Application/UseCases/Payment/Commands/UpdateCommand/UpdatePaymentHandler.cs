@@ -45,10 +45,11 @@ public class UpdatePaymentHandler : IRequestHandler<UpdatePaymentCommand, BaseRe
             payment.Id = request.PaymentId;
 
             var parameters = new DynamicParameters();
+            parameters.Add("PPaymentId", request.PaymentId, DbType.Int32);
             parameters.Add("PSaleId", request.PaymentId, DbType.Int32);
-            parameters.Add("PAmount", request.UserId, DbType.Int32);
-            parameters.Add("PPaymentDate", payment.Address, DbType.String);
-            parameters.Add("PPaymentType", payment.Phone, DbType.String);
+            parameters.Add("PAmount", request.Amount, DbType.Int32);
+            parameters.Add("PPaymentDate", payment.Paymentdate, DbType.DateTime);
+            parameters.Add("PPaymentType", payment.Paymenttype, DbType.String);
             parameters.Add("PState", payment.State, DbType.Int32);
             parameters.Add("PAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
 

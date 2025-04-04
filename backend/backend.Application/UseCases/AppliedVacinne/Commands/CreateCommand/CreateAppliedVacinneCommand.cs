@@ -10,9 +10,8 @@ namespace backend.Application.UseCases.AppliedVaccine.Commands.CreateCommand;
 
 public class CreateAppliedVaccineCommand : IRequest<BaseResponse<bool>>
 {
-    public string AppliedVaccineId { get; set; } = null!;
     public DateTime Applicationdate { get; set; }
-    public int Petid { get; set; }
-    public int Vaccineid { get; set; }
+    public int PetId { get; set; }
+    public int VaccineId { get; set; }
     public int AuditCreateUser { get; set; }
 }

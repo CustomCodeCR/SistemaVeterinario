@@ -1,0 +1,11 @@
+@backend_Host = https://localhost:7166
+
+### LOGIN
+POST {{backend_Host}}/api/v1/login/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "juanperez23",
+  "password": "password123"
+}

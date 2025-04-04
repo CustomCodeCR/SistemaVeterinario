@@ -1,0 +1,6 @@
+services:
+  backend.api:
+    image: ${DOCKER_REGISTRY-}backendapi
+    build:
+      context: .
+      dockerfile: backend.Api/Dockerfile

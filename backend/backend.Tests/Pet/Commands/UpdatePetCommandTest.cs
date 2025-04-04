@@ -32,7 +32,7 @@ public class UpdatePetCommandTest
 
         var command = new UpdatePetCommand
         {
-            PetId = 4,
+            PetId = 21,
             ClientId = 1,
             Name = "Michi",
             Type = "Perro",

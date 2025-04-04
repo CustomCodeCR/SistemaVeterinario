@@ -31,7 +31,7 @@ public class GetVaccineByIdQueryTest
 
         var query = new GetVaccineByIdQuery
         {
-            VaccineId = 1
+            VaccineId = 21
         };
 
         var response = await mediator.Send(query);

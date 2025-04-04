@@ -19,13 +19,15 @@ public class InventoryMapping : Profile
     {
         CreateMap<Inventory, InventoryResponseDto>()
             .ForMember(x => x.InventoryId, x => x.MapFrom(y => y.Id))
-            .ForMember(x => x.Productid, x => x.MapFrom(y => y.Productid))
+            .ForMember(x => x.Product, x => x.MapFrom(y => y.Product.Name))
+            .ForMember(x => x.UpdateDate, x => x.MapFrom(y => y.Updatedate))
             .ForMember(x => x.StateInventory, x => x.MapFrom(y => y.State.Equals((int)StateTypes.Activo) ? "ACTIVO" : "INACTIVO"))
         .ReverseMap();
 
         CreateMap<Inventory, InventoryByIdResponseDto>()
             .ForMember(x => x.InventoryId, x => x.MapFrom(y => y.Id))
-            .ForMember(x => x.Productid, x => x.MapFrom(y => y.Productid))
+            .ForMember(x => x.ProductId, x => x.MapFrom(y => y.Productid))
+            .ForMember(x => x.UpdateDate, x => x.MapFrom(y => y.Updatedate))
             .ReverseMap();
 
         CreateMap<CreateInventoryCommand, Inventory>();

@@ -18,7 +18,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly ApplicationDbContext _context;
     private bool _disposed = false;
 
-    private IGenericRepository<Appuser> _user = null!;
+    private IUserRepository _user = null!;
     private IGenericRepository<Client> _client = null!;
     private IGenericRepository<Medic> _medic = null!;
     private IGenericRepository<Pet> _pet = null!;
@@ -28,19 +28,21 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<Payment> _payment = null!;
     private IGenericRepository<Product> _product = null!;
     private IGenericRepository<Productcategory> _productCategory = null!;
-    private IGenericRepository<Productcategoryrelation> _productCategoryRelation = null!;
+    private IProductCategoryRelationRepository _productCategoryRelation = null!;
     private IGenericRepository<Supplier> _supplier = null!;
     private IGenericRepository<Appointment> _appointment = null!;
     private IAppointmentDetailRepository _appointmentDetail = null!;
     private IGenericRepository<Purchaseorder> _purchaseOrder = null!;
     private IPurchaseOrderDetailRepository _purchaseOrderDetail = null!;
+    private IGenericRepository<Sale> _sale = null!;
+    private ISaleDetailRepository _saleDetail = null!;
 
     public UnitOfWork(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    public IGenericRepository<Appuser> User => _user ?? new GenericRepository<Appuser>(_context);
+    public IUserRepository User => _user ?? new UserRepository(_context);
     public IGenericRepository<Client> Client => _client ?? new GenericRepository<Client>(_context);
     public IGenericRepository<Medic> Medic => _medic ?? new GenericRepository<Medic>(_context);
     public IGenericRepository<Pet> Pet => _pet ?? new GenericRepository<Pet>(_context);
@@ -50,12 +52,14 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<Payment> Payment => _payment ?? new GenericRepository<Payment>(_context);
     public IGenericRepository<Product> Product => _product ?? new GenericRepository<Product>(_context);
     public IGenericRepository<Productcategory> ProductCategory => _productCategory ?? new GenericRepository<Productcategory>(_context);
-    public IGenericRepository<Productcategoryrelation> ProductCategoryRelation => _productCategoryRelation ?? new GenericRepository<Productcategoryrelation>(_context);
+    public IProductCategoryRelationRepository ProductCategoryRelation => _productCategoryRelation ?? new ProductCategoryRelationRepository(_context);
     public IGenericRepository<Supplier> Supplier => _supplier ?? new GenericRepository<Supplier>(_context);
     public IGenericRepository<Appointment> Appointment => _appointment ?? new GenericRepository<Appointment>(_context);
     public IAppointmentDetailRepository AppointmentDetail => _appointmentDetail ?? new AppointmentDetailRepository(_context);
     public IGenericRepository<Purchaseorder> PurchaseOrder => _purchaseOrder ?? new GenericRepository<Purchaseorder>(_context);
     public IPurchaseOrderDetailRepository PurchaseOrderDetail => _purchaseOrderDetail ?? new PurchaseOrderDetailRepository(_context);
+    public IGenericRepository<Sale> Sale => _sale ?? new GenericRepository<Sale>(_context);
+    public ISaleDetailRepository SaleDetail => _saleDetail ?? new SaleDetailRepository(_context);
 
     public void Dispose()
     {

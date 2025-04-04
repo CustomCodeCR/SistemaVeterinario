@@ -17,6 +17,8 @@ public class ProductCategoryRelationConfiguration : IEntityTypeConfiguration<Pro
 
         builder.ToTable("PRODUCTCATEGORYRELATION");
 
+        builder.Ignore(e => e.Id);
+
         builder.HasIndex(e => e.Categoryid, "IDX_PRODUCTCATEGORYRELATION_CATEGORYID");
 
         builder.HasIndex(e => e.Productid, "IDX_PRODUCTCATEGORYRELATION_PRODUCTID");

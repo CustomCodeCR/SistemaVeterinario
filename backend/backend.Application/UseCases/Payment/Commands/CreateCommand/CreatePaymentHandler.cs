@@ -35,10 +35,11 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentCommand, BaseRe
             var payment = _mapper.Map<Entity.Payment>(request);
 
             var parameters = new DynamicParameters();
-            parameters.Add("PSaleId", payment.Userid, DbType.int);
-            parameters.Add("PAmount", payment.Address, DbType.int);
-            parameters.Add("PPaymentDate", payment.Phone, DbType.DateTime);
+            parameters.Add("PSaleId", payment.Saleid, DbType.Int32);
+            parameters.Add("PAmount", payment.Amount, DbType.Int32);
+            parameters.Add("PPaymentDate", payment.Paymentdate, DbType.DateTime);
             parameters.Add("PPaymentType", payment.State, DbType.String);
+            parameters.Add("PState", payment.State, DbType.Int32);
             parameters.Add("PAuditCreateUser", request.AuditCreateUser, DbType.Int32);
             parameters.Add("PPaymentId", dbType: DbType.Int32, direction: ParameterDirection.Output);
 

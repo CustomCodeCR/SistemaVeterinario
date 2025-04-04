@@ -1,0 +1,43 @@
+@backend_Host = https://localhost:7166
+@paymentId = 2
+
+### GET ALL PAYMENTS
+GET {{backend_Host}}/api/v1/payment
+Accept: application/json
+
+### GET PAYMENT BY ID
+GET {{backend_Host}}/api/v1/payment/{{paymentId}}
+Accept: application/json
+
+### CREATE PAYMENT
+POST {{backend_Host}}/api/v1/payment/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "saleId": 3,
+  "amount": 25000,
+  "paymentDate": "2025-04-07T10:00:00",
+  "paymentType": "Efectivo",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE PAYMENT
+PUT {{backend_Host}}/api/v1/payment/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "paymentId": 2,
+  "saleId": 3,
+  "amount": 30000,
+  "paymentDate": "2025-04-07T15:45:00",
+  "paymentType": "Tarjeta",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE PAYMENT
+DELETE {{backend_Host}}/api/v1/payment/delete/{{paymentId}}
+Accept: application/json

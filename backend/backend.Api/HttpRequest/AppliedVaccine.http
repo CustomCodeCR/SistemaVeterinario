@@ -1,0 +1,39 @@
+@backend_Host = https://localhost:7166
+@appliedVaccineId = 3
+
+### GET ALL APPLIED VACCINES
+GET {{backend_Host}}/api/v1/appliedvaccine
+Accept: application/json
+
+### GET APPLIED VACCINE BY ID
+GET {{backend_Host}}/api/v1/appliedvaccine/{{appliedVaccineId}}
+Accept: application/json
+
+### CREATE APPLIED VACCINE
+POST {{backend_Host}}/api/v1/appliedvaccine/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "applicationdate": "2024-04-04T09:00:00",
+  "petId": 21,
+  "vaccineId": 21,
+  "auditCreateUser": 1001
+}
+
+### UPDATE APPLIED VACCINE
+PUT {{backend_Host}}/api/v1/appliedvaccine/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "appliedVaccineId": 1,
+  "applicationdate": "2024-04-04T09:00:00",
+  "petId": 21,
+  "vaccineId": 21,
+  "auditUpdateUser": 1002
+}
+
+### DELETE APPLIED VACCINE
+DELETE {{backend_Host}}/api/v1/appliedvaccine/delete/{{appliedVaccineId}}
+Accept: application/json

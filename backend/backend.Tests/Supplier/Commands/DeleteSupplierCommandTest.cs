@@ -31,7 +31,7 @@ public class DeleteSupplierCommandTest
 
         var command = new DeleteSupplierCommand
         {
-            SupplierId = 4,
+            SupplierId = 21,
             AuditDeleteUser = 1003
         };
 

@@ -31,7 +31,7 @@ public class DeleteVaccineCommandTest
 
         var command = new DeleteVaccineCommand
         {
-            VaccineId = 1,
+            VaccineId = 21,
             AuditDeleteUser = 1003
         };
 

@@ -8,9 +8,9 @@ namespace backend.Application.Dtos.Payment.Response;
 public class PaymentByIdResponseDto
 {
     public int PaymentId { get; set; }
-    public int Saleid { get; set; }
+    public int SaleId { get; set; }
     public int Amount { get; set; }
-    public DateTime Paymentdate { get; set; }
-    public string Paymenttype { get; set; } = null!;
+    public DateTime PaymentDate { get; set; }
+    public string PaymentType { get; set; } = null!;
     public int State { get; set; }
 }

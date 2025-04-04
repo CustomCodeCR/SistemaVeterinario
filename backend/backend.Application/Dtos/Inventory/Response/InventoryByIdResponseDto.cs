@@ -8,7 +8,8 @@ namespace backend.Application.Dtos.Inventory.Response;
 public class InventoryByIdResponseDto
 {
     public int InventoryId { get; set; }
-    public int Productid { get; set; }
+    public int ProductId { get; set; }
     public int Quantity { get; set; }
-    public DateTime Updatedate { get; set; }
+    public DateTime UpdateDate { get; set; }
+    public int State { get; set; }
 }

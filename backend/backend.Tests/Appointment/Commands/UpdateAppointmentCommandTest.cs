@@ -32,7 +32,7 @@ public class UpdateAppointmentCommandTest
 
         var command = new UpdateAppointmentCommand
         {
-            AppointmentId = 22,
+            AppointmentId = 41,
             AppointmentDate = DateTime.Now.AddDays(2),
             Reason = "Revisión general",
             PetId = 3,
@@ -43,7 +43,7 @@ public class UpdateAppointmentCommandTest
             {
                 new()
                 {
-                    AppointmentDetailId = 21,
+                    AppointmentDetailId = 41,
                     Diagnosis = "Mejorando",
                     Treatment = "Continuar tratamiento",
                     Observations = "Reacción positiva"

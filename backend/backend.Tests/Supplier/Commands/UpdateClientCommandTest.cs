@@ -32,7 +32,7 @@ public class UpdateSupplierCommandTest
 
         var command = new UpdateSupplierCommand
         {
-            SupplierId = 4,
+            SupplierId = 21,
             Name = "Animalitos, S.A.",
             Contact = "Jennifer Gonzalez",
             Address = "Heredia, Heredia, Heredia, 40101",

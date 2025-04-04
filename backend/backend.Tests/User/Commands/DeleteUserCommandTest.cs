@@ -31,7 +31,7 @@ public class DeleteUserCommandTest
 
         var command = new DeleteUserCommand
         {
-            UserId = 2,
+            UserId = 22,
             AuditDeleteUser = 1003
         };
 

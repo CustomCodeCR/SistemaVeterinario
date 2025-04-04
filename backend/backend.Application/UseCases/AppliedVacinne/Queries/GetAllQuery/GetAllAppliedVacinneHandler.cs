@@ -29,7 +29,8 @@ public async Task<BaseResponse<IEnumerable<AppliedVaccineResponseDto>>> Handle(G
     try
     {
         var AppliedVaccines = _unitOfWork.AppliedVaccine.GetAllQueryable()
-                .Include(x => x.User)
+                .Include(x => x.Vaccine)
+                .Include(x => x.Pet)
                 .AsQueryable();
 
             if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
@@ -37,10 +38,10 @@ public async Task<BaseResponse<IEnumerable<AppliedVaccineResponseDto>>> Handle(G
             switch (request.NumFilter)
             {
                 case 1:
-                    AppliedVaccines = AppliedVaccines.Where(x => x.Address.Contains(request.TextFilter));
+                    AppliedVaccines = AppliedVaccines.Where(x => x.Vaccine.Vaccinename.Contains(request.TextFilter));
                     break;
                 case 2:
-                    AppliedVaccines = AppliedVaccines.Where(x => x.Phone!.Contains(request.TextFilter));
+                    AppliedVaccines = AppliedVaccines.Where(x => x.Pet.Name!.Contains(request.TextFilter));
                     break;
             }
         }

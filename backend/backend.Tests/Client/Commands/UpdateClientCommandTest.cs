@@ -32,7 +32,7 @@ public class UpdateClientCommandTest
 
         var command = new UpdateClientCommand
         {
-            ClientId = 2,
+            ClientId = 21,
             UserId = 1,
             Address = "Heredia, Heredia, Heredia, 40101",
             Phone = "2222-2222",

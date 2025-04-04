@@ -1,0 +1,41 @@
+@backend_Host = https://localhost:7166
+@inventoryId = 3
+
+### GET ALL INVENTORY
+GET {{backend_Host}}/api/v1/inventory
+Accept: application/json
+
+### GET INVENTORY BY ID
+GET {{backend_Host}}/api/v1/inventory/{{inventoryId}}
+Accept: application/json
+
+### CREATE INVENTORY
+POST {{backend_Host}}/api/v1/inventory/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "productId": 1,
+  "quantity": 50,
+  "updateDate": "2025-04-05T12:00:00",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE INVENTORY
+PUT {{backend_Host}}/api/v1/inventory/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "inventoryId": 2,
+  "productId": 1,
+  "quantity": 75,
+  "updateDate": "2025-04-06T14:30:00",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE INVENTORY
+DELETE {{backend_Host}}/api/v1/inventory/delete/{{inventoryId}}
+Accept: application/json

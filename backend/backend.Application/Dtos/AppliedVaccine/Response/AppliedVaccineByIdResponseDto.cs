@@ -9,6 +9,6 @@ public class AppliedVaccineByIdResponseDto
 {
     public int AppliedVaccineId { get; set; }
     public DateTime Applicationdate { get; set; }
-    public int Petid { get; set; }
-    public int Vaccineid { get; set; }
+    public int PetId { get; set; }
+    public int VaccineId { get; set; }
 }

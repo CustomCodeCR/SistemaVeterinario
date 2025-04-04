@@ -5,6 +5,8 @@
 
 using AutoMapper;
 using backend.Application.Dtos.ProductCategory.Response;
+using backend.Application.UseCases.ProductCategory.Commands.CreateCommand;
+using backend.Application.UseCases.ProductCategory.Commands.UpdateCommand;
 using backend.Domain.Entities;
 using backend.Utilities.Static;
 
@@ -23,6 +25,8 @@ public class ProductCategoryMapping : Profile
             .ForMember(x => x.CategoryId, x => x.MapFrom(y => y.Id))
             .ReverseMap();
 
-        //CreateMap<>();
+        CreateMap<CreateProductCategoryCommand, Productcategory>();
+
+        CreateMap<UpdateProductCategoryCommand, Productcategory>();
     }
 }

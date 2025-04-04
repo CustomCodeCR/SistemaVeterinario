@@ -92,7 +92,7 @@ public class CreateUserCommandTest
         {
             FirstName = "Juan",
             LastName = "Pérez",
-            Username = "juanperez1",
+            Username = "juanperez12",
             Password = "password123",
             Email = "juan@example.com",
             UserType = "Admin",

@@ -45,9 +45,10 @@ public class UpdateInventoryHandler : IRequestHandler<UpdateInventoryCommand, Ba
             Inventory.Id = request.InventoryId;
 
             var parameters = new DynamicParameters();
+            parameters.Add("PInventoryId", request.InventoryId, DbType.Int32);
             parameters.Add("PProductId", request.ProductId, DbType.Int32);
             parameters.Add("PQuantity", request.Quantity, DbType.Int32);
-            parameters.Add("PUpdateDate", Inventory.UpdateDate, DbType.String);
+            parameters.Add("PUpdateDate", Inventory.Updatedate, DbType.Date);
             parameters.Add("PState", Inventory.State, DbType.Int32);
             parameters.Add("PAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
 

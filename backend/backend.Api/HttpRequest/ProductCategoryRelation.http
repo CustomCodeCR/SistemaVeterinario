@@ -1,0 +1,39 @@
+@backend_Host = https://localhost:7166
+@productId = 1
+@categoryId = 1
+
+### GET ALL PRODUCT-CATEGORY RELATIONS
+GET {{backend_Host}}/api/v1/ProductCategoryRelation
+Accept: application/json
+
+### GET PRODUCT-CATEGORY RELATION BY ID
+GET {{backend_Host}}/api/v1/ProductCategoryRelation/{{productId}}/{{categoryId}}
+Accept: application/json
+
+### CREATE PRODUCT-CATEGORY RELATION
+POST {{backend_Host}}/api/v1/ProductCategoryRelation/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "productId": 1,
+  "categoryId": 1,
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE PRODUCT-CATEGORY RELATION
+PUT {{backend_Host}}/api/v1/ProductCategoryRelation/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "productId": 1,
+  "categoryId": 2,
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE PRODUCT-CATEGORY RELATION
+DELETE {{backend_Host}}/api/v1/ProductCategoryRelation/delete/{{productId}}/{{categoryId}}
+Accept: application/json

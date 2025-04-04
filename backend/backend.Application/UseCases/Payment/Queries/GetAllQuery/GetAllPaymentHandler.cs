@@ -29,7 +29,7 @@ public async Task<BaseResponse<IEnumerable<PaymentResponseDto>>> Handle(GetAllPa
     try
     {
         var payments = _unitOfWork.Payment.GetAllQueryable()
-                .Include(x => x.User)
+                .Include(x => x.Sale)
                 .AsQueryable();
 
             if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
@@ -37,10 +37,7 @@ public async Task<BaseResponse<IEnumerable<PaymentResponseDto>>> Handle(GetAllPa
             switch (request.NumFilter)
             {
                 case 1:
-                    payments = payments.Where(x => x.Address.Contains(request.TextFilter));
-                    break;
-                case 2:
-                    payments = payments.Where(x => x.Phone!.Contains(request.TextFilter));
+                    payments = payments.Where(x => x.Paymenttype.Contains(request.TextFilter));
                     break;
             }
         }

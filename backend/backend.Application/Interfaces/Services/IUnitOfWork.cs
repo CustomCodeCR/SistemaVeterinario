@@ -11,7 +11,7 @@ namespace backend.Application.Interfaces.Services;
 
 public interface IUnitOfWork : IDisposable
 {
-    IGenericRepository<Appuser> User { get; }
+    IUserRepository User { get; }
     IGenericRepository<Client> Client { get; }
     IGenericRepository<Medic> Medic { get; }
     IGenericRepository<Pet> Pet { get; }
@@ -21,12 +21,14 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<Payment> Payment { get; }
     IGenericRepository<Product> Product { get; }
     IGenericRepository<Productcategory> ProductCategory { get; }
-    IGenericRepository<Productcategoryrelation> ProductCategoryRelation { get; }
+    IProductCategoryRelationRepository ProductCategoryRelation { get; }
     IGenericRepository<Supplier> Supplier { get; }
     IGenericRepository<Appointment> Appointment { get; }
     IAppointmentDetailRepository AppointmentDetail { get; }
     IGenericRepository<Purchaseorder> PurchaseOrder { get; }
     IPurchaseOrderDetailRepository PurchaseOrderDetail { get; }
+    IGenericRepository<Sale> Sale { get; }
+    ISaleDetailRepository SaleDetail { get; }
     Task SaveChangesAsync();
     IDbTransaction BeginTransaction();
 }

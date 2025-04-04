@@ -31,7 +31,7 @@ public class DeleteMedicCommandTest
 
         var command = new DeleteMedicCommand
         {
-            MedicId = 5,
+            MedicId = 21,
             AuditDeleteUser = 1003
         };
 

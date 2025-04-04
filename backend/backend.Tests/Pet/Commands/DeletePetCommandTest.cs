@@ -31,7 +31,7 @@ public class DeletePetCommandTest
 
         var command = new DeletePetCommand
         {
-            PetId = 4,
+            PetId = 21,
             AuditDeleteUser = 1003
         };
 

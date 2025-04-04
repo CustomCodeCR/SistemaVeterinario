@@ -29,7 +29,7 @@ public async Task<BaseResponse<IEnumerable<InventoryResponseDto>>> Handle(GetAll
     try
     {
         var Inventorys = _unitOfWork.Inventory.GetAllQueryable()
-                .Include(x => x.User)
+                .Include(x => x.Product)
                 .AsQueryable();
 
             if (request.NumFilter is not null && !string.IsNullOrEmpty(request.TextFilter))
@@ -37,10 +37,7 @@ public async Task<BaseResponse<IEnumerable<InventoryResponseDto>>> Handle(GetAll
             switch (request.NumFilter)
             {
                 case 1:
-                    Inventorys = Inventorys.Where(x => x.Address.Contains(request.TextFilter));
-                    break;
-                case 2:
-                    Inventorys = Inventorys.Where(x => x.Phone!.Contains(request.TextFilter));
+                    Inventorys = Inventorys.Where(x => x.Product.Name.Contains(request.TextFilter));
                     break;
             }
         }

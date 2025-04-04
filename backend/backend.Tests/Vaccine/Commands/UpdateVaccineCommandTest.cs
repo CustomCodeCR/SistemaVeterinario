@@ -32,7 +32,7 @@ public class UpdateVaccineCommandTest
 
         var command = new UpdateVaccineCommand
         {
-            VaccineId = 1,
+            VaccineId = 21,
             VaccineName = "Parvovirus",
             Description = "Previene el Virus intestinal severo",
             Type = "Core",

@@ -32,13 +32,13 @@ public class CreateInventoryHandler : IRequestHandler<CreateInventoryCommand, Ba
 
         try
         {
-            var Inventory = _mapper.Map<Entity.Inventory>(request);
+            var inventory = _mapper.Map<Entity.Inventory>(request);
 
             var parameters = new DynamicParameters();
-            parameters.Add("PProductId", Product.ProductId, DbType.String);
-            parameters.Add("PQuantity", Product.Quantity, DbType.String);
-            parameters.Add("PUpdateDate", Product.UpdateDate, DbType.String);
-            parameters.Add("PState", Product.State, DbType.Int32);
+            parameters.Add("PProductId", inventory.Productid, DbType.Int32);
+            parameters.Add("PQuantity", inventory.Quantity, DbType.Int32);
+            parameters.Add("PUpdateDate", inventory.Updatedate, DbType.Date);
+            parameters.Add("PState", inventory.State, DbType.Int32);
             parameters.Add("PAuditCreateUser", request.AuditCreateUser, DbType.Int32);
             parameters.Add("PInventoryId", dbType: DbType.Int32, direction: ParameterDirection.Output);
 

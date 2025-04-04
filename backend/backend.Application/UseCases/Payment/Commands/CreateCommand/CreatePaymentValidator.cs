@@ -14,7 +14,7 @@ public class CreatePaymentValidator : AbstractValidator<CreatePaymentCommand>
         RuleFor(x => x.Amount)
             .NotNull().WithMessage("El monto no puede ser nulo.")
             .NotEmpty().WithMessage("El monto no puede ser vacio.");
-        RuleFor(x => x.Paymenttype)
+        RuleFor(x => x.PaymentType)
             .NotNull().WithMessage("El Tipo de pago no puede ser nulo.")
             .NotEmpty().WithMessage("El Tipo de pago no puede ser vacio.");
     }

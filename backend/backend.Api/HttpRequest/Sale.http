@@ -1,0 +1,58 @@
+﻿@backend_Host = https://localhost:7166
+@saleId = 3
+
+### GET ALL SALES
+GET {{backend_Host}}/api/v1/sale
+Accept: application/json
+
+### GET SALE BY ID
+GET {{backend_Host}}/api/v1/sale/{{saleId}}
+Accept: application/json
+
+### CREATE SALE
+POST {{backend_Host}}/api/v1/sale/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "clientId": 1,
+  "saleDate": "2025-03-25T14:00:00",
+  "state": 1,
+  "auditCreateUser": 1001,
+  "saleDetail": [
+    {
+      "productId": 1,
+      "quantity": 10,
+      "price": 250
+    },
+    {
+      "productId": 2,
+      "quantity": 3,
+      "price": 750
+    }
+  ]
+}
+
+### UPDATE SALE
+PUT {{backend_Host}}/api/v1/sale/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "saleId": {{saleId}},
+  "clientId": 1,
+  "saleDate": "2025-03-26T10:30:00",
+  "state": 1,
+  "auditUpdateUser": 1002,
+  "saleDetail": [
+    {
+      "productId": 2,
+      "quantity": 12,
+      "price": 240
+    }
+  ]
+}
+
+### DELETE SALE
+DELETE {{backend_Host}}/api/v1/sale/delete/{{saleId}}
+Accept: application/json

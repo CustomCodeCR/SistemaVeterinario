@@ -41,16 +41,16 @@ public class UpdateAppliedVaccineHandler : IRequestHandler<UpdateAppliedVaccineC
                 return response;
             }
 
-            var AppliedVaccine = _mapper.Map<Entity.AppliedVaccine>(request);
-            AppliedVaccine.Id = request.AppliedVaccineId;
+            var appliedVaccine = _mapper.Map<Entity.Appliedvaccine>(request);
+            appliedVaccine.Id = request.AppliedVaccineId;
 
             var parameters = new DynamicParameters();
             parameters.Add("PAppliedVaccineId", request.AppliedVaccineId, DbType.Int32);
-            parameters.Add("PPetId ", client.Petid, DbType.String);
-            parameters.Add("PVaccineId", client.Vaccineid, DbType.Int32);
-            parameters.Add("PState", client.State, DbType.Int32);
-            parameters.Add("PAuditCreateUser", request.AuditCreateUser, DbType.Int32);
-            parameters.Add("AVAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
+            parameters.Add("PApplicationDate", appliedVaccine.Applicationdate, DbType.Date);
+            parameters.Add("PPetId ", appliedVaccine.Petid, DbType.Int32);
+            parameters.Add("PVaccineId", appliedVaccine.Vaccineid, DbType.Int32);
+            parameters.Add("PState", appliedVaccine.State, DbType.Int32);
+            parameters.Add("PAuditUpdateUser", request.AuditUpdateUser, DbType.Int32);
 
             var result = await _unitOfWork.AppliedVaccine.ExecAsync(SP.SpUpdateAppliedVaccine, parameters);
 

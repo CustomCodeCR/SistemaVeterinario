@@ -30,7 +30,7 @@ public class GetProductCategoryRelationByIdHandler : IRequestHandler<GetProductC
 
         try
         {
-            var ProductCategoryRelation = await _unitOfWork.ProductCategoryRelation.GetByIdAsync(request.ProductCategoryRelationId);
+            var ProductCategoryRelation = await _unitOfWork.ProductCategoryRelation.GetProductCategoryRelationByProductId(request.ProductId, request.CategoryId);
 
             if (ProductCategoryRelation is null)
             {

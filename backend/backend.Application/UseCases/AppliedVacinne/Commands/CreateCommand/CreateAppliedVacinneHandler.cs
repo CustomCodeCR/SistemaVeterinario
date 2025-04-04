@@ -32,13 +32,13 @@ public class CreateAppliedVaccineHandler : IRequestHandler<CreateAppliedVaccineC
 
         try
         {
-            var AppliedVaccine = _mapper.Map<Entity.AppliedVaccine>(request);
+            var appliedVaccine = _mapper.Map<Entity.Appliedvaccine>(request);
 
             var parameters = new DynamicParameters();
-            parameters.Add("PApplicationDate ", client.Applicationdate, DbType.String);
-            parameters.Add("PPetId ", client.Petid, DbType.String);
-            parameters.Add("PVaccineId", client.Vaccineid, DbType.Int32);
-            parameters.Add("PState", client.State, DbType.Int32);
+            parameters.Add("PApplicationDate ", appliedVaccine.Applicationdate, DbType.Date);
+            parameters.Add("PPetId ", appliedVaccine.Petid, DbType.String);
+            parameters.Add("PVaccineId", appliedVaccine.Vaccineid, DbType.Int32);
+            parameters.Add("PState", appliedVaccine.State, DbType.Int32);
             parameters.Add("PAuditCreateUser", request.AuditCreateUser, DbType.Int32);
             parameters.Add("PAppliedVaccineId", dbType: DbType.Int32, direction: ParameterDirection.Output);
 

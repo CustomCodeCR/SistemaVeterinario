@@ -11,10 +11,7 @@ public class CreateAppliedVaccineValidator : AbstractValidator<CreateAppliedVacc
 {
     public CreateAppliedVaccineValidator()
     {
-        RuleFor(x => x.AppliedVaccineName)
-            .NotNull().WithMessage("El nombre de la vacuna no puede ser nulo.")
-            .NotEmpty().WithMessage("El nombre de la vacuna no puede ser vacio.");
-        RuleFor(x => x.Vaccineid)
+        RuleFor(x => x.VaccineId)
             .NotNull().WithMessage("El ID de la vacuna no puede ser nulo.")
             .NotEmpty().WithMessage("El ID de la vacuna no puede ser vacio.");
     }

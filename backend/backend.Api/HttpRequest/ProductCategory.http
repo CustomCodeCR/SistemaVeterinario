@@ -1,0 +1,39 @@
+@backend_Host = https://localhost:7166
+@productCategoryId = 2
+
+### GET ALL PRODUCTCATEGORYS
+GET {{backend_Host}}/api/v1/productCategory
+Accept: application/json
+
+### GET PRODUCTCATEGORY BY ID
+GET {{backend_Host}}/api/v1/productCategory/{{productCategoryId}}
+Accept: application/json
+
+### CREATE PRODUCTCATEGORY
+POST {{backend_Host}}/api/v1/productCategory/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "categoryName": "Snacks",
+  "description": "Snacks",
+  "state": 1,
+  "auditCreateUser": 1001
+}
+
+### UPDATE PRODUCTCATEGORY
+PUT {{backend_Host}}/api/v1/productCategory/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "productCategoryId": 2,
+  "categoryName": "Bebidas gaseosas",
+  "description": "Bebidas gaseosas",
+  "state": 1,
+  "auditUpdateUser": 1002
+}
+
+### DELETE PRODUCTCATEGORY
+DELETE {{backend_Host}}/api/v1/productCategory/delete/{{productCategoryId}}
+Accept: application/json
