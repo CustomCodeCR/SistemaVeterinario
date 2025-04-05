@@ -12,6 +12,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using WatchDog;
 
@@ -72,8 +73,15 @@ builder.Services.AddSwagger();
 
 var app = builder.Build();
 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 if (env.IsDevelopment() || env.IsProduction())
 {
+    app.UseDeveloperExceptionPage();
+
     var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
     app.UseSwagger();
@@ -113,8 +121,6 @@ app.UseWatchDog(configuration =>
     configuration.WatchPageUsername = "admin";
     configuration.WatchPagePassword = "S0port3.";
 });
-
-app.UseDeveloperExceptionPage();
 
 await app.RunAsync();
 
