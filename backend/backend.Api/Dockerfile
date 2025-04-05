@@ -3,12 +3,20 @@
 # ---------------------------------------------------------------------------
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 
-# Zona horaria por defecto
-ENV TZ=America/Costa_Rica
+RUN apt-get update && apt-get install -y tzdata
 
-USER app
+# Instalar dependencias necesarias
+RUN apt-get update && \
+    apt-get install -y apt-utils && \
+    apt-get install -y libgdiplus && \
+    apt-get install -y libc6-dev && \
+    ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll
+
+RUN mkdir -p /app/wwwroot && \
+    chmod 755 /app/wwwroot
 WORKDIR /app
 EXPOSE 8080
+ENV TZ=America/Costa_Rica
 
 # ---------------------------------------------------------------------------
 # BUILD IMAGE
@@ -51,6 +59,8 @@ COPY --from=publish /app/publish .
 
 # Establecer permisos
 RUN chmod 755 /app
+
+EXPOSE 8080
 
 # Variables de entorno (si usás HashiCorp Vault u otros secretos)
 ARG VAULT_TOKEN
