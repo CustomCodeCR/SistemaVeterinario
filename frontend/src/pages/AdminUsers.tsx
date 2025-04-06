@@ -2,28 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from 'axios';
 
 const AdminUsers: React.FC = () => {
-  const [users, setUsers] = useState<{ id: number; name: string; email: string; role: string }[]>([]);
+  const [users, setUsers] = useState<{ userId: number; firstName: string; lastName: string; userName: string; email: string; userType: string; auditCreateDate: Date; state: number; stateUser: string; }[]>([]);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState<{ id: number; name: string; email: string; role: string } | null>(null);
-  const [newUser, setNewUser] = useState({ name: '', email: '', role: '' });
+  const [editingUser, setEditingUser] = useState<{ userId: number; firstName: string; email: string; userType: string  } | null>(null);
+  const [newUser, setNewUser] = useState({ firstName: '', email: '', userType: '' });
 
   useEffect(() => {
-    const storedUsers = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    setUsers(storedUsers);
+    axios
+      .post("https://api.vetfriends.customcodecr.com/api/v1/User", newUser)
+      .then((res) => setUsers(res.data.data))
+      .catch((err) => console.log(err));
+
+      console.log(users)
   }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const filteredUsers = users.filter(
+  /*const filteredUsers = users.filter(
     (user) =>
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.role.toLowerCase().includes(search.toLowerCase())
-  );
+      user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      user.userType.toLowerCase().includes(search.toLowerCase())
+  );*/
 
   const handleNewUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
@@ -36,7 +41,7 @@ const AdminUsers: React.FC = () => {
     if (editingUser) {
       // Editar usuario existente
       updatedUsers = users.map((u) =>
-        u.id === editingUser.id ? { ...editingUser } : u
+        u.userId === editingUser.userId ? { ...editingUser } : u
       );
     } else {
       // Agregar nuevo usuario
@@ -49,17 +54,17 @@ const AdminUsers: React.FC = () => {
     setUsers(updatedUsers);
     setModalOpen(false);
     setEditingUser(null);
-    setNewUser({ name: '', email: '', role: '' }); // Limpia el formulario
+    setNewUser({ firstName: '', email: '', userType: '' }); // Limpia el formulario
   };
 
-  const handleEdit = (user: { id: number; name: string; email: string; role: string }) => {
+  const handleEdit = (user: { userId: number; firstName: string; email: string; userType: string }) => {
     setEditingUser(user);
     setNewUser(user); // Rellena el formulario con los datos del usuario editado
     setModalOpen(true);
   };
 
   const handleDelete = (id: number) => {
-    const updatedUsers = users.filter((user) => user.id !== id);
+    const updatedUsers = users.filter((user) => user.userId !== id);
     localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
     setUsers(updatedUsers);
   };
@@ -84,7 +89,7 @@ const AdminUsers: React.FC = () => {
               className="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               onClick={() => {
                 setEditingUser(null);
-                setNewUser({ name: '', email: '', role: '' }); // Limpia el formulario
+                setNewUser({ firstName: '', email: '', userType: '' }); // Limpia el formulario
                 setModalOpen(true);
               }}
             >
@@ -104,23 +109,23 @@ const AdminUsers: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map((user) => (
-                <tr key={user.id} className="text-center border">
-                  <td className="border p-2">{user.id}</td>
-                  <td className="border p-2">{user.name}</td>
+              {users.map((user) => (
+                <tr key={user.userId} className="text-center border">
+                  <td className="border p-2">{user.userId}</td>
+                  <td className="border p-2">{user.firstName}</td>
                   <td className="border p-2">{user.email}</td>
-                  <td className="border p-2">{user.role}</td>
+                  <td className="border p-2">{user.userType}</td>
                   <td className="border p-2 flex justify-center space-x-4">
                     <button onClick={() => handleEdit(user)} className="text-blue-600 hover:text-blue-800">
                       <FaEdit />
                     </button>
-                    <button onClick={() => handleDelete(user.id)} className="text-red-600 hover:text-red-800">
+                    <button onClick={() => handleDelete(user.userId)} className="text-red-600 hover:text-red-800">
                       <FaTrash />
                     </button>
                   </td>
                 </tr>
               ))}
-              {filteredUsers.length === 0 && (
+              {users.length === 0 && (
                 <tr>
                   <td colSpan={5} className="text-center p-4">No hay usuarios encontrados.</td>
                 </tr>
@@ -143,7 +148,7 @@ const AdminUsers: React.FC = () => {
                 type="text"
                 name="name"
                 placeholder="Nombre del usuario"
-                value={newUser.name}
+                value={newUser.firstName}
                 onChange={handleNewUserChange}
                 required
                 className="w-full p-2 border rounded"
@@ -161,7 +166,7 @@ const AdminUsers: React.FC = () => {
                 type="text"
                 name="role"
                 placeholder="Rol (Admin, Usuario, Recepcionista, Veterinario)"
-                value={newUser.role}
+                value={newUser.userType}
                 onChange={handleNewUserChange}
                 required
                 className="w-full p-2 border rounded"
@@ -175,7 +180,7 @@ const AdminUsers: React.FC = () => {
                   onClick={() => {
                     setModalOpen(false);
                     setEditingUser(null);
-                    setNewUser({ name: '', email: '', role: '' }); // Limpia el formulario al cerrar
+                    setNewUser({ firstName: '', email: '', userType: '' }); // Limpia el formulario al cerrar
                   }}
                   className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
                 >
