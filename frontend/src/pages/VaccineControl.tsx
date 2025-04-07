@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaTrash, FaUser, FaPaw, FaSyringe } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaUser, FaPaw } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axiosInstance from '../api/axiosInstance';
+
+interface Vaccine {
+  vaccineId: number;
+  name: string;
+}
+
+interface AppliedVaccine {
+  vaccineId: number;
+  applicationDate: string;
+}
 
 interface Pet {
-  id: number;
+  petId: number;
   name: string;
   species: string;
   breed: string;
@@ -13,94 +24,105 @@ interface Pet {
   owner: string;
   contact: string;
   image: string;
-  appliedVaccines: string[];
-  pendingVaccines: string[];
-  upcomingVaccines: { name: string; date: string }[];
 }
 
 const VaccineControl: React.FC = () => {
   const [pets, setPets] = useState<Pet[]>([]);
+  const [vaccines, setVaccines] = useState<Vaccine[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingPet, setEditingPet] = useState<Pet | null>(null);
   const [newPet, setNewPet] = useState({
-    name: '',
-    species: '',
-    breed: '',
-    weight: '',
-    age: '',
-    owner: '',
-    contact: '',
-    image: '',
-    appliedVaccines: '',
-    pendingVaccines: '',
-    upcomingVaccines: ''
+    name: '', species: '', breed: '', weight: '', age: '', owner: '', contact: '', image: ''
   });
-  // Estado para controlar el modal de vacunas
-  const [selectedVaccinesPet, setSelectedVaccinesPet] = useState<Pet | null>(null);
+  const [appliedVaccines, setAppliedVaccines] = useState<AppliedVaccine[]>([]);
 
   useEffect(() => {
-    const storedPets = JSON.parse(localStorage.getItem('mascotas') || '[]');
-    setPets(storedPets);
+    fetchPets();
+    fetchVaccines();
   }, []);
 
-  const handleNewPetChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const fetchPets = async () => {
+    try {
+      const res = await axiosInstance.get('/Pet');
+      setPets(res.data.data);
+    } catch (error) {
+      console.error('Error al obtener mascotas:', error);
+    }
+  };
+
+  const fetchVaccines = async () => {
+    try {
+      const res = await axiosInstance.get('/Vaccine');
+      setVaccines(res.data.data);
+    } catch (error) {
+      console.error('Error al obtener vacunas:', error);
+    }
+  };
+
+  const handlePetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPet({ ...newPet, [e.target.name]: e.target.value });
   };
 
-  const handleAddOrUpdatePet = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const storedPets = JSON.parse(localStorage.getItem('mascotas') || '[]');
-
-    const petData: Pet = {
-      id: editingPet ? editingPet.id : storedPets.length + 1,
-      name: newPet.name,
-      species: newPet.species,
-      breed: newPet.breed,
-      weight: newPet.weight,
-      age: newPet.age,
-      owner: newPet.owner,
-      contact: newPet.contact,
-      image: newPet.image,
-      appliedVaccines: newPet.appliedVaccines.split(',').map(v => v.trim()),
-      pendingVaccines: newPet.pendingVaccines.split(',').map(v => v.trim()),
-      upcomingVaccines: newPet.upcomingVaccines.split(',').map(v => {
-        const [name, date] = v.split('-').map(str => str.trim());
-        return { name, date };
-      })
-    };
-
-    let updatedPets;
-    if (editingPet) {
-      updatedPets = storedPets.map((pet: Pet) => (pet.id === editingPet.id ? petData : pet));
-    } else {
-      updatedPets = [...storedPets, petData];
-    }
-
-    setPets(updatedPets);
-    localStorage.setItem('mascotas', JSON.stringify(updatedPets));
-
-    setModalOpen(false);
-    setEditingPet(null);
-    setNewPet({
-      name: '',
-      species: '',
-      breed: '',
-      weight: '',
-      age: '',
-      owner: '',
-      contact: '',
-      image: '',
-      appliedVaccines: '',
-      pendingVaccines: '',
-      upcomingVaccines: ''
-    });
+  const handleVaccineChange = (index: number, field: keyof AppliedVaccine, value: string) => {
+    const updated = [...appliedVaccines];
+    updated[index][field] = field === 'vaccineId' ? parseInt(value) : value;
+    setAppliedVaccines(updated);
   };
 
-  const handleDeletePet = (id: number) => {
-    const updatedPets = pets.filter((pet) => pet.id !== id);
-    setPets(updatedPets);
-    localStorage.setItem('mascotas', JSON.stringify(updatedPets));
+  const addVaccineField = () => {
+    setAppliedVaccines([...appliedVaccines, { vaccineId: vaccines[0]?.vaccineId || 0, applicationDate: '' }]);
+  };
+
+  const handleAddOrUpdatePet = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      let savedPetId: number;
+      if (editingPet) {
+        await axiosInstance.put(`/Pet/${editingPet.petId}`, { petId: editingPet.petId, ...newPet });
+        savedPetId = editingPet.petId;
+      } else {
+        const response = await axiosInstance.post('/Pet', newPet);
+        savedPetId = response.data.data.petId;
+      }
+
+      for (const vaccine of appliedVaccines) {
+        await axiosInstance.post('/api/v1/AppliedVaccine/Create', {
+          applicationDate: vaccine.applicationDate,
+          petId: savedPetId,
+          vaccineId: vaccine.vaccineId,
+          auditCreateUser: 1
+        });
+      }
+
+      fetchPets();
+      resetForm();
+      setModalOpen(false);
+    } catch (error) {
+      console.error('Error al guardar mascota:', error);
+    }
+  };
+
+  const resetForm = () => {
+    setNewPet({ name: '', species: '', breed: '', weight: '', age: '', owner: '', contact: '', image: '' });
+    setAppliedVaccines([]);
+    setEditingPet(null);
+  };
+
+  const handleEdit = (pet: Pet) => {
+    setEditingPet(pet);
+    setNewPet(pet);
+    setAppliedVaccines([]);
+    setModalOpen(true);
+  };
+
+  const handleDeletePet = async (id: number) => {
+    if (!window.confirm('¿Estás seguro de eliminar esta mascota?')) return;
+    try {
+      await axiosInstance.delete(`/Pet/${id}`);
+      fetchPets();
+    } catch (error) {
+      console.error('Error al eliminar mascota:', error);
+    }
   };
 
   return (
@@ -109,37 +131,14 @@ const VaccineControl: React.FC = () => {
       <main className="flex-grow p-6 md:p-10">
         <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold text-blue-600 mb-4">Gestión de Mascotas y Vacunas</h2>
-
-          {/* Botón para agregar nueva mascota */}
           <div className="flex justify-end mb-4">
-            <button
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center"
-              onClick={() => {
-                setEditingPet(null);
-                setNewPet({
-                  name: '',
-                  species: '',
-                  breed: '',
-                  weight: '',
-                  age: '',
-                  owner: '',
-                  contact: '',
-                  image: '',
-                  appliedVaccines: '',
-                  pendingVaccines: '',
-                  upcomingVaccines: ''
-                });
-                setModalOpen(true);
-              }}
-            >
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center" onClick={() => { resetForm(); setModalOpen(true); }}>
               <FaPaw className="mr-2" /> Nueva Mascota
             </button>
           </div>
-
-          {/* Tarjetas de mascotas */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {pets.map((pet) => (
-              <div key={pet.id} className="bg-white p-4 rounded-lg shadow-lg">
+              <div key={pet.petId} className="bg-white p-4 rounded-lg shadow-lg">
                 <div className="bg-blue-600 text-white p-2 rounded-t-lg">
                   <h3 className="text-xl font-bold">{pet.name}</h3>
                   <p className="text-sm">{pet.species} - {pet.breed}</p>
@@ -150,41 +149,12 @@ const VaccineControl: React.FC = () => {
                   <p><FaUser className="inline text-gray-600" /> <strong>Dueño:</strong> {pet.owner}</p>
                   <p><strong>Contacto:</strong> {pet.contact}</p>
                 </div>
-
                 <div className="flex justify-around p-2">
-                  <button 
-                    onClick={() => {
-                      setEditingPet(pet);
-                      setNewPet({
-                        name: pet.name,
-                        species: pet.species,
-                        breed: pet.breed,
-                        weight: pet.weight,
-                        age: pet.age,
-                        owner: pet.owner,
-                        contact: pet.contact,
-                        image: pet.image,
-                        appliedVaccines: pet.appliedVaccines.join(', '),
-                        pendingVaccines: pet.pendingVaccines.join(', '),
-                        upcomingVaccines: pet.upcomingVaccines.map(v => `${v.name} - ${v.date}`).join(', ')
-                      });
-                      setModalOpen(true);
-                    }}
-                    className="bg-blue-500 text-white px-3 py-1 rounded flex items-center"
-                  >
-                    <FaEdit className="inline mr-2" /> Editar
+                  <button onClick={() => handleEdit(pet)} className="bg-blue-500 text-white px-3 py-1 rounded flex items-center">
+                    <FaEdit className="mr-2" /> Editar
                   </button>
-                  <button 
-                    onClick={() => handleDeletePet(pet.id)} 
-                    className="bg-red-500 text-white px-3 py-1 rounded flex items-center"
-                  >
-                    <FaTrash className="inline mr-2" /> Eliminar
-                  </button>
-                  <button 
-                    onClick={() => setSelectedVaccinesPet(pet)} 
-                    className="bg-green-500 text-white px-3 py-1 rounded flex items-center"
-                  >
-                    <FaSyringe className="inline mr-2" /> Vacunas
+                  <button onClick={() => handleDeletePet(pet.petId)} className="bg-red-500 text-white px-3 py-1 rounded flex items-center">
+                    <FaTrash className="mr-2" /> Eliminar
                   </button>
                 </div>
               </div>
@@ -194,7 +164,6 @@ const VaccineControl: React.FC = () => {
       </main>
       <Footer />
 
-      {/* Modal para agregar o editar mascota */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
@@ -202,58 +171,37 @@ const VaccineControl: React.FC = () => {
               {editingPet ? 'Editar Mascota' : 'Agregar Nueva Mascota'}
             </h3>
             <form onSubmit={handleAddOrUpdatePet} className="mt-4 space-y-4">
-              <input type="text" name="name" placeholder="Nombre" value={newPet.name} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="species" placeholder="Especie" value={newPet.species} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="breed" placeholder="Raza" value={newPet.breed} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="weight" placeholder="Peso (kg)" value={newPet.weight} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="age" placeholder="Edad (años)" value={newPet.age} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="owner" placeholder="Nombre del dueño" value={newPet.owner} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="contact" placeholder="Contacto" value={newPet.contact} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="image" placeholder="URL de la imagen" value={newPet.image} onChange={handleNewPetChange} className="w-full p-2 border rounded" />
-              <input type="text" name="appliedVaccines" placeholder="Vacunas aplicadas (separadas por coma)" value={newPet.appliedVaccines} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="pendingVaccines" placeholder="Vacunas pendientes (separadas por coma)" value={newPet.pendingVaccines} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <input type="text" name="upcomingVaccines" placeholder="Vacunas próximas (nombre - fecha)" value={newPet.upcomingVaccines} onChange={handleNewPetChange} required className="w-full p-2 border rounded" />
-              <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Guardar</button>
+              {Object.entries(newPet).map(([key, value]) => (
+                <input key={key} type="text" name={key} placeholder={key} value={value} onChange={handlePetChange} required={key !== 'image'} className="w-full p-2 border rounded" />
+              ))}
+              <h4 className="font-bold mt-4">Vacunas Aplicadas</h4>
+              {appliedVaccines.map((vaccine, index) => (
+                <div key={index} className="flex gap-2">
+                  <select
+                    value={vaccine.vaccineId}
+                    onChange={(e) => handleVaccineChange(index, 'vaccineId', e.target.value)}
+                    className="w-1/2 p-2 border rounded"
+                  >
+                    {vaccines.map((v) => (
+                      <option key={v.vaccineId} value={v.vaccineId}>{v.name}</option>
+                    ))}
+                  </select>
+                  <input
+                    type="date"
+                    value={vaccine.applicationDate}
+                    onChange={(e) => handleVaccineChange(index, 'applicationDate', e.target.value)}
+                    className="w-1/2 p-2 border rounded"
+                    required
+                  />
+                </div>
+              ))}
+              <button type="button" onClick={addVaccineField} className="text-blue-600 text-sm underline">
+                + Agregar vacuna aplicada
+              </button>
+              <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">
+                Guardar
+              </button>
             </form>
-          </div>
-        </div>
-      )}
-
-      {/* Modal para ver las vacunas de una mascota */}
-      {selectedVaccinesPet && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <h3 className="text-2xl font-bold text-center text-blue-600">
-              Vacunas de {selectedVaccinesPet.name}
-            </h3>
-            <div className="mt-4">
-              <h4 className="font-bold">Vacunas aplicadas:</h4>
-              <ul>
-                {selectedVaccinesPet.appliedVaccines.map((vac, index) => (
-                  <li key={index}>{vac}</li>
-                ))}
-              </ul>
-              <h4 className="font-bold mt-2">Vacunas pendientes:</h4>
-              <ul>
-                {selectedVaccinesPet.pendingVaccines.map((vac, index) => (
-                  <li key={index}>{vac}</li>
-                ))}
-              </ul>
-              <h4 className="font-bold mt-2">Vacunas próximas:</h4>
-              <ul>
-                {selectedVaccinesPet.upcomingVaccines.map((vac, index) => (
-                  <li key={index}>
-                    {vac.name} - {vac.date}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <button
-              onClick={() => setSelectedVaccinesPet(null)}
-              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
-            >
-              Cerrar
-            </button>
           </div>
         </div>
       )}
@@ -262,6 +210,14 @@ const VaccineControl: React.FC = () => {
 };
 
 export default VaccineControl;
+
+
+
+
+
+
+
+
 
 
 

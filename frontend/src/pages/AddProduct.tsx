@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axiosInstance from '../api/axiosInstance';
 
-const AdminProducts: React.FC = () => {
-  const navigate = useNavigate();
-  const [products, setProducts] = useState<{ id: number; name: string; price: number; category: string }[]>([]);
+interface Product {
+  productId: number;
+  name: string;
+  price: number;
+  category: string;
+}
+
+const AddProduct: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<{ id: number; name: string; price: string; category: string } | null>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [newProduct, setNewProduct] = useState({ name: '', price: '', category: '' });
 
   useEffect(() => {
-    const storedProducts = JSON.parse(localStorage.getItem('productos') || '[]');
-    setProducts(storedProducts);
+    fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const res = await axiosInstance.get('/Product', {
+        params: {
+          NumFilter: 1,
+          TextFilter: '',
+          NumPage: 1,
+          NumRecordsPage: 100
+        }
+      });
+      setProducts(res.data.data);
+    } catch (error) {
+      console.error('Error cargando productos:', error);
+    }
+  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -31,37 +52,51 @@ const AdminProducts: React.FC = () => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
-  const handleAddOrUpdateProduct = (e: React.FormEvent) => {
+  const handleAddOrUpdateProduct = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    let updatedProducts;
-    if (editingProduct) {
-      // Editar producto existente
-      updatedProducts = products.map((p) =>
-        p.id === editingProduct.id ? { ...editingProduct, price: parseFloat(editingProduct.price) } : p
-      );
-    } else {
-      // Agregar nuevo producto
-      const storedProducts = JSON.parse(localStorage.getItem('productos') || '[]');
-      const newEntry = { ...newProduct, id: storedProducts.length + 1, price: parseFloat(newProduct.price) };
-      updatedProducts = [...storedProducts, newEntry];
+    try {
+      if (editingProduct) {
+        await axiosInstance.put('/Product/Update', {
+          productId: editingProduct.productId,
+          name: newProduct.name,
+          price: parseFloat(newProduct.price),
+          category: newProduct.category
+        });
+      } else {
+        await axiosInstance.post('/Product/Create', {
+          name: newProduct.name,
+          price: parseFloat(newProduct.price),
+          category: newProduct.category
+        });
+      }
+      await fetchProducts();
+      setModalOpen(false);
+      setEditingProduct(null);
+      setNewProduct({ name: '', price: '', category: '' });
+    } catch (error) {
+      console.error('Error al guardar producto:', error);
     }
-
-    localStorage.setItem('productos', JSON.stringify(updatedProducts));
-    setProducts(updatedProducts);
-    setModalOpen(false);
-    setEditingProduct(null);
   };
 
-  const handleEdit = (product: { id: number; name: string; price: number; category: string }) => {
-    setEditingProduct({ ...product, price: product.price.toString() });
+  const handleEdit = (product: Product) => {
+    setEditingProduct(product);
+    setNewProduct({
+      name: product.name,
+      price: product.price.toString(),
+      category: product.category
+    });
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
-    localStorage.setItem('productos', JSON.stringify(updatedProducts));
-    setProducts(updatedProducts);
+  const handleDelete = async (id: number) => {
+    if (window.confirm('¿Estás seguro de eliminar este producto?')) {
+      try {
+        await axiosInstance.delete(`/Product/Delete/${id}`);
+        await fetchProducts();
+      } catch (error) {
+        console.error('Error al eliminar producto:', error);
+      }
+    }
   };
 
   return (
@@ -71,7 +106,6 @@ const AdminProducts: React.FC = () => {
         <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold text-blue-600 mb-4">Gestión de Productos</h2>
 
-          {/* Buscador */}
           <div className="flex items-center justify-between mb-4">
             <input
               type="text"
@@ -84,6 +118,7 @@ const AdminProducts: React.FC = () => {
               className="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               onClick={() => {
                 setEditingProduct(null);
+                setNewProduct({ name: '', price: '', category: '' });
                 setModalOpen(true);
               }}
             >
@@ -91,7 +126,6 @@ const AdminProducts: React.FC = () => {
             </button>
           </div>
 
-          {/* Tabla de productos */}
           <table className="w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-200">
@@ -103,23 +137,24 @@ const AdminProducts: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredProducts.map((product) => (
-                <tr key={product.id} className="text-center border">
-                  <td className="border p-2">{product.id}</td>
-                  <td className="border p-2">{product.name}</td>
-                  <td className="border p-2">${product.price.toFixed(2)}</td>
-                  <td className="border p-2">{product.category}</td>
-                  <td className="border p-2 flex justify-center space-x-4">
-                    <button onClick={() => handleEdit(product)} className="text-blue-600 hover:text-blue-800">
-                      <FaEdit />
-                    </button>
-                    <button onClick={() => handleDelete(product.id)} className="text-red-600 hover:text-red-800">
-                      <FaTrash />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {filteredProducts.length === 0 && (
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((product) => (
+                  <tr key={product.productId} className="text-center border">
+                    <td className="border p-2">{product.productId}</td>
+                    <td className="border p-2">{product.name}</td>
+                    <td className="border p-2">₡{product.price.toFixed(2)}</td>
+                    <td className="border p-2">{product.category}</td>
+                    <td className="border p-2 flex justify-center space-x-4">
+                      <button onClick={() => handleEdit(product)} className="text-blue-600 hover:text-blue-800">
+                        <FaEdit />
+                      </button>
+                      <button onClick={() => handleDelete(product.productId)} className="text-red-600 hover:text-red-800">
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
                 <tr>
                   <td colSpan={5} className="text-center p-4">No hay productos encontrados.</td>
                 </tr>
@@ -130,7 +165,6 @@ const AdminProducts: React.FC = () => {
       </main>
       <Footer />
 
-      {/* Modal para agregar o editar producto */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
@@ -142,12 +176,8 @@ const AdminProducts: React.FC = () => {
                 type="text"
                 name="name"
                 placeholder="Nombre del producto"
-                value={editingProduct ? editingProduct.name : newProduct.name}
-                onChange={(e) =>
-                  editingProduct
-                    ? setEditingProduct({ ...editingProduct, name: e.target.value })
-                    : setNewProduct({ ...newProduct, name: e.target.value })
-                }
+                value={newProduct.name}
+                onChange={handleNewProductChange}
                 required
                 className="w-full p-2 border rounded"
               />
@@ -155,12 +185,8 @@ const AdminProducts: React.FC = () => {
                 type="number"
                 name="price"
                 placeholder="Precio"
-                value={editingProduct ? editingProduct.price : newProduct.price}
-                onChange={(e) =>
-                  editingProduct
-                    ? setEditingProduct({ ...editingProduct, price: e.target.value })
-                    : setNewProduct({ ...newProduct, price: e.target.value })
-                }
+                value={newProduct.price}
+                onChange={handleNewProductChange}
                 required
                 className="w-full p-2 border rounded"
               />
@@ -168,12 +194,8 @@ const AdminProducts: React.FC = () => {
                 type="text"
                 name="category"
                 placeholder="Categoría"
-                value={editingProduct ? editingProduct.category : newProduct.category}
-                onChange={(e) =>
-                  editingProduct
-                    ? setEditingProduct({ ...editingProduct, category: e.target.value })
-                    : setNewProduct({ ...newProduct, category: e.target.value })
-                }
+                value={newProduct.category}
+                onChange={handleNewProductChange}
                 required
                 className="w-full p-2 border rounded"
               />
@@ -181,7 +203,15 @@ const AdminProducts: React.FC = () => {
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                   {editingProduct ? 'Guardar Cambios' : 'Agregar'}
                 </button>
-                <button type="button" onClick={() => setModalOpen(false)} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModalOpen(false);
+                    setEditingProduct(null);
+                    setNewProduct({ name: '', price: '', category: '' });
+                  }}
+                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                >
                   Cancelar
                 </button>
               </div>
@@ -193,7 +223,9 @@ const AdminProducts: React.FC = () => {
   );
 };
 
-export default AdminProducts;
+export default AddProduct;
+
+
 
 
 
