@@ -74,6 +74,12 @@ const AdminPage = () => {
       icon: <FaTags className="mb-4 text-4xl text-indigo-600" />,
       link: '/AdminCategories',
       description: 'Administra las categorías de productos'
+    },
+    {
+      title: 'Agregar Vacunas',
+      icon: <FaTags className="mb-4 text-4xl text-indigo-600" />,
+      link: '/AdminVaccines',
+      description: 'Administra las vacunas de la tienda'
     }
   ]
 
