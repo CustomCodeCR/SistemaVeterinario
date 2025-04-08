@@ -151,5 +151,3 @@ const ProductSection: React.FC = () => {
 };
 
 export default ProductSection;
-
-

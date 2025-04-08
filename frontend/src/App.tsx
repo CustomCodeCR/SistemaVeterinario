@@ -14,7 +14,8 @@ import SalesReport from 'pages/SalesReport'
 import Addproduct from './pages/Addproduct'
 import AdminUsers from './pages/AdminUsers'
 import VaccineControl from './pages/VaccineControl'
-import CartPage from './pages/cart';
+import CartPage from './pages/cart'
+import AdminCategories from 'pages/AdminCategories';
 
 
 function App() {
@@ -36,9 +37,10 @@ function App() {
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/control-vacunas" element={<VaccineControl />} />
         <Route path="/cart" element={<CartPage />} /> {/* Ruta del carrito */}
+        <Route path="/AdminCategories" element={<AdminCategories />} />
       </Routes>
     </BrowserRouter>
   )
-} 
+}
 
 export default App

@@ -9,7 +9,8 @@ import {
   FaBoxes,
   FaUsers,
   FaClinicMedical,
-  FaFileInvoiceDollar
+  FaFileInvoiceDollar,
+  FaTags
 } from 'react-icons/fa'
 import Header from '../components/Header'
 import Footer from 'components/Footer'
@@ -67,6 +68,12 @@ const AdminPage = () => {
       icon: <FaClinicMedical className="mb-4 text-4xl text-teal-600" />,
       link: '/ServiciosClinicos',
       description: 'Gestiona servicios veterinarios'
+    },
+    {
+      title: 'Agregar Categorías',
+      icon: <FaTags className="mb-4 text-4xl text-indigo-600" />,
+      link: '/AdminCategories',
+      description: 'Administra las categorías de productos'
     }
   ]
 
@@ -121,33 +128,6 @@ const AdminPage = () => {
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* Sección de actividad reciente (opcional) */}
-        <div className="mt-12 rounded-xl bg-white p-6 shadow-md">
-          <h2 className="mb-4 text-xl font-semibold text-gray-800">
-            Actividad Reciente
-          </h2>
-          <div className="space-y-4">
-            <div className="flex items-center rounded-lg p-3 hover:bg-gray-50">
-              <div className="mr-3 rounded-full bg-green-100 p-2">
-                <FaPlus className="text-green-600" />
-              </div>
-              <div>
-                <p className="font-medium">Nuevo producto agregado</p>
-                <p className="text-sm text-gray-500">Hace 2 horas</p>
-              </div>
-            </div>
-            <div className="flex items-center rounded-lg p-3 hover:bg-gray-50">
-              <div className="mr-3 rounded-full bg-blue-100 p-2">
-                <FaUserShield className="text-blue-600" />
-              </div>
-              <div>
-                <p className="font-medium">Nuevo usuario registrado</p>
-                <p className="text-sm text-gray-500">Hace 5 horas</p>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
       <Footer />
