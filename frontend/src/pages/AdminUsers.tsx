@@ -3,71 +3,176 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import Swal from 'sweetalert2'; // SweetAlert2 agregado
 
 const AdminUsers: React.FC = () => {
-  const [users, setUsers] = useState<{ userId: number; firstName: string; lastName: string; userName: string; email: string; userType: string; auditCreateDate: Date; state: number; stateUser: string; }[]>([]);
+  const [users, setUsers] = useState<any[]>([]);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState<{ userId: number; firstName: string; email: string; userType: string  } | null>(null);
-  const [newUser, setNewUser] = useState({ firstName: '', email: '', userType: '' });
+  const [editingUser, setEditingUser] = useState<any | null>(null);
+  const [newUser, setNewUser] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: '',
+    email: '',
+    userType: 'User',
+    state: 1
+  });
 
   useEffect(() => {
-    axios
-      .post("https://api.vetfriends.customcodecr.com/api/v1/User", newUser)
-      .then((res) => setUsers(res.data.data))
-      .catch((err) => console.log(err));
-
-      console.log(users)
+    fetchUsers();
   }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("https://api.vetfriends.customcodecr.com/api/v1/User");
+      setUsers(response.data.data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
+  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  /*const filteredUsers = users.filter(
-    (user) =>
-      user.firstName.toLowerCase().includes(search.toLowerCase()) ||
-      user.userType.toLowerCase().includes(search.toLowerCase())
-  );*/
-
-  const handleNewUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewUser({ ...newUser, [e.target.name]: e.target.value });
+  const handleNewUserChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: name === 'state' ? parseInt(value) : value });
   };
 
-  const handleAddOrUpdateUser = (e: React.FormEvent) => {
+  const handleAddOrUpdateUser = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let updatedUsers;
-    if (editingUser) {
-      // Editar usuario existente
-      updatedUsers = users.map((u) =>
-        u.userId === editingUser.userId ? { ...editingUser } : u
-      );
-    } else {
-      // Agregar nuevo usuario
-      const storedUsers = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      const newEntry = { ...newUser, id: storedUsers.length + 1 };
-      updatedUsers = [...storedUsers, newEntry];
+    const { firstName, lastName, username, password, email } = newUser;
+    if (!firstName || !lastName || !username || (!editingUser && !password) || !email) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos requeridos.',
+      });
+      return;
     }
 
-    localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
-    setUsers(updatedUsers);
-    setModalOpen(false);
-    setEditingUser(null);
-    setNewUser({ firstName: '', email: '', userType: '' }); // Limpia el formulario
+    try {
+      const payload = {
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        username: newUser.username,
+        password: newUser.password,
+        email: newUser.email,
+        userType: newUser.userType,
+        state: newUser.state,
+        auditCreateUser: 1
+      };
+
+      if (editingUser) {
+        await axios.put("https://api.vetfriends.customcodecr.com/api/v1/User/Update", {
+          userId: editingUser.userId,
+          ...payload,
+          auditUpdateUser: 1
+        });
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario actualizado',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        await axios.post("https://api.vetfriends.customcodecr.com/api/v1/User/Create", payload);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario creado correctamente',
+          text: `Nombre: ${newUser.firstName} ${newUser.lastName}\nRol: ${newUser.userType}`,
+        });
+      }
+
+      fetchUsers();
+      setModalOpen(false);
+      setEditingUser(null);
+      resetForm();
+    } catch (error: any) {
+      console.error("Error saving user:", error);
+      if (error.response) {
+        console.log("Detalles:", error.response.data);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error del servidor',
+          text: JSON.stringify(error.response.data)
+        });
+      }
+    }
   };
 
-  const handleEdit = (user: { userId: number; firstName: string; email: string; userType: string }) => {
+  const resetForm = () => {
+    setNewUser({
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      email: '',
+      userType: 'User',
+      state: 1
+    });
+  };
+
+  const handleEdit = (user: any) => {
     setEditingUser(user);
-    setNewUser(user); // Rellena el formulario con los datos del usuario editado
+    setNewUser({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.userName,
+      password: '',
+      email: user.email,
+      userType: user.userType,
+      state: user.state
+    });
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    const updatedUsers = users.filter((user) => user.userId !== id);
-    localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
-    setUsers(updatedUsers);
+  const handleDelete = async (id: number) => {
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará al usuario permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await axios.delete(`https://api.vetfriends.customcodecr.com/api/v1/User/Delete/${id}`);
+      fetchUsers();
+      Swal.fire({
+        icon: 'success',
+        title: 'Usuario eliminado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error: any) {
+      console.error("Error deleting user:", error);
+      if (error.response) {
+        console.log("Detalles:", error.response.data);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al eliminar',
+          text: JSON.stringify(error.response.data)
+        });
+      }
+    }
   };
+
+  const filteredUsers = users.filter((user) =>
+    user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+    user.userType.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -76,7 +181,6 @@ const AdminUsers: React.FC = () => {
         <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold text-blue-600 mb-4">Gestión de Usuarios</h2>
 
-          {/* Buscador */}
           <div className="flex items-center justify-between mb-4">
             <input
               type="text"
@@ -89,7 +193,7 @@ const AdminUsers: React.FC = () => {
               className="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               onClick={() => {
                 setEditingUser(null);
-                setNewUser({ firstName: '', email: '', userType: '' }); // Limpia el formulario
+                resetForm();
                 setModalOpen(true);
               }}
             >
@@ -97,24 +201,35 @@ const AdminUsers: React.FC = () => {
             </button>
           </div>
 
-          {/* Tabla de usuarios */}
           <table className="w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-200">
                 <th className="border p-2">ID</th>
                 <th className="border p-2">Nombre</th>
+                <th className="border p-2">Apellido</th>
+                <th className="border p-2">Usuario</th>
                 <th className="border p-2">Email</th>
                 <th className="border p-2">Rol</th>
+                <th className="border p-2">Fecha de Creación</th>
+                <th className="border p-2">Estado</th>
                 <th className="border p-2">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user.userId} className="text-center border">
                   <td className="border p-2">{user.userId}</td>
                   <td className="border p-2">{user.firstName}</td>
+                  <td className="border p-2">{user.lastName}</td>
+                  <td className="border p-2">{user.userName}</td>
                   <td className="border p-2">{user.email}</td>
                   <td className="border p-2">{user.userType}</td>
+                  <td className="border p-2">{new Date(user.auditCreateDate).toLocaleString()}</td>
+                  <td className="border p-2">
+                    <span className={`px-2 py-1 rounded-full text-white text-sm ${user.state === 1 ? 'bg-green-500' : 'bg-red-500'}`}>
+                      {user.stateDesc || (user.state === 1 ? 'Activo' : 'Desactivado')}
+                    </span>
+                  </td>
                   <td className="border p-2 flex justify-center space-x-4">
                     <button onClick={() => handleEdit(user)} className="text-blue-600 hover:text-blue-800">
                       <FaEdit />
@@ -125,9 +240,9 @@ const AdminUsers: React.FC = () => {
                   </td>
                 </tr>
               ))}
-              {users.length === 0 && (
+              {filteredUsers.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="text-center p-4">No hay usuarios encontrados.</td>
+                  <td colSpan={9} className="text-center p-4">No hay usuarios encontrados.</td>
                 </tr>
               )}
             </tbody>
@@ -136,7 +251,6 @@ const AdminUsers: React.FC = () => {
       </main>
       <Footer />
 
-      {/* Modal para agregar o editar usuario */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
@@ -146,11 +260,38 @@ const AdminUsers: React.FC = () => {
             <form onSubmit={handleAddOrUpdateUser} className="mt-4 space-y-4">
               <input
                 type="text"
-                name="name"
-                placeholder="Nombre del usuario"
+                name="firstName"
+                placeholder="Nombre"
                 value={newUser.firstName}
                 onChange={handleNewUserChange}
                 required
+                className="w-full p-2 border rounded"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Apellido"
+                value={newUser.lastName}
+                onChange={handleNewUserChange}
+                required
+                className="w-full p-2 border rounded"
+              />
+              <input
+                type="text"
+                name="username"
+                placeholder="Nombre de usuario"
+                value={newUser.username}
+                onChange={handleNewUserChange}
+                required
+                className="w-full p-2 border rounded"
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                value={newUser.password}
+                onChange={handleNewUserChange}
+                required={!editingUser}
                 className="w-full p-2 border rounded"
               />
               <input
@@ -162,15 +303,28 @@ const AdminUsers: React.FC = () => {
                 required
                 className="w-full p-2 border rounded"
               />
-              <input
-                type="text"
-                name="role"
-                placeholder="Rol (Admin, Usuario, Recepcionista, Veterinario)"
+              <select
+                name="userType"
                 value={newUser.userType}
                 onChange={handleNewUserChange}
                 required
                 className="w-full p-2 border rounded"
-              />
+              >
+                <option value="Admin">Admin</option>
+                <option value="Medic">Medic</option>
+                <option value="Client">Client</option>
+                <option value="User">User</option>
+              </select>
+              <select
+                name="state"
+                value={newUser.state}
+                onChange={handleNewUserChange}
+                required
+                className="w-full p-2 border rounded"
+              >
+                <option value={1}>Activo</option>
+                <option value={0}>Desactivado</option>
+              </select>
               <div className="flex justify-between">
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                   {editingUser ? 'Guardar Cambios' : 'Agregar'}
@@ -180,7 +334,7 @@ const AdminUsers: React.FC = () => {
                   onClick={() => {
                     setModalOpen(false);
                     setEditingUser(null);
-                    setNewUser({ firstName: '', email: '', userType: '' }); // Limpia el formulario al cerrar
+                    resetForm();
                   }}
                   className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
                 >
@@ -196,3 +350,6 @@ const AdminUsers: React.FC = () => {
 };
 
 export default AdminUsers;
+
+
+
