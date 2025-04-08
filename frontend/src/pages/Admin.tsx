@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   FaPlus,
@@ -14,23 +14,49 @@ import {
 } from 'react-icons/fa'
 import Header from '../components/Header'
 import Footer from 'components/Footer'
+import axios from 'axios'
 
 const AdminPage = () => {
-  // Datos de resumen (puedes reemplazar con datos reales)
-  const stats = [
-    { title: 'Productos', value: 42, icon: <FaBoxes className="text-2xl" /> },
-    { title: 'Usuarios', value: 128, icon: <FaUsers className="text-2xl" /> },
-    {
-      title: 'Citas hoy',
-      value: 15,
-      icon: <FaCalendarAlt className="text-2xl" />
-    },
-    {
-      title: 'Ventas',
-      value: '$3,450',
-      icon: <FaFileInvoiceDollar className="text-2xl" />
+  const [stats, setStats] = useState([
+    { title: 'Productos', value: 0, icon: <FaBoxes className="text-2xl" /> },
+    { title: 'Usuarios', value: 0, icon: <FaUsers className="text-2xl" /> },
+    { title: 'Citas hoy', value: 0, icon: <FaCalendarAlt className="text-2xl" /> },
+    { title: 'Ventas', value: '$0', icon: <FaFileInvoiceDollar className="text-2xl" /> }
+  ])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productsRes, usersRes, salesRes, appointmentsRes] = await Promise.all([
+          axios.get('https://api.vetfriends.customcodecr.com/api/v1/Product'),
+          axios.get('https://api.vetfriends.customcodecr.com/api/v1/User'),
+          axios.get('https://api.vetfriends.customcodecr.com/api/v1/Sale'),
+          axios.get('https://api.vetfriends.customcodecr.com/api/v1/Appointment')
+        ])
+
+        const today = new Date().toISOString().split('T')[0]
+        const citasHoy = appointmentsRes.data.data.filter((a: any) =>
+          a.appointmentDate?.startsWith(today)
+        )
+
+        const totalVentas = salesRes.data.data.reduce(
+          (acc: number, sale: any) => acc + (sale.total || 0),
+          0
+        )
+
+        setStats([
+          { title: 'Productos', value: productsRes.data.data.length, icon: <FaBoxes className="text-2xl" /> },
+          { title: 'Usuarios', value: usersRes.data.data.length, icon: <FaUsers className="text-2xl" /> },
+          { title: 'Citas hoy', value: citasHoy.length, icon: <FaCalendarAlt className="text-2xl" /> },
+          { title: 'Ventas', value: `$${totalVentas.toLocaleString()}`, icon: <FaFileInvoiceDollar className="text-2xl" /> }
+        ])
+      } catch (error) {
+        console.error('Error al cargar estadísticas:', error)
+      }
     }
-  ]
+
+    fetchData()
+  }, [])
 
   const adminCards = [
     {
@@ -88,7 +114,6 @@ const AdminPage = () => {
       <Header />
 
       <main className="p-4 md:p-8">
-        {/* Banner de bienvenida */}
         <div className="mb-8 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-white shadow-lg">
           <h1 className="mb-2 text-3xl font-bold">Panel de Administración</h1>
           <p className="opacity-90">
@@ -96,7 +121,7 @@ const AdminPage = () => {
           </p>
         </div>
 
-        {/* Estadísticas rápidas */}
+        {/* Estadísticas rápidas actualizadas */}
         <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <div
@@ -136,6 +161,7 @@ const AdminPage = () => {
           ))}
         </div>
       </main>
+
       <Footer />
     </div>
   )

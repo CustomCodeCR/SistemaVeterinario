@@ -4,7 +4,6 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-
 interface Category {
   categoryId?: number;
   categoryName: string;
@@ -23,13 +22,24 @@ const AdminCategories: React.FC = () => {
     state: 1,
     auditCreateUser: 1,
   });
+  const [users, setUsers] = useState<{ userId: number; name: string }[]>([]);
 
   useEffect(() => {
-    // Aquí podrías cargar las categorías existentes si hay un endpoint para eso
-    // axios.get('/api/categories').then(res => setCategories(res.data));
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get('https://api.vetfriends.customcodecr.com/api/v1/User');
+        if (res.data && Array.isArray(res.data.data)) {
+          setUsers(res.data.data);
+        }
+      } catch (err) {
+        console.error('Error al cargar usuarios:', err);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
-  const handleNewCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNewCategoryChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewCategory((prev) => ({ ...prev, [name]: value }));
   };
@@ -173,22 +183,28 @@ const AdminCategories: React.FC = () => {
                 onChange={handleNewCategoryChange}
                 className="w-full p-2 border rounded"
               />
-              <input
-                type="number"
+              <select
                 name="state"
-                placeholder="Estado (0 o 1)"
                 value={newCategory.state}
                 onChange={handleNewCategoryChange}
                 className="w-full p-2 border rounded"
-              />
-              <input
-                type="number"
+              >
+                <option value={1}>Activo</option>
+                <option value={0}>Inactivo</option>
+              </select>
+              <select
                 name="auditCreateUser"
-                placeholder="ID Usuario"
                 value={newCategory.auditCreateUser}
                 onChange={handleNewCategoryChange}
                 className="w-full p-2 border rounded"
-              />
+              >
+                <option value="">Seleccione un usuario</option>
+                {users.map((user) => (
+                  <option key={user.userId} value={user.userId}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
               <div className="flex justify-between">
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                   {editingCategory ? 'Guardar Cambios' : 'Crear'}
