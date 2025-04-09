@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import axios from 'axios';
@@ -12,8 +12,8 @@ const Vaccines: React.FC = () => {
     vaccineName: '',
     description: '',
     type: '',
-    state: 0,
-    auditCreateUser: 0,
+    state: 1,
+    auditCreateUser: 1,
   });
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,8 +46,8 @@ const Vaccines: React.FC = () => {
         vaccineName: '',
         description: '',
         type: '',
-        state: 0,
-        auditCreateUser: 0,
+        state: 1,
+        auditCreateUser: 1,
       });
     } catch (error) {
       console.error('Error al crear vacuna:', error);
@@ -58,6 +58,18 @@ const Vaccines: React.FC = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const fetchVaccines = async () => {
+      try {
+        const res = await axios.get('https://api.vetfriends.customcodecr.com/api/v1/Vaccine');
+        setVaccines(res.data.data);
+      } catch (error) {
+        console.error('Error al obtener vacunas:', error);
+      }
+    };
+    fetchVaccines();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -81,8 +93,8 @@ const Vaccines: React.FC = () => {
                   vaccineName: '',
                   description: '',
                   type: '',
-                  state: 0,
-                  auditCreateUser: 0,
+                  state: 1,
+                  auditCreateUser: 1,
                 });
                 setModalOpen(true);
               }}

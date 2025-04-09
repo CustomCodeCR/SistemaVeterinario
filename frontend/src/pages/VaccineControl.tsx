@@ -17,13 +17,12 @@ interface AppliedVaccine {
 interface Pet {
   petId: number;
   name: string;
-  species: string;
+  type: string;
   breed: string;
-  weight: string;
-  age: string;
-  owner: string;
-  contact: string;
-  image: string;
+  age: number;
+  clientId: number;
+  state: number;
+  auditCreateUser: number;
 }
 
 const VaccineControl: React.FC = () => {
@@ -31,8 +30,14 @@ const VaccineControl: React.FC = () => {
   const [vaccines, setVaccines] = useState<Vaccine[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingPet, setEditingPet] = useState<Pet | null>(null);
-  const [newPet, setNewPet] = useState({
-    name: '', species: '', breed: '', weight: '', age: '', owner: '', contact: '', image: ''
+  const [newPet, setNewPet] = useState<Pet>({
+    name: '',
+    type: '',
+    breed: '',
+    age: 0,
+    clientId: 1, // ID cliente fijo o seleccionable si se desea
+    state: 1,
+    auditCreateUser: 1
   });
   const [appliedVaccines, setAppliedVaccines] = useState<AppliedVaccine[]>([]);
 
@@ -43,7 +48,7 @@ const VaccineControl: React.FC = () => {
 
   const fetchPets = async () => {
     try {
-      const res = await axiosInstance.get('/Pet');
+      const res = await axiosInstance.get('https://api.vetfriends.customcodecr.com/api/v1/Pet');
       setPets(res.data.data);
     } catch (error) {
       console.error('Error al obtener mascotas:', error);
@@ -52,7 +57,7 @@ const VaccineControl: React.FC = () => {
 
   const fetchVaccines = async () => {
     try {
-      const res = await axiosInstance.get('/Vaccine');
+      const res = await axiosInstance.get('https://api.vetfriends.customcodecr.com/api/v1/Vaccine');
       setVaccines(res.data.data);
     } catch (error) {
       console.error('Error al obtener vacunas:', error);
@@ -60,7 +65,8 @@ const VaccineControl: React.FC = () => {
   };
 
   const handlePetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewPet({ ...newPet, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNewPet({ ...newPet, [name]: name === 'age' ? parseInt(value) : value });
   };
 
   const handleVaccineChange = (index: number, field: keyof AppliedVaccine, value: string) => {
@@ -78,19 +84,19 @@ const VaccineControl: React.FC = () => {
     try {
       let savedPetId: number;
       if (editingPet) {
-        await axiosInstance.put(`/Pet/${editingPet.petId}`, { petId: editingPet.petId, ...newPet });
+        await axiosInstance.put(`/Pet/${editingPet.petId}`, { ...newPet, petId: editingPet.petId });
         savedPetId = editingPet.petId;
       } else {
-        const response = await axiosInstance.post('/Pet', newPet);
+        const response = await axiosInstance.post('https://api.vetfriends.customcodecr.com/api/v1/Pet/Create', newPet);
         savedPetId = response.data.data.petId;
       }
 
       for (const vaccine of appliedVaccines) {
-        await axiosInstance.post('/api/v1/AppliedVaccine/Create', {
+        await axiosInstance.post('https://api.vetfriends.customcodecr.com/api/v1/AppliedVaccine/Create', {
           applicationDate: vaccine.applicationDate,
           petId: savedPetId,
           vaccineId: vaccine.vaccineId,
-          auditCreateUser: 1
+          auditCreateUser: newPet.auditCreateUser
         });
       }
 
@@ -103,7 +109,15 @@ const VaccineControl: React.FC = () => {
   };
 
   const resetForm = () => {
-    setNewPet({ name: '', species: '', breed: '', weight: '', age: '', owner: '', contact: '', image: '' });
+    setNewPet({
+      name: '',
+      type: '',
+      breed: '',
+      age: 0,
+      clientId: 1,
+      state: 1,
+      auditCreateUser: 1
+    });
     setAppliedVaccines([]);
     setEditingPet(null);
   };
@@ -111,7 +125,7 @@ const VaccineControl: React.FC = () => {
   const handleEdit = (pet: Pet) => {
     setEditingPet(pet);
     setNewPet(pet);
-    setAppliedVaccines([]);
+    setAppliedVaccines([]); // Aquí podrías cargar vacunas aplicadas si tienes un endpoint para eso
     setModalOpen(true);
   };
 
@@ -141,13 +155,11 @@ const VaccineControl: React.FC = () => {
               <div key={pet.petId} className="bg-white p-4 rounded-lg shadow-lg">
                 <div className="bg-blue-600 text-white p-2 rounded-t-lg">
                   <h3 className="text-xl font-bold">{pet.name}</h3>
-                  <p className="text-sm">{pet.species} - {pet.breed}</p>
+                  <p className="text-sm">{pet.type} - {pet.breed}</p>
                 </div>
                 <div className="p-3">
-                  <p><strong>Peso:</strong> {pet.weight} kg</p>
                   <p><strong>Edad:</strong> {pet.age} años</p>
-                  <p><FaUser className="inline text-gray-600" /> <strong>Dueño:</strong> {pet.owner}</p>
-                  <p><strong>Contacto:</strong> {pet.contact}</p>
+                  <p><FaUser className="inline text-gray-600" /> <strong>Cliente ID:</strong> {pet.clientId}</p>
                 </div>
                 <div className="flex justify-around p-2">
                   <button onClick={() => handleEdit(pet)} className="bg-blue-500 text-white px-3 py-1 rounded flex items-center">
@@ -171,9 +183,11 @@ const VaccineControl: React.FC = () => {
               {editingPet ? 'Editar Mascota' : 'Agregar Nueva Mascota'}
             </h3>
             <form onSubmit={handleAddOrUpdatePet} className="mt-4 space-y-4">
-              {Object.entries(newPet).map(([key, value]) => (
-                <input key={key} type="text" name={key} placeholder={key} value={value} onChange={handlePetChange} required={key !== 'image'} className="w-full p-2 border rounded" />
-              ))}
+              <input type="text" name="name" placeholder="Nombre" value={newPet.name} onChange={handlePetChange} required className="w-full p-2 border rounded" />
+              <input type="text" name="type" placeholder="Tipo (Perro, Gato...)" value={newPet.type} onChange={handlePetChange} required className="w-full p-2 border rounded" />
+              <input type="text" name="breed" placeholder="Raza" value={newPet.breed} onChange={handlePetChange} required className="w-full p-2 border rounded" />
+              <input type="number" name="age" placeholder="Edad" value={newPet.age} onChange={handlePetChange} required className="w-full p-2 border rounded" />
+
               <h4 className="font-bold mt-4">Vacunas Aplicadas</h4>
               {appliedVaccines.map((vaccine, index) => (
                 <div key={index} className="flex gap-2">
@@ -210,15 +224,3 @@ const VaccineControl: React.FC = () => {
 };
 
 export default VaccineControl;
-
-
-
-
-
-
-
-
-
-
-
-

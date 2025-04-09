@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { FaEdit, FaTrash } from 'react-icons/fa';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import axios from 'axios';
-import Swal from 'sweetalert2'; // SweetAlert2 agregado
+import React, { useState, useEffect } from 'react'
+import { FaEdit, FaTrash } from 'react-icons/fa'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import axios from 'axios'
+import Swal from 'sweetalert2' // SweetAlert2 agregado
 
 const AdminUsers: React.FC = () => {
-  const [users, setUsers] = useState<any[]>([]);
-  const [search, setSearch] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState<any | null>(null);
+  const [users, setUsers] = useState<any[]>([])
+  const [search, setSearch] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editingUser, setEditingUser] = useState<any | null>(null)
   const [newUser, setNewUser] = useState({
     firstName: '',
     lastName: '',
@@ -18,24 +18,26 @@ const AdminUsers: React.FC = () => {
     email: '',
     userType: 'User',
     state: 1
-  });
+  })
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    fetchUsers()
+  }, [])
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("https://api.vetfriends.customcodecr.com/api/v1/User");
-      setUsers(response.data.data);
+      const response = await axios.get(
+        'https://api.vetfriends.customcodecr.com/api/v1/User'
+      )
+      setUsers(response.data.data)
     } catch (err) {
-      console.error("Error fetching users:", err);
+      console.error('Error fetching users:', err)
     }
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
+    setSearch(e.target.value)
+  }
 
   const handleNewUserChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

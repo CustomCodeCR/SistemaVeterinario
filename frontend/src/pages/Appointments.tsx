@@ -113,7 +113,7 @@ const Appointments: React.FC = () => {
                   petId: 0,
                   medicId: 0,
                   state: 0,
-                  auditCreateUser: 0,
+                  auditCreateUser: 90,
                   appointmentDetail: [{ diagnosis: '', treatment: '', observations: '' }],
                 });
                 setModalOpen(true);

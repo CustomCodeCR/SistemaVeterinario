@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/logod.png' // Asegúrate de que la ruta del logo sea correcta
+import logo from '../assets/logod.png'
 
 const Footer: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
 
         {/* Texto de derechos de autor al centro */}
         <div className="mb-4 text-gray-400 md:mb-0">
-          © 2020 - 2025 Vets Friends.
+          © 2020 - {new Date().getFullYear()} Vets Friends.
         </div>
 
         {/* Íconos de redes sociales a la derecha */}

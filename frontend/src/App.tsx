@@ -1,7 +1,7 @@
 // App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Products from './pages/Products'
-import Home from './pages/home'
+import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Profile from './pages/Profile'
@@ -11,13 +11,13 @@ import Admin from './pages/Admin'
 import Appointments from './pages/Appointments'
 import ServiciosClinicos from './pages/ServiciosClinicos'
 import SalesReport from 'pages/SalesReport'
-import Addproduct from './pages/Addproduct'
+import Addproduct from './pages/AddProduct'
 import AdminUsers from './pages/AdminUsers'
 import VaccineControl from './pages/VaccineControl'
 import CartPage from './pages/cart'
 import AdminCategories from './pages/AdminCategories'
-import AdminVaccines from './pages/AdminVaccines';
-
+import AdminVaccines from './pages/AdminVaccines'
+import AddClient from './pages/AddClient'
 
 function App() {
   return (
@@ -40,6 +40,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} /> {/* Ruta del carrito */}
         <Route path="/AdminCategories" element={<AdminCategories />} />
         <Route path="/AdminVaccines" element={<AdminVaccines />} />
+        <Route path="/AddClient" element={<AddClient />} />
       </Routes>
     </BrowserRouter>
   )

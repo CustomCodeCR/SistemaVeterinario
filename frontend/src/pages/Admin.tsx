@@ -72,6 +72,12 @@ const AdminPage = () => {
       description: 'Administra usuarios y permisos'
     },
     {
+      title: 'Gestionar Clientes',
+      icon: <FaUserShield className="mb-4 text-4xl text-green-600" />,
+      link: '/AddClient',
+      description: 'Administra clientes'
+    },
+    {
       title: 'Control de Vacunas',
       icon: <FaSyringe className="mb-4 text-4xl text-purple-600" />,
       link: '/control-vacunas',

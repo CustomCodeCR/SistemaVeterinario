@@ -1,22 +1,15 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import {
-  FaUser,
-  FaLock,
-  FaEnvelope,
-  FaSignInAlt,
-  FaUserPlus
-} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import { FaLock, FaEnvelope, FaSignInAlt } from 'react-icons/fa'
 import Header from '../components/Header'
 
-const Profile = () => {
-  const [isLogin, setIsLogin] = useState(true)
+const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: ''
+    username: '',
+    password: ''
   })
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,28 +20,72 @@ const Profile = () => {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
     // Validación básica
-    if (!formData.email || !formData.password) {
+    if (!formData.username || !formData.password) {
       setError('Por favor completa todos los campos')
       return
     }
 
-    if (!isLogin && !formData.name) {
-      setError('Por favor ingresa tu nombre')
-      return
+    try {
+      setIsLoading(true)
+
+      const response = await fetch('https://api.vetfriends.customcodecr.com/api/v1/Login/Login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        }
+      )
+
+      // Verificar contenido de la respuesta antes de procesarlo
+      const responseText = await response.text()
+      let data = null
+
+      // Intentar parsear la respuesta como JSON solo si tiene contenido
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText)
+        } catch (jsonError) {
+          console.error('Error parsing JSON response:', responseText)
+          throw new Error('La respuesta del servidor no es un JSON válido')
+        }
+      }
+
+      if (!response.ok) {
+        // Si el servidor responde con un error
+        const errorMessage =
+          data?.message || `Error en la autenticación: ${response.status}`
+        throw new Error(errorMessage)
+      }
+
+      // Verificar si tenemos una respuesta exitosa
+      if (!data && response.ok) {
+        // El servidor respondió con éxito pero sin datos
+        console.log('Autenticación exitosa sin datos retornados')
+      } else if (data) {
+        // Guardar token o información de sesión si viene en la respuesta
+        if (data.token) {
+          localStorage.setItem('authToken', data.token)
+        }
+
+        // Si hay información de usuario en la respuesta, puedes guardarla también
+        if (data.user) {
+          localStorage.setItem('userData', JSON.stringify(data.user))
+        }
+      }
+
+      navigate('/')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error durante el inicio de sesión')
+      console.error('Login error:', err)
+    } finally {
+      setIsLoading(false)
     }
-
-    // Aquí iría tu lógica de autenticación real
-    console.log('Datos enviados:', formData)
-
-    // Simulación de autenticación exitosa
-    setTimeout(() => {
-      navigate('/profile/dashboard')
-    }, 1000)
   }
 
   return (
@@ -57,28 +94,9 @@ const Profile = () => {
 
       <main className="flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md overflow-hidden rounded-xl bg-white shadow-lg">
-          {/* Pestañas Login/Signup */}
-          <div className="flex border-b">
-            <button
-              className={`flex-1 px-6 py-4 text-center font-medium ${
-                isLogin ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'
-              }`}
-              onClick={() => setIsLogin(true)}
-            >
-              <FaSignInAlt className="mr-2 inline" />
-              Iniciar Sesión
-            </button>
-            <button
-              className={`flex-1 px-6 py-4 text-center font-medium ${
-                !isLogin
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700'
-              }`}
-              onClick={() => setIsLogin(false)}
-            >
-              <FaUserPlus className="mr-2 inline" />
-              Registrarse
-            </button>
+          {/* Título */}
+          <div className="bg-blue-600 px-6 py-4 text-center">
+            <h2 className="text-xl font-semibold text-white">Iniciar Sesión</h2>
           </div>
 
           {/* Formulario */}
@@ -89,44 +107,22 @@ const Profile = () => {
               </div>
             )}
 
-            {!isLogin && (
-              <div className="space-y-2">
-                <label htmlFor="name" className="block text-gray-700">
-                  Nombre Completo
-                </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <FaUser className="text-gray-400" />
-                  </span>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                    placeholder="Tu nombre"
-                  />
-                </div>
-              </div>
-            )}
-
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-gray-700">
-                Correo Electrónico
+              <label htmlFor="username" className="block text-gray-700">
+                Nombre de Usuario
               </label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <FaEnvelope className="text-gray-400" />
                 </span>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
                   className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                  placeholder="tu@email.com"
+                  placeholder="Nombre de usuario"
                 />
               </div>
             </div>
@@ -146,53 +142,47 @@ const Profile = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                  placeholder={
-                    isLogin ? 'Tu contraseña' : 'Crea una contraseña'
-                  }
+                  placeholder="Tu contraseña"
                   minLength={6}
                 />
               </div>
             </div>
 
-            {isLogin && (
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="size-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-700"
-                  >
-                    Recordarme
-                  </label>
-                </div>
-
-                <Link
-                  to="/forgot-password"
-                  className="text-sm text-blue-600 hover:text-blue-500"
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="size-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-700"
                 >
-                  ¿Olvidaste tu contraseña?
-                </Link>
+                  Recordarme
+                </label>
               </div>
-            )}
+
+              <a
+                href="/forgot-password"
+                className="text-sm text-blue-600 hover:text-blue-500"
+              >
+                ¿Olvidaste tu contraseña?
+              </a>
+            </div>
 
             <button
               type="submit"
-              className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition duration-200 hover:bg-blue-700"
+              disabled={isLoading}
+              className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition duration-200 hover:bg-blue-700 disabled:bg-blue-400"
             >
-              {isLogin ? (
+              {isLoading ? (
+                'Iniciando sesión...'
+              ) : (
                 <>
                   <FaSignInAlt className="mr-2" />
                   Iniciar Sesión
-                </>
-              ) : (
-                <>
-                  <FaUserPlus className="mr-2" />
-                  Registrarse
                 </>
               )}
             </button>
@@ -203,4 +193,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Login
