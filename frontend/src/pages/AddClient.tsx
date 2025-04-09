@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaUserPlus, FaSearch } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import axios from 'axios';
@@ -11,8 +11,8 @@ interface Client {
   phone: string;
   state: number;
   auditCreateUser: number;
-  name?: string; // Para mostrar en la tabla
-  email?: string; // Para mostrar en la tabla
+  name?: string;
+  email?: string;
 }
 
 const AddClient: React.FC = () => {
@@ -21,10 +21,11 @@ const AddClient: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [newClient, setNewClient] = useState<Client>({
+    userId: 0,
     address: '',
     phone: '',
     state: 1,
-    auditCreateUser: 90 // Valor quemado
+    auditCreateUser: 0
   });
 
   useEffect(() => {
@@ -57,34 +58,36 @@ const AddClient: React.FC = () => {
 
   const filteredClients = clients.filter(client =>
     (client.name?.toLowerCase().includes(search.toLowerCase()) ||
-    (client.email?.toLowerCase().includes(search.toLowerCase())) ||
+    client.email?.toLowerCase().includes(search.toLowerCase()) ||
     client.phone.toLowerCase().includes(search.toLowerCase()) ||
-    client.address.toLowerCase().includes(search.toLowerCase()))
+    client.address.toLowerCase().includes(search.toLowerCase()) ||
+    client.userId?.toString().includes(search))
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setNewClient(prev => ({ ...prev, [name]: value }));
+    setNewClient(prev => ({
+      ...prev,
+      [name]: name === 'userId' || name === 'state' || name === 'auditCreateUser'
+        ? Number(value)
+        : value
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const payload = {
-        address: newClient.address,
-        phone: newClient.phone,
-        state: Number(newClient.state),
-        auditCreateUser: 90 // Valor quemado
-      };
 
+    try {
       if (editingClient && editingClient.userId) {
         // Actualizar cliente existente
         await axios.put(
           'https://api.vetfriends.customcodecr.com/api/v1/Client/Update',
           {
-            userId: editingClient.userId,
-            ...payload,
-            auditUpdateUser: 90 // Valor quemado para actualización
+            userId: newClient.userId,
+            address: newClient.address,
+            phone: newClient.phone,
+            state: newClient.state,
+            auditUpdateUser: newClient.auditCreateUser
           },
           {
             headers: {
@@ -103,7 +106,13 @@ const AddClient: React.FC = () => {
         // Crear nuevo cliente
         await axios.post(
           'https://api.vetfriends.customcodecr.com/api/v1/Client/Create',
-          payload,
+          {
+            userId: newClient.userId,
+            address: newClient.address,
+            phone: newClient.phone,
+            state: newClient.state,
+            auditCreateUser: newClient.auditCreateUser
+          },
           {
             headers: {
               'Content-Type': 'application/json',
@@ -114,7 +123,7 @@ const AddClient: React.FC = () => {
         Swal.fire({
           icon: 'success',
           title: 'Cliente creado',
-          text: `Teléfono: ${newClient.phone}`
+          text: `ID: ${newClient.userId} - Teléfono: ${newClient.phone}`
         });
       }
 
@@ -122,17 +131,20 @@ const AddClient: React.FC = () => {
       setModalOpen(false);
       setEditingClient(null);
       setNewClient({
+        userId: 0,
         address: '',
         phone: '',
         state: 1,
-        auditCreateUser: 90 // Resetear con valor quemado
+        auditCreateUser: 0
       });
     } catch (error) {
       console.error('Error al guardar cliente:', error);
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Error al guardar el cliente'
+        text: axios.isAxiosError(error) && error.response?.data?.message
+          ? error.response.data.message
+          : 'Error al guardar el cliente'
       });
     }
   };
@@ -140,10 +152,11 @@ const AddClient: React.FC = () => {
   const handleEdit = (client: Client) => {
     setEditingClient(client);
     setNewClient({
+      userId: client.userId || 0,
       address: client.address,
       phone: client.phone,
       state: client.state,
-      auditCreateUser: 90 // Valor quemado al editar
+      auditCreateUser: client.auditCreateUser || 0
     });
     setModalOpen(true);
   };
@@ -166,7 +179,7 @@ const AddClient: React.FC = () => {
       await axios.delete(
         `https://api.vetfriends.customcodecr.com/api/v1/Client/Delete/${userId}`,
         {
-          data: { auditDeleteUser: 90 }, // Valor quemado para eliminación
+          data: { auditDeleteUser: newClient.auditCreateUser || 0 },
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*'
@@ -199,75 +212,87 @@ const AddClient: React.FC = () => {
             Gestión de Clientes
           </h2>
 
-          <div className="flex items-center justify-between mb-4">
-            <input
-              type="text"
-              placeholder="Buscar clientes..."
-              value={search}
-              onChange={handleSearchChange}
-              className="w-full md:w-1/2 p-2 border rounded"
-            />
+          <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+            <div className="relative w-full md:w-1/2">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FaSearch className="text-gray-400" />
+              </div>
+              <input
+                type="text"
+                placeholder="Buscar por ID, teléfono, dirección..."
+                value={search}
+                onChange={handleSearchChange}
+                className="w-full pl-10 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
             <button
-              className="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center"
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
               onClick={() => {
                 setEditingClient(null);
                 setNewClient({
+                  userId: 0,
                   address: '',
                   phone: '',
                   state: 1,
-                  auditCreateUser: 90
+                  auditCreateUser: 0
                 });
                 setModalOpen(true);
               }}
             >
-              <FaUserPlus className="mr-2" /> Nuevo Cliente
+              <FaUserPlus /> Nuevo Cliente
             </button>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-300">
+            <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-gray-200">
-                  <th className="border p-2">ID</th>
-                  <th className="border p-2">Teléfono</th>
-                  <th className="border p-2">Dirección</th>
-                  <th className="border p-2">Estado</th>
-                  <th className="border p-2">Acciones</th>
+                <tr className="bg-gray-200 text-left">
+                  <th className="p-3 border border-gray-300">ID Usuario</th>
+                  <th className="p-3 border border-gray-300">Teléfono</th>
+                  <th className="p-3 border border-gray-300">Dirección</th>
+                  <th className="p-3 border border-gray-300">Estado</th>
+                  <th className="p-3 border border-gray-300">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredClients.length > 0 ? (
                   filteredClients.map((client) => (
-                    <tr key={client.userId} className="text-center border hover:bg-gray-50">
-                      <td className="border p-2">{client.userId}</td>
-                      <td className="border p-2">{client.phone}</td>
-                      <td className="border p-2">{client.address}</td>
-                      <td className="border p-2">
-                        <span className={`px-2 py-1 rounded-full text-white text-sm ${client.state === 1 ? 'bg-green-500' : 'bg-red-500'}`}>
+                    <tr key={client.userId} className="border-b border-gray-300 hover:bg-gray-50">
+                      <td className="p-3 border border-gray-300">{client.userId}</td>
+                      <td className="p-3 border border-gray-300">{client.phone}</td>
+                      <td className="p-3 border border-gray-300">{client.address}</td>
+                      <td className="p-3 border border-gray-300">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          client.state === 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
                           {client.state === 1 ? 'Activo' : 'Inactivo'}
                         </span>
                       </td>
-                      <td className="border p-2 flex justify-center space-x-4">
-                        <button
-                          onClick={() => handleEdit(client)}
-                          className="text-blue-600 hover:text-blue-800 p-1"
-                          title="Editar"
-                        >
-                          <FaEdit />
-                        </button>
-                        <button
-                          onClick={() => client.userId && handleDelete(client.userId)}
-                          className="text-red-600 hover:text-red-800 p-1"
-                          title="Eliminar"
-                        >
-                          <FaTrash />
-                        </button>
+                      <td className="p-3 border border-gray-300">
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleEdit(client)}
+                            className="text-blue-600 hover:text-blue-800 p-1 rounded hover:bg-blue-50"
+                            title="Editar"
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            onClick={() => client.userId && handleDelete(client.userId)}
+                            className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-50"
+                            title="Eliminar"
+                          >
+                            <FaTrash />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="text-center p-4">No hay clientes registrados.</td>
+                    <td colSpan={5} className="p-4 text-center text-gray-500">
+                      No se encontraron clientes
+                    </td>
                   </tr>
                 )}
               </tbody>
@@ -278,22 +303,48 @@ const AddClient: React.FC = () => {
       <Footer />
 
       {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
-            <h3 className="text-2xl font-bold text-center text-blue-600 mb-4">
-              {editingClient ? 'Editar Cliente' : 'Nuevo Cliente'}
-            </h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-2xl font-bold text-blue-600">
+                {editingClient ? 'Editar Cliente' : 'Nuevo Cliente'}
+              </h3>
+              <button
+                onClick={() => {
+                  setModalOpen(false);
+                  setEditingClient(null);
+                }}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-gray-700 mb-1">ID de Usuario</label>
+                <input
+                  type="number"
+                  name="userId"
+                  placeholder="ID del usuario"
+                  value={newClient.userId || ''}
+                  onChange={handleInputChange}
+                  required
+                  min="1"
+                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
               <div>
                 <label className="block text-gray-700 mb-1">Teléfono</label>
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="8888-8888"
+                  placeholder="Ej: 8888-8888"
                   value={newClient.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
 
@@ -306,7 +357,7 @@ const AddClient: React.FC = () => {
                   value={newClient.address}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
 
@@ -316,7 +367,7 @@ const AddClient: React.FC = () => {
                   name="state"
                   value={newClient.state}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   required
                 >
                   <option value={1}>Activo</option>
@@ -324,30 +375,36 @@ const AddClient: React.FC = () => {
                 </select>
               </div>
 
-              <input type="hidden" name="auditCreateUser" value={90} />
+              <div>
+                <label className="block text-gray-700 mb-1">ID Usuario Auditoría</label>
+                <input
+                  type="number"
+                  name="auditCreateUser"
+                  placeholder="ID del usuario que registra"
+                  value={newClient.auditCreateUser || ''}
+                  onChange={handleInputChange}
+                  required
+                  min="1"
+                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
 
-              <div className="flex justify-between pt-4">
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex-1 mr-2"
-                >
-                  {editingClient ? 'Guardar Cambios' : 'Registrar Cliente'}
-                </button>
+              <div className="flex justify-end gap-3 pt-4">
                 <button
                   type="button"
                   onClick={() => {
                     setModalOpen(false);
                     setEditingClient(null);
-                    setNewClient({
-                      address: '',
-                      phone: '',
-                      state: 1,
-                      auditCreateUser: 90
-                    });
                   }}
-                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 flex-1 ml-2"
+                  className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-100"
                 >
                   Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  {editingClient ? 'Guardar Cambios' : 'Registrar Cliente'}
                 </button>
               </div>
             </form>
