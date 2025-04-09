@@ -45,6 +45,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(e => e.Name)
             .HasMaxLength(50)
             .HasColumnName("NAME");
+        builder.Property(e => e.Image)
+            .HasMaxLength(255)
+            .HasColumnName("IMAGE");
         builder.Property(e => e.Price)
             .HasColumnType("NUMBER(10,2)")
             .HasColumnName("PRICE");

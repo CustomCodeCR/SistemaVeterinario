@@ -10,6 +10,7 @@ using backend.Application.UseCases.AppliedVaccine.Queries.GetAllQuery;
 using backend.Application.UseCases.AppliedVaccine.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class AppliedVaccineController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public AppliedVaccineController(IMediator mediator)
+        public AppliedVaccineController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "applied-vaccine")]
         public async Task<IActionResult> AppliedVaccineList([FromQuery] GetAllAppliedVaccineQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> AppliedVaccineCreate([FromBody] CreateAppliedVaccineCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("applied-vaccine", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> AppliedVaccineUpdate([FromBody] UpdateAppliedVaccineCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("applied-vaccine", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> AppliedVaccineDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteAppliedVaccineCommand() { AppliedVaccineId = userId });
+            await _cacheStore.EvictByTagAsync("applied-vaccine", default);
             return Ok(response);
         }
     }

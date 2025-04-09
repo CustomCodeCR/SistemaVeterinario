@@ -16,7 +16,7 @@ public partial class ApplicationDbContext : DbContext
         _connectionString = connectionString;
     }
 
-    public IDbConnection CreateConnection => new OracleConnection(_connectionString);
+    public OracleConnection CreateConnection => new OracleConnection(_connectionString);
 
     public virtual DbSet<Appliedvaccine> Appliedvaccines { get; set; }
 

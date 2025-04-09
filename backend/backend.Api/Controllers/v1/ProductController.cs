@@ -10,6 +10,7 @@ using backend.Application.UseCases.Product.Queries.GetAllQuery;
 using backend.Application.UseCases.Product.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public ProductController(IMediator mediator)
+        public ProductController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "product")]
         public async Task<IActionResult> ProductList([FromQuery] GetAllProductQuery query)
         {
             var response = await _mediator.Send(query);
@@ -41,16 +45,18 @@ namespace backend.Api.Controllers.v1
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> ProductCreate([FromBody] CreateProductCommand command)
+        public async Task<IActionResult> ProductCreate([FromForm] CreateProductCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("product", default);
             return Ok(response);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> ProductUpdate([FromBody] UpdateProductCommand command)
+        public async Task<IActionResult> ProductUpdate([FromForm] UpdateProductCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("product", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteProductCommand() { ProductId = userId });
+            await _cacheStore.EvictByTagAsync("product", default);
             return Ok(response);
         }
     }

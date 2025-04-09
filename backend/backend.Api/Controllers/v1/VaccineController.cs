@@ -10,6 +10,7 @@ using backend.Application.UseCases.Vaccine.Queries.GetAllQuery;
 using backend.Application.UseCases.Vaccine.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class VaccineController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public VaccineController(IMediator mediator)
+        public VaccineController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "vaccine")]
         public async Task<IActionResult> VaccineList([FromQuery] GetAllVaccineQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> VaccineCreate([FromBody] CreateVaccineCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("vaccine", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> VaccineUpdate([FromBody] UpdateVaccineCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("vaccine", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> VaccineDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteVaccineCommand() { VaccineId = userId });
+            await _cacheStore.EvictByTagAsync("vaccine", default);
             return Ok(response);
         }
     }

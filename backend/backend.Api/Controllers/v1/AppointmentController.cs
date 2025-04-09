@@ -10,6 +10,7 @@ using backend.Application.UseCases.Appointment.Queries.GetAllQuery;
 using backend.Application.UseCases.Appointment.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class AppointmentController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public AppointmentController(IMediator mediator)
+        public AppointmentController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "appointment")]
         public async Task<IActionResult> AppointmentList([FromQuery] GetAllAppointmentQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> AppointmentCreate([FromBody] CreateAppointmentCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("appointment", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> AppointmentUpdate([FromBody] UpdateAppointmentCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("appointment", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> AppointmentDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteAppointmentCommand() { AppointmentId = userId });
+            await _cacheStore.EvictByTagAsync("appointment", default);
             return Ok(response);
         }
     }

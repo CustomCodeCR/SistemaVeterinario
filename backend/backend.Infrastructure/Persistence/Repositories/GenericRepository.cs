@@ -86,26 +86,36 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task<bool> ExecAsync(string storedProcedure, object parameters)
     {
         using var connection = _context.CreateConnection;
-        var objParam = new DynamicParameters(parameters);
-        var recordAffected = await connection
-            .ExecuteAsync(storedProcedure, param: objParam, commandType: CommandType.StoredProcedure);
+        await connection.OpenAsync();
 
-        if (recordAffected > 0)
+        try
         {
-            return true;
-        }
+            var objParam = new DynamicParameters(parameters);
+            var recordAffected = await connection.ExecuteAsync(
+                storedProcedure,
+                param: objParam,
+                commandType: CommandType.StoredProcedure
+            );
 
-        foreach (var param in objParam.ParameterNames)
-        {
-            var paramValue = objParam.Get<object>(param);
-
-            if (paramValue != null)
+            if (recordAffected > 0)
             {
                 return true;
             }
+
+            foreach (var param in objParam.ParameterNames)
+            {
+                var paramValue = objParam.Get<object>(param);
+                if (paramValue != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
-
-        return false;
+        finally
+        {
+            await connection.CloseAsync();
+        }
     }
-
 }

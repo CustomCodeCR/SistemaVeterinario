@@ -10,6 +10,7 @@ using backend.Application.UseCases.PurchaseOrder.Queries.GetAllQuery;
 using backend.Application.UseCases.PurchaseOrder.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class PurchaseOrderController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public PurchaseOrderController(IMediator mediator)
+        public PurchaseOrderController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "purchase-order")]
         public async Task<IActionResult> PurchaseOrderList([FromQuery] GetAllPurchaseOrderQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PurchaseOrderCreate([FromBody] CreatePurchaseOrderCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("purchase-order", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PurchaseOrderUpdate([FromBody] UpdatePurchaseOrderCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("purchase-order", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PurchaseOrderDelete(int userId)
         {
             var response = await _mediator.Send(new DeletePurchaseOrderCommand() { PurchaseOrderId = userId });
+            await _cacheStore.EvictByTagAsync("purchase-order", default);
             return Ok(response);
         }
     }

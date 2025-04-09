@@ -31,4 +31,8 @@
     <ProjectReference Include="..\backend.Utilities\backend.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

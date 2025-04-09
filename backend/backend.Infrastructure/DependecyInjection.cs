@@ -58,6 +58,7 @@ public static class DependencyInjection
 
         services.AddTransient<IOrderingQuery, OrderingQuery>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<IFileStorageService, FileStorageService>();
 
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();

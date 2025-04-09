@@ -19,11 +19,13 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, BaseRe
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IFileStorageService _fileStorageService;
 
-    public CreateProductHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateProductHandler(IUnitOfWork unitOfWork, IMapper mapper, IFileStorageService fileStorageService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _fileStorageService = fileStorageService;
     }
 
     public async Task<BaseResponse<bool>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -34,8 +36,12 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, BaseRe
         {
             var client = _mapper.Map<Entity.Product>(request);
 
+            if (request.Image is not null)
+                client.Image = await _fileStorageService.SaveFile(Containers.PRODUCT, request.Image!);
+
             var parameters = new DynamicParameters();
             parameters.Add("PName", client.Name, DbType.String);
+            parameters.Add("PImage", client.Image, DbType.String);
             parameters.Add("PDescription", client.Description, DbType.String);
             parameters.Add("PPrice", client.Price, DbType.Int32);
             parameters.Add("PState", client.State, DbType.Int32);

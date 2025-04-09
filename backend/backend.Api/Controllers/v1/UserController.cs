@@ -10,6 +10,7 @@ using backend.Application.UseCases.User.Queries.GetAllQuery;
 using backend.Application.UseCases.User.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public UserController(IMediator mediator)
+        public UserController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "user")]
         public async Task<IActionResult> UserList([FromQuery] GetAllUserQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> UserCreate([FromBody] CreateUserCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("user", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> UserUpdate([FromBody] UpdateUserCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("user", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> UserDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteUserCommand() { UserId = userId });
+            await _cacheStore.EvictByTagAsync("user", default);
             return Ok(response);
         }
     }

@@ -10,6 +10,7 @@ using backend.Application.UseCases.Inventory.Queries.GetAllQuery;
 using backend.Application.UseCases.Inventory.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class InventoryController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public InventoryController(IMediator mediator)
+        public InventoryController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "inventory")]
         public async Task<IActionResult> InventoryList([FromQuery] GetAllInventoryQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> InventoryCreate([FromBody] CreateInventoryCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("inventory", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> InventoryUpdate([FromBody] UpdateInventoryCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("inventory", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> InventoryDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteInventoryCommand() { InventoryId = userId });
+            await _cacheStore.EvictByTagAsync("inventory", default);
             return Ok(response);
         }
     }

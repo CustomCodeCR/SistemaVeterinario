@@ -71,6 +71,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger();
 
+builder.Services.AddOutputCache(opciones =>
+{
+    opciones.AddPolicy("applied-vaccine", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("applied-vaccine"));
+    opciones.AddPolicy("appointment", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("appointment"));
+    opciones.AddPolicy("client", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("client"));
+    opciones.AddPolicy("inventory", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("inventory"));
+    opciones.AddPolicy("medic", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("medic"));
+    opciones.AddPolicy("payment", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("payment"));
+    opciones.AddPolicy("pet", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("pet"));
+    opciones.AddPolicy("product-category", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("product-category"));
+    opciones.AddPolicy("product-category-relation", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("product-category-relation"));
+    opciones.AddPolicy("product", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("product"));
+    opciones.AddPolicy("purchase-order", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("purchase-order"));
+    opciones.AddPolicy("sale", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("sale"));
+    opciones.AddPolicy("supplier", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("supplier"));
+    opciones.AddPolicy("user", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("user"));
+    opciones.AddPolicy("vaccine", builder => builder.Expire(TimeSpan.FromMinutes(1)).Tag("vaccine"));
+});
+
 var app = builder.Build();
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -94,6 +113,8 @@ if (env.IsDevelopment() || env.IsProduction())
         }
     });
 }
+
+app.UseOutputCache();
 
 app.UseWatchDogExceptionLogger();
 app.UseStaticFiles();

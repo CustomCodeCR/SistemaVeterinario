@@ -10,6 +10,7 @@ using backend.Application.UseCases.ProductCategoryRelation.Queries.GetAllQuery;
 using backend.Application.UseCases.ProductCategoryRelation.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class ProductCategoryRelationController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public ProductCategoryRelationController(IMediator mediator)
+        public ProductCategoryRelationController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "product-category-relation")]
         public async Task<IActionResult> ProductCategoryRelationList([FromQuery] GetAllProductCategoryRelationQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductCategoryRelationCreate([FromBody] CreateProductCategoryRelationCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("product-category-relation", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductCategoryRelationUpdate([FromBody] UpdateProductCategoryRelationCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("product-category-relation", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductCategoryRelationDelete(int productId, int categoryId)
         {
             var response = await _mediator.Send(new DeleteProductCategoryRelationCommand() { ProductId = productId, CategoryId = categoryId });
+            await _cacheStore.EvictByTagAsync("product-category-relation", default);
             return Ok(response);
         }
     }

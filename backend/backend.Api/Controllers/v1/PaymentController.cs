@@ -10,6 +10,7 @@ using backend.Application.UseCases.Payment.Queries.GetAllQuery;
 using backend.Application.UseCases.Payment.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class PaymentController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public PaymentController(IMediator mediator)
+        public PaymentController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "payment")]
         public async Task<IActionResult> PaymentList([FromQuery] GetAllPaymentQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PaymentCreate([FromBody] CreatePaymentCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("payment", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PaymentUpdate([FromBody] UpdatePaymentCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("payment", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PaymentDelete(int userId)
         {
             var response = await _mediator.Send(new DeletePaymentCommand() { PaymentId = userId });
+            await _cacheStore.EvictByTagAsync("payment", default);
             return Ok(response);
         }
     }

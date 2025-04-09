@@ -10,6 +10,7 @@ using backend.Application.UseCases.Sale.Queries.GetAllQuery;
 using backend.Application.UseCases.Sale.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class SaleController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public SaleController(IMediator mediator)
+        public SaleController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "sale")]
         public async Task<IActionResult> SaleList([FromQuery] GetAllSaleQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> SaleCreate([FromBody] CreateSaleCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("sale", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> SaleUpdate([FromBody] UpdateSaleCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("sale", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> SaleDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteSaleCommand() { SaleId = userId });
+            await _cacheStore.EvictByTagAsync("sale", default);
             return Ok(response);
         }
     }

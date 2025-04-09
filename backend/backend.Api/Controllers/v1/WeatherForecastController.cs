@@ -4,7 +4,6 @@ using System.Net;
 
 namespace backend.Api.Controllers.v1
 {
-    [Authorize]
     [ApiController]
     [Route("api/v{version:apiVersion}/weatherforecast")]
     [ApiVersion("1.0")]

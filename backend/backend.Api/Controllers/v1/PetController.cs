@@ -10,6 +10,7 @@ using backend.Application.UseCases.Pet.Queries.GetAllQuery;
 using backend.Application.UseCases.Pet.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class PetController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public PetController(IMediator mediator)
+        public PetController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "pet")]
         public async Task<IActionResult> PetList([FromQuery] GetAllPetQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PetCreate([FromBody] CreatePetCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("pet", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PetUpdate([FromBody] UpdatePetCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("pet", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> PetDelete(int userId)
         {
             var response = await _mediator.Send(new DeletePetCommand() { PetId = userId });
+            await _cacheStore.EvictByTagAsync("pet", default);
             return Ok(response);
         }
     }

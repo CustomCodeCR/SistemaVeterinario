@@ -10,6 +10,7 @@ using backend.Application.UseCases.ProductCategory.Queries.GetAllQuery;
 using backend.Application.UseCases.ProductCategory.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class ProductCategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public ProductCategoryController(IMediator mediator)
+        public ProductCategoryController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "product-category")]
         public async Task<IActionResult> ProductCategoryList([FromQuery] GetAllProductCategoryQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductCategoryCreate([FromBody] CreateProductCategoryCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("product-category", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductCategoryUpdate([FromBody] UpdateProductCategoryCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("product-category", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ProductCategoryDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteProductCategoryCommand() { ProductCategoryId = userId });
+            await _cacheStore.EvictByTagAsync("product-category", default);
             return Ok(response);
         }
     }

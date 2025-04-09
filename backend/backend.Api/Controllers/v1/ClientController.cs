@@ -10,6 +10,7 @@ using backend.Application.UseCases.Client.Queries.GetAllQuery;
 using backend.Application.UseCases.Client.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace backend.Api.Controllers.v1
 {
@@ -20,13 +21,16 @@ namespace backend.Api.Controllers.v1
     public class ClientController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IOutputCacheStore _cacheStore;
 
-        public ClientController(IMediator mediator)
+        public ClientController(IMediator mediator, IOutputCacheStore cacheStore)
         {
             _mediator = mediator;
+            _cacheStore = cacheStore;
         }
 
         [HttpGet]
+        [OutputCache(PolicyName = "client")]
         public async Task<IActionResult> ClientList([FromQuery] GetAllClientQuery query)
         {
             var response = await _mediator.Send(query);
@@ -44,6 +48,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ClientCreate([FromBody] CreateClientCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("client", default);
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ClientUpdate([FromBody] UpdateClientCommand command)
         {
             var response = await _mediator.Send(command);
+            await _cacheStore.EvictByTagAsync("client", default);
             return Ok(response);
         }
 
@@ -58,6 +64,7 @@ namespace backend.Api.Controllers.v1
         public async Task<IActionResult> ClientDelete(int userId)
         {
             var response = await _mediator.Send(new DeleteClientCommand() { ClientId = userId });
+            await _cacheStore.EvictByTagAsync("client", default);
             return Ok(response);
         }
     }
