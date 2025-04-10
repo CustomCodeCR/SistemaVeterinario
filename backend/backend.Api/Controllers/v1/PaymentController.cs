@@ -37,10 +37,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> PaymentById(int userId)
+        [HttpGet("{paymentId:int}")]
+        public async Task<IActionResult> PaymentById(int paymentId)
         {
-            var response = await _mediator.Send(new GetPaymentByIdQuery() { PaymentId = userId });
+            var response = await _mediator.Send(new GetPaymentByIdQuery() { PaymentId = paymentId });
             return Ok(response);
         }
 
@@ -60,10 +60,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> PaymentDelete(int userId)
+        [HttpDelete("Delete/{paymentId:int}")]
+        public async Task<IActionResult> PaymentDelete(int paymentId)
         {
-            var response = await _mediator.Send(new DeletePaymentCommand() { PaymentId = userId });
+            var response = await _mediator.Send(new DeletePaymentCommand() { PaymentId = paymentId });
             await _cacheStore.EvictByTagAsync("payment", default);
             return Ok(response);
         }

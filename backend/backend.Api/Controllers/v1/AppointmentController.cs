@@ -6,6 +6,8 @@
 using backend.Application.UseCases.Appointment.Commands.CreateCommand;
 using backend.Application.UseCases.Appointment.Commands.DeleteCommand;
 using backend.Application.UseCases.Appointment.Commands.UpdateCommand;
+using backend.Application.UseCases.Appointment.Queries.GetAllByMedicQuery;
+using backend.Application.UseCases.Appointment.Queries.GetAllByPetQuery;
 using backend.Application.UseCases.Appointment.Queries.GetAllQuery;
 using backend.Application.UseCases.Appointment.Queries.GetByIdQuery;
 using MediatR;
@@ -37,10 +39,24 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> AppointmentById(int userId)
+        [HttpGet("Pet/")]
+        public async Task<IActionResult> AppointmentListByPet([FromQuery] GetAllAppointmentByPetQuery query)
         {
-            var response = await _mediator.Send(new GetAppointmentByIdQuery() { AppointmentId = userId });
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpGet("Medic/")]
+        public async Task<IActionResult> AppointmentListByMedic([FromQuery] GetAllAppointmentByMedicQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpGet("{appointmentId:int}")]
+        public async Task<IActionResult> AppointmentById(int appointmentId)
+        {
+            var response = await _mediator.Send(new GetAppointmentByIdQuery() { AppointmentId = appointmentId });
             return Ok(response);
         }
 
@@ -60,10 +76,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> AppointmentDelete(int userId)
+        [HttpDelete("Delete/{appointmentId:int}")]
+        public async Task<IActionResult> AppointmentDelete(int appointmentId)
         {
-            var response = await _mediator.Send(new DeleteAppointmentCommand() { AppointmentId = userId });
+            var response = await _mediator.Send(new DeleteAppointmentCommand() { AppointmentId = appointmentId });
             await _cacheStore.EvictByTagAsync("appointment", default);
             return Ok(response);
         }

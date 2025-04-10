@@ -28,7 +28,7 @@ public async Task<BaseResponse<IEnumerable<AppliedVaccineResponseDto>>> Handle(G
 
     try
     {
-        var AppliedVaccines = _unitOfWork.AppliedVaccine.GetAllQueryable()
+        var appliedVaccines = _unitOfWork.AppliedVaccine.GetAllQueryable()
                 .Include(x => x.Vaccine)
                 .Include(x => x.Pet)
                 .AsQueryable();
@@ -38,32 +38,32 @@ public async Task<BaseResponse<IEnumerable<AppliedVaccineResponseDto>>> Handle(G
             switch (request.NumFilter)
             {
                 case 1:
-                    AppliedVaccines = AppliedVaccines.Where(x => x.Vaccine.Vaccinename.Contains(request.TextFilter));
+                    appliedVaccines = appliedVaccines.Where(x => x.Vaccine.Vaccinename.Contains(request.TextFilter));
                     break;
                 case 2:
-                    AppliedVaccines = AppliedVaccines.Where(x => x.Pet.Name!.Contains(request.TextFilter));
+                    appliedVaccines = appliedVaccines.Where(x => x.Pet.Name!.Contains(request.TextFilter));
                     break;
             }
         }
 
         if (request.StateFilter is not null)
         {
-            AppliedVaccines = AppliedVaccines.Where(x => x.State == request.StateFilter);
+            appliedVaccines = appliedVaccines.Where(x => x.State == request.StateFilter);
         }
 
         if (!string.IsNullOrEmpty(request.StartDate) && !string.IsNullOrEmpty(request.EndDate))
         {
-            AppliedVaccines = AppliedVaccines.Where(x => x.AuditCreateDate >= Convert.ToDateTime(request.StartDate).ToUniversalTime() &&
+            appliedVaccines = appliedVaccines.Where(x => x.AuditCreateDate >= Convert.ToDateTime(request.StartDate).ToUniversalTime() &&
                                      x.AuditCreateDate <= Convert.ToDateTime(request.EndDate).ToUniversalTime().AddDays(1));
         }
 
         request.Sort ??= "Id";
 
-        var items = await _ordering.Ordering(request, AppliedVaccines)
+        var items = await _ordering.Ordering(request, appliedVaccines)
             .ToListAsync(cancellationToken);
 
         response.IsSuccess = true;
-        response.TotalRecords = await AppliedVaccines.CountAsync(cancellationToken);
+        response.TotalRecords = await appliedVaccines.CountAsync(cancellationToken);
         response.Data = _mapper.Map<IEnumerable<AppliedVaccineResponseDto>>(items);
         response.Message = ReplyMessage.MESSAGE_QUERY;
     }

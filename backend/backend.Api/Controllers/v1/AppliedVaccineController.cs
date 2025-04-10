@@ -8,6 +8,7 @@ using backend.Application.UseCases.AppliedVaccine.Commands.DeleteCommand;
 using backend.Application.UseCases.AppliedVaccine.Commands.UpdateCommand;
 using backend.Application.UseCases.AppliedVaccine.Queries.GetAllQuery;
 using backend.Application.UseCases.AppliedVaccine.Queries.GetByIdQuery;
+using backend.Application.UseCases.AppliedVacinne.Queries.GetAllByPetQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
@@ -37,10 +38,17 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> AppliedVaccineById(int userId)
+        [HttpGet("Pet/")]
+        public async Task<IActionResult> AppliedVaccineListByPet([FromQuery] GetAllAppliedVaccineByPetQuery query)
         {
-            var response = await _mediator.Send(new GetAppliedVaccineByIdQuery() { AppliedVaccineId = userId });
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpGet("{appliedVaccineId:int}")]
+        public async Task<IActionResult> AppliedVaccineById(int appliedVaccineId)
+        {
+            var response = await _mediator.Send(new GetAppliedVaccineByIdQuery() { AppliedVaccineId = appliedVaccineId });
             return Ok(response);
         }
 
@@ -60,10 +68,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> AppliedVaccineDelete(int userId)
+        [HttpDelete("Delete/{appliedVaccineId:int}")]
+        public async Task<IActionResult> AppliedVaccineDelete(int appliedVaccineId)
         {
-            var response = await _mediator.Send(new DeleteAppliedVaccineCommand() { AppliedVaccineId = userId });
+            var response = await _mediator.Send(new DeleteAppliedVaccineCommand() { AppliedVaccineId = appliedVaccineId });
             await _cacheStore.EvictByTagAsync("applied-vaccine", default);
             return Ok(response);
         }

@@ -30,9 +30,9 @@ public class GetAppliedVaccineByIdHandler : IRequestHandler<GetAppliedVaccineByI
 
         try
         {
-            var AppliedVaccine = await _unitOfWork.AppliedVaccine.GetByIdAsync(request.AppliedVaccineId);
+            var appliedVaccine = await _unitOfWork.AppliedVaccine.GetByIdAsync(request.AppliedVaccineId);
 
-            if (AppliedVaccine is null)
+            if (appliedVaccine is null)
             {
                 response.IsSuccess = false;
                 response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
@@ -40,7 +40,7 @@ public class GetAppliedVaccineByIdHandler : IRequestHandler<GetAppliedVaccineByI
             }
 
             response.IsSuccess = true;
-            response.Data = _mapper.Map<AppliedVaccineByIdResponseDto>(AppliedVaccine);
+            response.Data = _mapper.Map<AppliedVaccineByIdResponseDto>(appliedVaccine);
             response.Message = ReplyMessage.MESSAGE_QUERY;
         }
         catch (Exception ex)

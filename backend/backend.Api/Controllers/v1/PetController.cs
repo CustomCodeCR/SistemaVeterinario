@@ -6,6 +6,7 @@
 using backend.Application.UseCases.Pet.Commands.CreateCommand;
 using backend.Application.UseCases.Pet.Commands.DeleteCommand;
 using backend.Application.UseCases.Pet.Commands.UpdateCommand;
+using backend.Application.UseCases.Pet.Queries.GetAllByClientQuery;
 using backend.Application.UseCases.Pet.Queries.GetAllQuery;
 using backend.Application.UseCases.Pet.Queries.GetByIdQuery;
 using MediatR;
@@ -37,10 +38,18 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> PetById(int userId)
+        [HttpGet("Client/{clientId:int}")]
+        public async Task<IActionResult> PetListByClient([FromQuery] GetAllPetByClientQuery query)
         {
-            var response = await _mediator.Send(new GetPetByIdQuery() { PetId = userId });
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+
+        [HttpGet("{petId:int}")]
+        public async Task<IActionResult> PetById(int petId)
+        {
+            var response = await _mediator.Send(new GetPetByIdQuery() { PetId = petId });
             return Ok(response);
         }
 
@@ -60,10 +69,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> PetDelete(int userId)
+        [HttpDelete("Delete/{petId:int}")]
+        public async Task<IActionResult> PetDelete(int petId)
         {
-            var response = await _mediator.Send(new DeletePetCommand() { PetId = userId });
+            var response = await _mediator.Send(new DeletePetCommand() { PetId = petId });
             await _cacheStore.EvictByTagAsync("pet", default);
             return Ok(response);
         }

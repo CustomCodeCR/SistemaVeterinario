@@ -4,15 +4,12 @@
 // -----------------------------------------------------------------------------
 
 using backend.Application.Commons.Bases;
+using backend.Application.Dtos.Appointment.Response;
 using MediatR;
 
-namespace backend.Application.UseCases.AppliedVaccine.Commands.CreateCommand;
+namespace backend.Application.UseCases.Appointment.Queries.GetAllByPetQuery;
 
-public class CreateAppliedVaccineCommand : IRequest<BaseResponse<bool>>
+public class GetAllAppointmentByPetQuery : BaseFilters, IRequest<BaseResponse<IEnumerable<AppointmentResponseDto>>>
 {
-    public DateTime ApplicationDate { get; set; }
     public int PetId { get; set; }
-    public int VaccineId { get; set; }
-    public int State { get; set; }
-    public int AuditCreateUser { get; set; }
 }

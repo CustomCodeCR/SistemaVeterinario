@@ -37,10 +37,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> PurchaseOrderById(int userId)
+        [HttpGet("{purchaseOrderId:int}")]
+        public async Task<IActionResult> PurchaseOrderById(int purchaseOrderId)
         {
-            var response = await _mediator.Send(new GetPurchaseOrderByIdQuery() { PurchaseOrderId = userId });
+            var response = await _mediator.Send(new GetPurchaseOrderByIdQuery() { PurchaseOrderId = purchaseOrderId });
             return Ok(response);
         }
 
@@ -60,10 +60,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> PurchaseOrderDelete(int userId)
+        [HttpDelete("Delete/{purchaseOrderId:int}")]
+        public async Task<IActionResult> PurchaseOrderDelete(int purchaseOrderId)
         {
-            var response = await _mediator.Send(new DeletePurchaseOrderCommand() { PurchaseOrderId = userId });
+            var response = await _mediator.Send(new DeletePurchaseOrderCommand() { PurchaseOrderId = purchaseOrderId });
             await _cacheStore.EvictByTagAsync("purchase-order", default);
             return Ok(response);
         }

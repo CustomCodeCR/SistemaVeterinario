@@ -4,11 +4,12 @@
 // -----------------------------------------------------------------------------
 
 using backend.Application.Commons.Bases;
-using backend.Application.Commons.Select.Response;
+using backend.Application.Dtos.AppliedVaccine.Response;
 using MediatR;
 
-namespace backend.Application.UseCases.AppliedVaccine.Queries.GetSelectQuery;
+namespace backend.Application.UseCases.AppliedVacinne.Queries.GetAllByPetQuery;
 
-public class GetSelectAppliedVaccineQuery : IRequest<BaseResponse<IEnumerable<SelectResponse>>>
+public class GetAllAppliedVaccineByPetQuery : BaseFilters, IRequest<BaseResponse<IEnumerable<AppliedVaccineResponseDto>>>
 {
+    public int PetId { get; set; }
 }

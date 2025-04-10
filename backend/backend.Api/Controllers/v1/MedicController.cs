@@ -37,10 +37,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> MedicById(int userId)
+        [HttpGet("{medicId:int}")]
+        public async Task<IActionResult> MedicById(int medicId)
         {
-            var response = await _mediator.Send(new GetMedicByIdQuery() { MedicId = userId });
+            var response = await _mediator.Send(new GetMedicByIdQuery() { MedicId = medicId });
             return Ok(response);
         }
 
@@ -60,10 +60,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> MedicDelete(int userId)
+        [HttpDelete("Delete/{medicId:int}")]
+        public async Task<IActionResult> MedicDelete(int medicId)
         {
-            var response = await _mediator.Send(new DeleteMedicCommand() { MedicId = userId });
+            var response = await _mediator.Send(new DeleteMedicCommand() { MedicId = medicId });
             await _cacheStore.EvictByTagAsync("medic", default);
             return Ok(response);
         }

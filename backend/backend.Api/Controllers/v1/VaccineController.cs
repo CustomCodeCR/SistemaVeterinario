@@ -37,10 +37,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<IActionResult> VaccineById(int userId)
+        [HttpGet("{vaccineId:int}")]
+        public async Task<IActionResult> VaccineById(int vaccineId)
         {
-            var response = await _mediator.Send(new GetVaccineByIdQuery() { VaccineId = userId });
+            var response = await _mediator.Send(new GetVaccineByIdQuery() { VaccineId = vaccineId });
             return Ok(response);
         }
 
@@ -60,10 +60,10 @@ namespace backend.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpDelete("Delete/{userId:int}")]
-        public async Task<IActionResult> VaccineDelete(int userId)
+        [HttpDelete("Delete/{vaccineId:int}")]
+        public async Task<IActionResult> VaccineDelete(int vaccineId)
         {
-            var response = await _mediator.Send(new DeleteVaccineCommand() { VaccineId = userId });
+            var response = await _mediator.Send(new DeleteVaccineCommand() { VaccineId = vaccineId });
             await _cacheStore.EvictByTagAsync("vaccine", default);
             return Ok(response);
         }
