@@ -3,6 +3,7 @@ import logo from '../assets/logod.png';
 import AddToCartButton from './AddToCartButton';
 import ViewDetailsButton from './ViewDetailsButton';
 import ProductSearch from 'components/ProductSerch';
+import Swal from 'sweetalert2';
 
 export interface Product {
   id: number;
@@ -11,87 +12,120 @@ export interface Product {
   price: number;
   image: string;
   category: string;
+  state?: number;
+  auditCreateUser?: number;
+}
+
+interface User {
+  name: string;
+  email: string;
+  role: string;
+  id: number;
 }
 
 const ProductSection: React.FC = () => {
-  // Lista original de productos
-  const defaultProducts: Product[] = [
-    {
-      id: 1,
-      name: 'Alimento para perros Premium',
-      description: 'Alimento balanceado para perros adultos de todas las razas',
-      price: 25.99,
-      category: 'Alimentos',
-      image: 'https://m.media-amazon.com/images/I/81nGXpRzVVL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 2,
-      name: 'Cama para gatos',
-      description: 'Cama suave y cómoda para gatos de todos los tamaños',
-      price: 35.5,
-      category: 'Accesorios',
-      image: 'https://m.media-amazon.com/images/I/71+nTJ8m5XL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 3,
-      name: 'Correa ajustable',
-      description: 'Correa resistente para perros con ajuste de longitud',
-      price: 15.75,
-      category: 'Accesorios',
-      image: 'https://m.media-amazon.com/images/I/71Zb9tUvUQL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 4,
-      name: 'Juguete interactivo',
-      description: 'Juguete para gatos con plumas y sonajero',
-      price: 12.99,
-      category: 'Juguetes',
-      image: 'https://m.media-amazon.com/images/I/71QYq+jqURL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 5,
-      name: 'Shampoo para mascotas',
-      description: 'Shampoo hipoalergénico para perros y gatos',
-      price: 8.99,
-      category: 'Higiene',
-      image: 'https://m.media-amazon.com/images/I/61+Q6VdLvYL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 6,
-      name: 'Transportadora mediana',
-      description: 'Transportadora segura y ventilada para viajes',
-      price: 45.0,
-      category: 'Accesorios',
-      image: 'https://m.media-amazon.com/images/I/71+9y1mJQVL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 7,
-      name: 'Snacks dentales',
-      description: 'Snacks para perros que ayudan con la higiene dental',
-      price: 10.25,
-      category: 'Alimentos',
-      image: 'https://m.media-amazon.com/images/I/81+QY7jKzYL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-      id: 8,
-      name: 'Rascador para gatos',
-      description: 'Rascador de 3 niveles con plataformas y juguetes',
-      price: 55.99,
-      category: 'Juguetes',
-      image: 'https://m.media-amazon.com/images/I/81+QY7jKzYL._AC_UF1000,1000_QL80_.jpg',
-    }
-  ];
-
-  // Estado para almacenar todos los productos
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  // Obtener productos del API
+  const fetchProducts = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('https://api.vetfriends.customcodecr.com/api/v1/Product');
+      if (!response.ok) {
+        throw new Error('Error al obtener los productos');
+      }
+      const data = await response.json();
+      setProducts(data);
+    } catch (err) {
+      setError(err.message);
+      showErrorAlert(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Obtener productos nuevos desde localStorage
-    const storedProducts = JSON.parse(localStorage.getItem('productos') || '[]');
+    // Obtener usuario del localStorage
+    const userData = JSON.parse(localStorage.getItem('userData') || 'null');
+    setCurrentUser(userData);
 
-    // Combinar los productos predeterminados con los agregados
-    setProducts([...defaultProducts, ...storedProducts]);
+    // Obtener productos
+    fetchProducts();
   }, []);
+
+  // Mostrar alerta de error con SweetAlert2
+  const showErrorAlert = (message: string) => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: message,
+      confirmButtonColor: '#3085d6',
+    });
+  };
+
+  // Mostrar alerta de éxito con SweetAlert2
+  const showSuccessAlert = (message: string) => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito',
+      text: message,
+      confirmButtonColor: '#3085d6',
+    });
+  };
+
+  // Función para manejar agregar al carrito
+  const handleAddToCart = (product: Product) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+    // Verificar si el producto ya está en el carrito
+    const existingItem = cartItems.find((item: any) => item.id === product.id);
+
+    if (existingItem) {
+      // Incrementar cantidad si ya existe
+      const updatedCart = cartItems.map((item: any) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    } else {
+      // Agregar nuevo producto al carrito
+      const newCartItem = {
+        id: product.id,
+        productId: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        image: product.image,
+        category: product.category
+      };
+      localStorage.setItem('cartItems', JSON.stringify([...cartItems, newCartItem]));
+    }
+
+    showSuccessAlert(`${product.name} agregado al carrito`);
+  };
+
+  if (isLoading) return (
+    <div className="flex justify-center items-center h-64">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  );
+
+  if (error) return (
+    <div className="text-center py-8">
+      <h3 className="text-red-500 text-xl">Error al cargar productos</h3>
+      <p className="text-gray-600">{error}</p>
+      <button
+        onClick={fetchProducts}
+        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Reintentar
+      </button>
+    </div>
+  );
 
   return (
     <section className="w-full bg-gray-100 p-4 md:p-8">
@@ -103,7 +137,7 @@ const ProductSection: React.FC = () => {
       <br />
       <div className="w-full px-2 md:px-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
-          {products.map((product) => (
+          {products.filter(p => p.state !== 0).map((product) => (
             <div
               key={product.id}
               className="flex h-full flex-col rounded-lg bg-white p-4 shadow-md transition-transform duration-300 hover:scale-105"
@@ -111,7 +145,7 @@ const ProductSection: React.FC = () => {
               <div className="mb-2 flex items-start justify-between">
                 <img src={logo} alt="Logo" className="size-6" />
                 <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">
-                  {product.category}
+                  {product.category || 'Sin categoría'}
                 </span>
               </div>
 
@@ -121,7 +155,7 @@ const ProductSection: React.FC = () => {
                 </h3>
                 <div className="mb-3 flex justify-center">
                   <img
-                    src={product.image}
+                    src={product.image || 'https://via.placeholder.com/150'}
                     alt={product.name}
                     className="size-32 rounded-lg object-contain"
                     onError={(e) => {
@@ -130,16 +164,19 @@ const ProductSection: React.FC = () => {
                   />
                 </div>
                 <p className="mb-2 line-clamp-2 h-12 text-sm text-gray-600">
-                  {product.description}
+                  {product.description || 'Descripción no disponible'}
                 </p>
                 <p className="mb-4 text-lg font-bold text-blue-600">
-                  ${product.price.toFixed(2)}
+                  ${product.price?.toFixed(2) || '0.00'}
                 </p>
               </div>
 
               <div className="mt-auto flex items-center justify-between">
-                {/* Se le pasa el producto al botón para poder agregarlo al carrito */}
-                <AddToCartButton product={product} className="mr-2 grow" />
+                <AddToCartButton
+                  product={product}
+                  className="mr-2 grow"
+                  onAddToCart={handleAddToCart}
+                />
                 <ViewDetailsButton className="mr-2 flex grid-rows-1" />
               </div>
             </div>
