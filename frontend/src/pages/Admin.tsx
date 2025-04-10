@@ -30,7 +30,7 @@ const AdminPage = () => {
         const [productsRes, usersRes, salesRes, appointmentsRes] = await Promise.all([
           axios.get('https://api.vetfriends.customcodecr.com/api/v1/Product'),
           axios.get('https://api.vetfriends.customcodecr.com/api/v1/User'),
-          axios.get('https://api.vetfriends.customcodecr.com/api/v1/Sale'),
+          axios.get('https://api.vetfriends.customcodecr.com/api/v1/Payment'),
           axios.get('https://api.vetfriends.customcodecr.com/api/v1/Appointment')
         ])
 
@@ -40,7 +40,7 @@ const AdminPage = () => {
         )
 
         const totalVentas = salesRes.data.data.reduce(
-          (acc: number, sale: any) => acc + (sale.total || 0),
+          (acc: number, sale: any) => acc + (sale.amount || 0),
           0
         )
 
