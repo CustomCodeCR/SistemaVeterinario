@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logod from '../assets/logod.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaUserCog } from 'react-icons/fa'
 
 const Header: React.FC = () => {
+  const [userName, setUserName] = useState<string | null>(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const userData = localStorage.getItem('userData')
+    if (userData) {
+      try {
+        const parsed = JSON.parse(userData)
+        const name = Array.isArray(parsed) ? parsed[0]?.name : parsed.name
+        setUserName(name)
+      } catch (err) {
+        console.error('Error al leer userData del localStorage', err)
+      }
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('userData')
+    navigate('/profile') // O a tu ruta de login
+  }
+
   // Puedes cambiar esto por tu lógica de autenticación real
-  const isAdmin = true // Ejemplo - debería venir de tu estado de autenticación
+  const isAdmin = true
 
   return (
     <header className="text-back flex items-center justify-between bg-white p-4 shadow-sm">
@@ -36,6 +58,7 @@ const Header: React.FC = () => {
         </Link>
       </nav>
 
+      {/* Usuario y acciones */}
       <div className="flex items-center space-x-4">
         {isAdmin && (
           <Link
@@ -53,6 +76,18 @@ const Header: React.FC = () => {
         >
           Contacto
         </Link>
+
+        {userName && (
+          <div className="hidden sm:flex flex-col items-end text-sm text-gray-700">
+            <span className="font-semibold">Hola, {userName.split(' ')[0]}</span>
+            <button
+              onClick={handleLogout}
+              className="text-blue-600 hover:text-red-500 text-xs mt-1 transition-colors"
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        )}
 
         <Link
           to="/profile"
